@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip } from 'recharts';
 import { Range, getTrackBackground } from 'react-range';
 import './App.css';
 
-// Simple PCA implementation
+// PCA function (unchanged)
 function pca(X) {
   const m = X.length;
   const n = X[0].length;
-  
+
   // Center the data
   const mean = X[0].map((_, j) => X.reduce((sum, row) => sum + row[j], 0) / m);
   const centeredX = X.map(row => row.map((x, j) => x - mean[j]));
-  
+
   // Compute covariance matrix
   const cov = Array(n).fill().map(() => Array(n).fill(0));
   for (let i = 0; i < n; i++) {
@@ -19,7 +19,7 @@ function pca(X) {
       cov[i][j] = centeredX.reduce((sum, row) => sum + row[i] * row[j], 0) / (m - 1);
     }
   }
-  
+
   // Compute eigenvalues and eigenvectors (using a very simple power iteration method)
   function powerIteration(A, numIterations = 100) {
     let b = Array(A.length).fill().map(() => Math.random());
@@ -30,10 +30,10 @@ function pca(X) {
     }
     return b;
   }
-  
+
   const pc1 = powerIteration(cov);
   const pc2 = powerIteration(cov.map(row => row.map((x, i) => x - pc1[i] * pc1.reduce((sum, y, j) => sum + y * row[j], 0))));
-  
+
   // Project data onto first two principal components
   return centeredX.map(row => [
     row.reduce((sum, x, i) => sum + x * pc1[i], 0),
@@ -67,41 +67,23 @@ const PolisSimulation = () => {
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [groupingThreshold, setGroupingThreshold] = useState(0.5);
-  
-  // New state variables for vote distribution and consensus groups
-  const [agreePercentage, setAgreePercentage] = useState(33);
-  const [disagreePercentage, setDisagreePercentage] = useState(33);
-  const [passPercentage, setPassPercentage] = useState(34);
+  const [rangeValues, setRangeValues] = useState([33, 66]);
   const [consensusGroups, setConsensusGroups] = useState(2);
 
-  const [rangeValues, setRangeValues] = useState([33, 66]);
+  // Define the missing state variables
+  const [agreePercentage, setAgreePercentage] = useState(rangeValues[0]);
+  const [disagreePercentage, setDisagreePercentage] = useState(rangeValues[1] - rangeValues[0]);
+  const [passPercentage, setPassPercentage] = useState(100 - rangeValues[1]);
 
-  useEffect(() => {
-    generateRandomVoteMatrix();
-  }, [participants, comments, rangeValues, consensusGroups]);
-
-  useEffect(() => {
-    if (voteMatrix.length > 0) {
-      performPCA();
-      saveState({ participants, comments, voteMatrix });
-    }
-  }, [voteMatrix]);
-
-  useEffect(() => {
-    if (pcaProjection.length > 0) {
-      identifyGroups();
-    }
-  }, [pcaProjection, groupingThreshold]);
-
-  const generateRandomVoteMatrix = () => {
+  const generateRandomVoteMatrix = useCallback(() => {
     const newMatrix = [];
     for (let i = 0; i < participants; i++) {
       const row = [];
       for (let j = 0; j < comments; j++) {
         const rand = Math.random() * 100;
-        if (rand < rangeValues[0]) {
+        if (rand < agreePercentage) {
           row.push(1);
-        } else if (rand < rangeValues[1]) {
+        } else if (rand < agreePercentage + disagreePercentage) {
           row.push(-1);
         } else {
           row.push(0);
@@ -127,18 +109,34 @@ const PolisSimulation = () => {
     }
 
     setVoteMatrix(newMatrix);
-  };
+  }, [participants, comments, agreePercentage, disagreePercentage, passPercentage, consensusGroups]);
 
+  useEffect(() => {
+    setAgreePercentage(rangeValues[0]);
+    setDisagreePercentage(rangeValues[1] - rangeValues[0]);
+    setPassPercentage(100 - rangeValues[1]);
+  }, [rangeValues]);
 
-  const performPCA = () => {
+  useEffect(() => {
+    generateRandomVoteMatrix();
+  }, [generateRandomVoteMatrix]);
+
+  const performPCA = useCallback(() => {
     const projection = pca(voteMatrix);
     setPcaProjection(projection.map((coords, i) => ({ x: coords[0], y: coords[1], id: i })));
-  };
+  }, [voteMatrix]);
 
-  const identifyGroups = () => {
+  useEffect(() => {
+    if (voteMatrix.length > 0) {
+      performPCA();
+      saveState({ participants, comments, voteMatrix });
+    }
+  }, [voteMatrix, performPCA, participants, comments]);
+
+  const identifyGroups = useCallback(() => {
     const newGroups = [];
     const threshold = groupingThreshold;
-    
+
     pcaProjection.forEach((point, i) => {
       let assignedGroup = null;
       for (let j = 0; j < newGroups.length; j++) {
@@ -152,48 +150,114 @@ const PolisSimulation = () => {
           break;
         }
       }
-      
+
       if (assignedGroup !== null) {
         newGroups[assignedGroup].points.push(i);
       } else {
         newGroups.push({ points: [i], centerX: point.x, centerY: point.y });
       }
     });
-    
+
     // Recalculate centers
     newGroups.forEach(group => {
       group.centerX = group.points.reduce((sum, p) => sum + pcaProjection[p].x, 0) / group.points.length;
       group.centerY = group.points.reduce((sum, p) => sum + pcaProjection[p].y, 0) / group.points.length;
     });
-    
+
     setGroups(newGroups);
     setSelectedGroup(null);
-  };
+  }, [pcaProjection, groupingThreshold]);
 
-  const handleVoteChange = (participant, comment, value) => {
-    const newMatrix = [...voteMatrix];
-    newMatrix[participant][comment] = value;
-    setVoteMatrix(newMatrix);
-  };
+  useEffect(() => {
+    if (pcaProjection.length > 0) {
+      identifyGroups();
+    }
+  }, [pcaProjection, identifyGroups]);
 
-  const handleParticipantsChange = (newParticipants) => {
+  const handleVoteChange = useCallback((participant, comment) => {
+    setVoteMatrix(prevMatrix => {
+      const newMatrix = [...prevMatrix];
+      newMatrix[participant] = [...newMatrix[participant]];
+      newMatrix[participant][comment] = (newMatrix[participant][comment] + 2) % 3 - 1; // Cycle through -1, 0, 1
+      return newMatrix;
+    });
+  }, []);
+
+  const handleParticipantsChange = useCallback((newParticipants) => {
     setParticipants(newParticipants);
-  };
+  }, []);
 
-  const handleCommentsChange = (newComments) => {
+  const handleCommentsChange = useCallback((newComments) => {
     setComments(newComments);
-  };
+  }, []);
 
-  const handleConsensusGroupsChange = (newGroups) => {
+  const handleConsensusGroupsChange = useCallback((newGroups) => {
     setConsensusGroups(Math.max(1, Math.min(participants, newGroups)));
-  };
+  }, [participants]);
 
-  const handleRangeChange = (newValues) => {
+  const handleRangeChange = useCallback((newValues) => {
     setRangeValues(newValues);
-  };
+  }, []);
+
+  const voteColors = useMemo(() => ({
+    '-1': 'red',
+    '0': 'gray',
+    '1': 'green'
+  }), []);
+
+  const renderVoteMatrix = useMemo(() => (
+    <div style={{ overflowX: 'auto', maxHeight: '400px', overflowY: 'auto' }}>
+      <table style={{ borderCollapse: 'collapse' }}>
+        <tbody>
+          {voteMatrix.map((row, i) => (
+            <tr key={i} style={selectedGroup && groups[selectedGroup]?.points.includes(i) ? {backgroundColor: 'yellow'} : {}}>
+              {row.map((vote, j) => (
+                <td 
+                  key={j}
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    backgroundColor: voteColors[vote],
+                    cursor: 'pointer',
+                    border: '1px solid #ddd'
+                  }}
+                  onClick={() => handleVoteChange(i, j)}
+                />
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ), [voteMatrix, selectedGroup, groups, voteColors, handleVoteChange]);
+
+  useEffect(() => {
+    window.polisSimulation = {
+      setParticipants: (num) => {
+        setParticipants(num);
+        generateRandomVoteMatrix();
+      },
+      setComments: (num) => {
+        setComments(num);
+        generateRandomVoteMatrix();
+      },
+      getState: () => ({
+        participants,
+        comments,
+        voteMatrix,
+        pcaProjection,
+        groups
+      }),
+      regenerateMatrix: generateRandomVoteMatrix
+    };
+
+    return () => {
+      delete window.polisSimulation;
+    };
+  }, [setParticipants, setComments, generateRandomVoteMatrix, participants, comments, voteMatrix, pcaProjection, groups]);
 
   return (
-    <div className="App">
+    <div key={`${participants}-${comments}`} className="App">
       <h1>Polis Vote Matrix and PCA Simulation</h1>
       <div>
         <label>Participants: </label>
@@ -217,66 +281,66 @@ const PolisSimulation = () => {
           <span>Pass: {100 - rangeValues[1]}%</span>
         </div>
         <Range
-  values={rangeValues}
-  step={1}
-  min={0}
-  max={100}
-  onChange={handleRangeChange}
-  renderTrack={({ props, children }) => (
-    <div
-      onMouseDown={props.onMouseDown}
-      onTouchStart={props.onTouchStart}
-      style={{
-        ...props.style,
-        height: '36px',
-        display: 'flex',
-        width: '100%'
-      }}
-    >
-      <div
-        ref={props.ref}
-        style={{
-          height: '5px',
-          width: '100%',
-          borderRadius: '4px',
-          background: getTrackBackground({
-            values: rangeValues,
-            colors: ['#548BF4', '#ccc', '#ccc'],
-            min: 0,
-            max: 100
-          }),
-          alignSelf: 'center'
-        }}
-      >
-        {children}
-      </div>
-    </div>
-  )}
-  renderThumb={({ props, isDragged }) => (
-    <div
-      {...props}
-      style={{
-        ...props.style,
-        height: '42px',
-        width: '42px',
-        borderRadius: '4px',
-        backgroundColor: '#FFF',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        boxShadow: '0px 2px 6px #AAA'
-      }}
-    >
-      <div
-        style={{
-          height: '16px',
-          width: '5px',
-          backgroundColor: isDragged ? '#548BF4' : '#CCC'
-        }}
-      />
-    </div>
-  )}
-/>
+          values={rangeValues}
+          step={1}
+          min={0}
+          max={100}
+          onChange={handleRangeChange}
+          renderTrack={({ props, children }) => (
+            <div
+              onMouseDown={props.onMouseDown}
+              onTouchStart={props.onTouchStart}
+              style={{
+                ...props.style,
+                height: '36px',
+                display: 'flex',
+                width: '100%'
+              }}
+            >
+              <div
+                ref={props.ref}
+                style={{
+                  height: '5px',
+                  width: '100%',
+                  borderRadius: '4px',
+                  background: getTrackBackground({
+                    values: rangeValues,
+                    colors: ['#548BF4', '#ccc', '#ccc'],
+                    min: 0,
+                    max: 100
+                  }),
+                  alignSelf: 'center'
+                }}
+              >
+                {children}
+              </div>
+            </div>
+          )}
+          renderThumb={({ props, isDragged }) => (
+            <div
+              {...props}
+              style={{
+                ...props.style,
+                height: '42px',
+                width: '42px',
+                borderRadius: '4px',
+                backgroundColor: '#FFF',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                boxShadow: '0px 2px 6px #AAA'
+              }}
+            >
+              <div
+                style={{
+                  height: '16px',
+                  width: '5px',
+                  backgroundColor: isDragged ? '#548BF4' : '#CCC'
+                }}
+              />
+            </div>
+          )}
+        />
       </div>
       
       <div>
@@ -287,50 +351,9 @@ const PolisSimulation = () => {
           onChange={(e) => handleConsensusGroupsChange(Number(e.target.value))}
         />
       </div>
-      
-      <div>
-        <label>Grouping Threshold: </label>
-        <input
-          type="range"
-          min="0.1"
-          max="2"
-          step="0.1"
-          value={groupingThreshold}
-          onChange={(e) => setGroupingThreshold(Number(e.target.value))}
-        />
-        <span>{groupingThreshold.toFixed(1)}</span>
-      </div>
-      
+           
       <h2>Vote Matrix</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Participant</th>
-            {Array(comments).fill().map((_, i) => (
-              <th key={i}>Comment {i+1}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {voteMatrix.map((row, i) => (
-            <tr key={i} style={selectedGroup && groups[selectedGroup].points.includes(i) ? {backgroundColor: 'yellow'} : {}}>
-              <td>Participant {i+1}</td>
-              {row.map((vote, j) => (
-                <td key={j}>
-                  <select
-                    value={vote}
-                    onChange={(e) => handleVoteChange(i, j, Number(e.target.value))}
-                  >
-                    <option value={-1}>Disagree</option>
-                    <option value={0}>Pass</option>
-                    <option value={1}>Agree</option>
-                  </select>
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {renderVoteMatrix}
       
       <h2>PCA Projection</h2>
       <ScatterChart width={400} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
@@ -348,6 +371,18 @@ const PolisSimulation = () => {
       </ScatterChart>
       
       <h2>Groups</h2>
+      <div>
+        <label>Grouping Threshold: </label>
+        <input
+          type="range"
+          min="0.1"
+          max="2"
+          step="0.1"
+          value={groupingThreshold}
+          onChange={(e) => setGroupingThreshold(Number(e.target.value))}
+        />
+        <span>{groupingThreshold.toFixed(1)}</span>
+      </div>
       <ul>
         {groups.map((group, i) => (
           <li
@@ -363,12 +398,4 @@ const PolisSimulation = () => {
   );
 };
 
-function App() {
-  return (
-    <div className="App">
-      <PolisSimulation />
-    </div>
-  );
-}
-
-export default App;
+export default PolisSimulation;
