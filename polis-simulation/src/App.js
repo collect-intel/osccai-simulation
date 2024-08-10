@@ -306,13 +306,14 @@ const PolisSimulation = () => {
     setGroupSizes(Array(value - 1).fill(0).map((_, index) => ((index + 1) * 100) / value));
   };
 
-  const handleGroupSizesChange = (newValues) => {
+  const handleGroupSizesChange = useCallback((newValues) => {
     const adjustedValues = newValues.map((value, index) => {
       if (index === 0) return value;
       return Math.max(value, newValues[index - 1] + 1);
     });
     setGroupSizes(adjustedValues);
-  };
+    generateRandomVoteMatrix();
+  }, [generateRandomVoteMatrix]);
 
   const toggleVoteMatrix = () => setShowVoteMatrix(prev => !prev);
 
