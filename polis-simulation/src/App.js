@@ -104,36 +104,37 @@ const PolisSimulation = () => {
   }, [voteMatrix, participants, comments]);
 
   const generateRandomVoteMatrix = useCallback(() => {
-    const newMatrix = [];
-    for (let i = 0; i < participants; i++) {
-      const row = [];
-      for (let j = 0; j < comments; j++) {
-        const rand = Math.random() * 100;
-        if (rand < agreePercentage) {
-          row.push(1);
-        } else if (rand < agreePercentage + disagreePercentage) {
-          row.push(-1);
-        } else {
-          row.push(0);
+    setVoteMatrix(prevMatrix => {
+      const newMatrix = [];
+      for (let i = 0; i < prevMatrix.length; i++) {
+        const row = [];
+        for (let j = 0; j < prevMatrix[0].length; j++) {
+          const rand = Math.random() * 100;
+          if (rand < agreePercentage) {
+            row.push(1);
+          } else if (rand < agreePercentage + disagreePercentage) {
+            row.push(-1);
+          } else {
+            row.push(0);
+          }
         }
+        newMatrix.push(row);
       }
-      newMatrix.push(row);
-    }
 
-    const groupBoundaries = [0, ...groupSizes.map(size => Math.floor((size / 100) * participants)), participants];
-    for (let g = 0; g < consensusGroups; g++) {
-      const startIndex = groupBoundaries[g];
-      const endIndex = groupBoundaries[g + 1];
+      const groupBoundaries = [0, ...groupSizes.map(size => Math.floor((size / 100) * newMatrix.length)), newMatrix.length];
+      for (let g = 0; g < consensusGroups; g++) {
+        const startIndex = groupBoundaries[g];
+        const endIndex = groupBoundaries[g + 1];
 
-      for (let j = 0; j < comments; j++) {
-        const consensusVote = generateConsensusVote();
-        for (let i = startIndex; i < endIndex; i++) {
-          if (Math.random() < 0.8) {
-            newMatrix[i][j] = consensusVote;
+        for (let j = 0; j < newMatrix[0].length; j++) {
+          const consensusVote = generateConsensusVote();
+          for (let i = startIndex; i < endIndex; i++) {
+            if (Math.random() < 0.8) {
+              newMatrix[i][j] = consensusVote;
+            }
           }
         }
       }
-    }
 
     // Adjust votes to respect percentages
     const totalVotes = participants * comments;
@@ -169,8 +170,9 @@ const PolisSimulation = () => {
     adjustVotes(-1, 0, targetDisagree);
     adjustVotes(0, 1, targetPass);
 
-    setVoteMatrix(newMatrix);
-  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes]);
+    return newMatrix;
+    });
+  }, [agreePercentage, disagreePercentage, consensusGroups, groupSizes]);
 
   const resetState = () => {
     setParticipants(5);
@@ -184,11 +186,6 @@ const PolisSimulation = () => {
     setSelectedGroup(null);
     setGroupSizes([50]);
   };
-
-  useEffect(() => {
-    setAgreePercentage(rangeValues[0]);
-    setDisagreePercentage(rangeValues[1] - rangeValues[0]);
-  }, [rangeValues]);
 
   useEffect(() => {
     if (voteMatrix.length === 0) {
@@ -261,22 +258,47 @@ const PolisSimulation = () => {
     });
   }, []);
 
-  const handleParticipantsChange = (value) => {
+  const handleParticipantsChange = useCallback((value) => {
     const newValue = Math.max(1, value); // Ensure at least 1 participant
     setParticipants(newValue);
-  };
+    setVoteMatrix(prevMatrix => {
+      if (newValue > prevMatrix.length) {
+        // Add new rows
+        return [
+          ...prevMatrix,
+          ...Array(newValue - prevMatrix.length).fill().map(() => Array(comments).fill(0))
+        ];
+      } else if (newValue < prevMatrix.length) {
+        // Remove rows
+        return prevMatrix.slice(0, newValue);
+      }
+      return prevMatrix;
+    });
+  }, [comments]);
 
-  const handleCommentsChange = (value) => {
+  const handleCommentsChange = useCallback((value) => {
     const newValue = Math.max(1, value); // Ensure at least 1 comment
     setComments(newValue);
-  };
+    setVoteMatrix(prevMatrix => 
+      prevMatrix.map(row => {
+        if (newValue > row.length) {
+          // Add new columns
+          return [...row, ...Array(newValue - row.length).fill(0)];
+        } else if (newValue < row.length) {
+          // Remove columns
+          return row.slice(0, newValue);
+        }
+        return row;
+      })
+    );
+  }, []);
 
-  useEffect(() => {
-    generateRandomVoteMatrix();
-  }, [participants, comments, generateRandomVoteMatrix]);
 
   const handleRangeChange = (values) => {
     setRangeValues(values);
+    setAgreePercentage(values[0]);
+    setDisagreePercentage(values[1] - values[0]);
+    generateRandomVoteMatrix();
   };
 
   const handleConsensusGroupsChange = (value) => {
