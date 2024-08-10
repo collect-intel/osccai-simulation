@@ -136,6 +136,7 @@ const PolisSimulation = () => {
         }
       }
 
+
     // Adjust votes to respect percentages
     const totalVotes = participants * comments;
     const targetAgree = Math.floor((agreePercentage / 100) * totalVotes);
@@ -145,6 +146,8 @@ const PolisSimulation = () => {
     let currentAgree = 0;
     let currentDisagree = 0;
     let currentPass = 0;
+
+    console.log('Before adjustment:', { currentAgree, currentDisagree, currentPass });
 
     for (let i = 0; i < participants; i++) {
       for (let j = 0; j < comments; j++) {
@@ -169,7 +172,7 @@ const PolisSimulation = () => {
     adjustVotes(1, 0, targetAgree);
     adjustVotes(-1, 0, targetDisagree);
     adjustVotes(0, 1, targetPass);
-
+    console.log('After adjustment:', { currentAgree: targetAgree, currentDisagree: targetDisagree, currentPass: targetPass });
     return newMatrix;
     });
   }, [agreePercentage, disagreePercentage, consensusGroups, groupSizes]);
