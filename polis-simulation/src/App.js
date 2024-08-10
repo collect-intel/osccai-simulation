@@ -105,20 +105,21 @@ const PolisSimulation = () => {
 
   const generateRandomVoteMatrix = useCallback(() => {
     setVoteMatrix(prevMatrix => {
-      const newMatrix = [];
-      for (let i = 0; i < prevMatrix.length; i++) {
-        const row = [];
-        for (let j = 0; j < prevMatrix[0].length; j++) {
+      const rows = prevMatrix.length || participants;
+      const cols = prevMatrix[0]?.length || comments;
+      const newMatrix = Array(rows).fill().map(() => Array(cols).fill(0));
+  
+      for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
           const rand = Math.random() * 100;
           if (rand < agreePercentage) {
-            row.push(1);
+            newMatrix[i][j] = 1;
           } else if (rand < agreePercentage + disagreePercentage) {
-            row.push(-1);
+            newMatrix[i][j] = -1;
           } else {
-            row.push(0);
+            newMatrix[i][j] = 0;
           }
         }
-        newMatrix.push(row);
       }
 
       const groupBoundaries = [0, ...groupSizes.map(size => Math.floor((size / 100) * newMatrix.length)), newMatrix.length];
@@ -183,11 +184,13 @@ const PolisSimulation = () => {
     setRangeValues([33, 66]);
     setConsensusGroups(2);
     setGroupingThreshold(0.5);
-    setVoteMatrix([]);
+    setVoteMatrix(Array(5).fill().map(() => Array(4).fill(0)));
     setPcaProjection([]);
     setGroups([]);
     setSelectedGroup(null);
     setGroupSizes([50]);
+    setAgreePercentage(33);
+    setDisagreePercentage(33);
   };
 
   useEffect(() => {
