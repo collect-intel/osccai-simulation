@@ -7,7 +7,7 @@ const DEFAULT_PARTICIPANTS = 50;
 const DEFAULT_COMMENTS = 50;
 const DEFAULT_RANGE_VALUES = [33, 66];
 const DEFAULT_CONSENSUS_GROUPS = 3;
-const DEFAULT_GROUPING_THRESHOLD = 0.5;
+const DEFAULT_GROUPING_THRESHOLD = 2.0;
 
 // PCA function
 function pca(X) {
@@ -256,8 +256,8 @@ const PolisSimulation = () => {
 
   const identifyGroups = useCallback(() => {
     const newGroups = [];
-    const threshold = groupingThreshold;
-
+    const maxDistance = Math.sqrt(2) * groupingThreshold; // Maximum possible distance in 2D space
+  
     pcaProjection.forEach((point, i) => {
       let assignedGroup = null;
       for (let j = 0; j < newGroups.length; j++) {
@@ -266,24 +266,24 @@ const PolisSimulation = () => {
           Math.pow(point.x - group.centerX, 2) + 
           Math.pow(point.y - group.centerY, 2)
         );
-        if (distance < threshold) {
+        if (distance < maxDistance) {
           assignedGroup = j;
           break;
         }
       }
-
+  
       if (assignedGroup !== null) {
         newGroups[assignedGroup].points.push(i);
       } else {
         newGroups.push({ points: [i], centerX: point.x, centerY: point.y });
       }
     });
-
+  
     newGroups.forEach(group => {
       group.centerX = group.points.reduce((sum, p) => sum + pcaProjection[p].x, 0) / group.points.length;
       group.centerY = group.points.reduce((sum, p) => sum + pcaProjection[p].y, 0) / group.points.length;
     });
-
+  
     setGroups(newGroups);
     setSelectedGroup(null);
   }, [pcaProjection, groupingThreshold]);
@@ -362,27 +362,43 @@ const PolisSimulation = () => {
 
   const renderVoteMatrix = useMemo(() => {
     return (
-      <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: '100%', overflowX: 'auto' }}>
-        {voteMatrix.map((row, i) => (
-          <div key={i} style={{ display: 'flex' }}>
-            {row.map((vote, j) => (
-              <div
-                key={j}
-                style={{
-                  width: '20px',
-                  height: '20px',
-                  backgroundColor: vote === 1 ? 'green' : vote === -1 ? 'red' : 'gray',
-                  margin: '1px',
-                  cursor: 'pointer'
-                }}
-                onClick={() => handleVoteChange(i, j)}
-              />
+      <div className="vote-matrix-container">
+        <div className="axis-label participants-label">Participants</div>
+        <div className="axis-label comments-label">Comments</div>
+        <div className="vote-matrix">
+          <div className="column-labels">
+            {voteMatrix[0].map((_, j) => (
+              <div key={j} className="column-label">
+                {j < 3 || j === voteMatrix[0].length - 1 ? j + 1 : (j === 3 ? '...' : '')}
+              </div>
             ))}
           </div>
-        ))}
+          <div style={{ display: 'flex' }}>
+            <div className="row-labels">
+              {voteMatrix.map((_, i) => (
+                <div key={i} className="row-label">
+                  {i < 3 || i === voteMatrix.length - 1 ? i + 1 : (i === 3 ? '...' : '')}
+                </div>
+              ))}
+            </div>
+            <div className="matrix-content">
+              {voteMatrix.map((row, i) => (
+                <div key={i} className={`matrix-row ${selectedGroup !== null && groups[selectedGroup].points.includes(i) ? 'highlighted' : ''}`}>
+                  {row.map((vote, j) => (
+                    <div
+                      key={j}
+                      className={`matrix-cell ${vote === 1 ? 'agree' : vote === -1 ? 'disagree' : 'pass'}`}
+                      onClick={() => handleVoteChange(i, j)}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     );
-  }, [voteMatrix, handleVoteChange]);
+  }, [voteMatrix, handleVoteChange, selectedGroup, groups]);
 
   const renderConsensusGroupLabels = useMemo(() => {
     const labels = [];
@@ -661,7 +677,7 @@ const PolisSimulation = () => {
         <input
           type="range"
           min="0.1"
-          max="2"
+          max="10"
           step="0.1"
           value={groupingThreshold}
           onChange={(e) => setGroupingThreshold(Number(e.target.value))}

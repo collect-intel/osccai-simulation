@@ -36,3 +36,84 @@
     transform: rotate(360deg);
   }
 }
+
+.vote-matrix-container {
+  position: relative;
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.axis-label {
+  position: absolute;
+  font-weight: bold;
+}
+
+.participants-label {
+  transform: rotate(-90deg);
+  transform-origin: left top;
+  left: -30px;
+  top: 50%;
+}
+
+.comments-label {
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.vote-matrix {
+  display: flex;
+  flex-direction: column;
+}
+
+.row-labels {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5px;
+}
+
+.row-label {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 12px;
+}
+
+.matrix-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-labels {
+  display: flex;
+  margin-bottom: 5px;
+  margin-left: 25px;
+}
+
+.column-label {
+  width: 22px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.matrix-row {
+  display: flex;
+}
+
+.matrix-cell {
+  width: 20px;
+  height: 20px;
+  margin: 1px;
+  cursor: pointer;
+}
+
+.matrix-cell.agree { background-color: green; }
+.matrix-cell.disagree { background-color: red; }
+.matrix-cell.pass { background-color: gray; }
+
+.matrix-row.highlighted .matrix-cell {
+  border: 2px solid yellow;
+  width: 16px;
+  height: 16px;
+}
