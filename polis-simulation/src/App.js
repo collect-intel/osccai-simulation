@@ -132,11 +132,12 @@ const PolisSimulation = () => {
         const groupSize = groupBoundaries[g + 1] - groupBoundaries[g];
         const groupWeight = groupSize / rows;
   
+        const PROPORTIONAL_ADJUSTMENT_FACTOR = 1/2;
         // Calculate proportional adjustments
-        const adjustAgree = (agreePercentage * (1 - agreePercentage / 100)) / 5;
-        const adjustDisagree = (disagreePercentage * (1 - disagreePercentage / 100)) / 5;
-        const adjustPass = (remainingPass * (1 - remainingPass / 100)) / 5;
-
+        const adjustAgree = (agreePercentage * (1 - agreePercentage / 100)) * PROPORTIONAL_ADJUSTMENT_FACTOR;
+        const adjustDisagree = (disagreePercentage * (1 - disagreePercentage / 100)) * PROPORTIONAL_ADJUSTMENT_FACTOR;
+        const adjustPass = ((100 - agreePercentage - disagreePercentage) * (1 - (100 - agreePercentage - disagreePercentage) / 100)) * PROPORTIONAL_ADJUSTMENT_FACTOR;
+  
         console.log(`Group ${g + 1} proportional adjustments:`, {
           adjustAgree,
           adjustDisagree,
@@ -144,28 +145,42 @@ const PolisSimulation = () => {
         });
   
         // Apply proportional random adjustments
-        const groupAgree = Math.min(Math.max(
-          remainingAgree + (Math.random() * 2 - 1) * adjustAgree * groupWeight, 
+        const totalRemaining = remainingAgree + remainingDisagree + remainingPass;
+        const baseAgree = (remainingAgree / totalRemaining) * 100;
+        const baseDisagree = (remainingDisagree / totalRemaining) * 100;
+        const basePass = (remainingPass / totalRemaining) * 100;
+  
+        let groupAgree = Math.min(Math.max(
+          baseAgree + (Math.random() * 2 - 1) * adjustAgree,
           0
-        ), 100 * groupWeight);
-        const groupDisagree = Math.min(Math.max(
-          remainingDisagree + (Math.random() * 2 - 1) * adjustDisagree * groupWeight, 
+        ), 100);
+        let groupDisagree = Math.min(Math.max(
+          baseDisagree + (Math.random() * 2 - 1) * adjustDisagree,
           0
-        ), 100 * groupWeight - groupAgree);
-        const groupPass = 100 * groupWeight - groupAgree - groupDisagree;
+        ), 100 - groupAgree);
+        let groupPass = Math.min(Math.max(
+          basePass + (Math.random() * 2 - 1) * adjustPass,
+          0
+        ), 100 - groupAgree - groupDisagree);
+  
+        // Normalize to ensure they sum to 100%
+        const total = groupAgree + groupDisagree + groupPass;
+        groupAgree = (groupAgree / total) * 100;
+        groupDisagree = (groupDisagree / total) * 100;
+        groupPass = (groupPass / total) * 100;
   
         groupDistributions.push({
-          agree: groupAgree / groupWeight,
-          disagree: groupDisagree / groupWeight,
-          pass: groupPass / groupWeight
+          agree: groupAgree,
+          disagree: groupDisagree,
+          pass: groupPass
         });
-
+  
         console.log(`Group ${g + 1} distribution:`, groupDistributions[g]);
   
-        remainingAgree -= groupAgree;
-        remainingDisagree -= groupDisagree;
-        remainingPass -= groupPass;
-
+        remainingAgree -= groupAgree * groupWeight;
+        remainingDisagree -= groupDisagree * groupWeight;
+        remainingPass -= groupPass * groupWeight;
+  
         console.log(`Remaining after Group ${g + 1}:`, {
           remainingAgree,
           remainingDisagree,
