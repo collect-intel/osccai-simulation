@@ -5,7 +5,9 @@ import './App.css';
 
 const DEFAULT_PARTICIPANTS = 50;
 const DEFAULT_COMMENTS = 50;
-const DEFAULT_RANGE_VALUES = [33, 66];
+const MAX_PARTICIPANTS_COMMENTS = 400;
+const DEFAULT_AGREE_PERCENTAGE = 33;
+const DEFAULT_DISAGREE_PERCENTAGE = 33;
 const DEFAULT_CONSENSUS_GROUPS = 3;
 const DEFAULT_GROUPING_THRESHOLD = 2.0;
 const DEFAULT_GROUP_SIMILARITY = 50;
@@ -30,9 +32,11 @@ function pca(X) {
 
   // Compute eigenvalues and eigenvectors (using a very simple power iteration method)
   function powerIteration(A, numIterations = 100) {
+    const multiplyAb = (A, b) => A.map(row => row.reduce((sum, a, j) => sum + a * b[j], 0));
+    
     let b = Array(A.length).fill().map(() => Math.random());
     for (let i = 0; i < numIterations; i++) {
-      const Ab = A.map(row => row.reduce((sum, a, j) => sum + a * b[j], 0));
+      const Ab = multiplyAb(A, b);
       const norm = Math.sqrt(Ab.reduce((sum, x) => sum + x * x, 0));
       b = Ab.map(x => x / norm);
     }
@@ -49,46 +53,107 @@ function pca(X) {
   ]);
 }
 
-const saveState = (state) => {
-  localStorage.setItem('polisSimulationState', JSON.stringify(state));
-};
-
-const loadState = () => {
-  const savedState = localStorage.getItem('polisSimulationState');
-  return savedState ? JSON.parse(savedState) : null;
-};
-
 
 const PolisSimulation = () => {
-  const savedState = loadState();
-
-  const [participants, setParticipants] = useState(savedState?.participants || DEFAULT_PARTICIPANTS);
-  const [comments, setComments] = useState(savedState?.comments || DEFAULT_COMMENTS);
-  const [voteMatrix, setVoteMatrix] = useState(() => {
-    if (savedState?.voteMatrix?.length > 0) {
-      return savedState.voteMatrix;
-    }
-    return Array(DEFAULT_PARTICIPANTS).fill().map(() => Array(DEFAULT_COMMENTS).fill(0));
+  const [participants, setParticipants] = useState(() => {
+    const saved = localStorage.getItem('participants');
+    return saved ? parseInt(saved, 10) : DEFAULT_PARTICIPANTS;
   });
-  const [pcaProjection, setPcaProjection] = useState([]);
-  const [groups, setGroups] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState(null);
-  const [rangeValues, setRangeValues] = useState(savedState?.rangeValues || DEFAULT_RANGE_VALUES);
-  const [consensusGroups, setConsensusGroups] = useState(savedState?.consensusGroups || DEFAULT_CONSENSUS_GROUPS);
-  const [groupingThreshold, setGroupingThreshold] = useState(savedState?.groupingThreshold ?? DEFAULT_GROUPING_THRESHOLD);
+  const [comments, setComments] = useState(() => {
+    const saved = localStorage.getItem('comments');
+    return saved ? parseInt(saved, 10) : DEFAULT_COMMENTS;
+  });
+  const [groupSimilarity, setGroupSimilarity] = useState(() => {
+    const saved = localStorage.getItem('groupSimilarity');
+    return saved ? parseInt(saved, 10) : DEFAULT_GROUP_SIMILARITY;
+  });
+  const [consensusGroups, setConsensusGroups] = useState(() => {
+    const saved = localStorage.getItem('consensusGroups');
+    return saved ? parseInt(saved, 10) : DEFAULT_CONSENSUS_GROUPS;
+  });
   const [groupSizes, setGroupSizes] = useState(() => {
-    const sizes = Array(consensusGroups - 1).fill(100 / consensusGroups);
-    return sizes.map((size, index) => size * (index + 1));
+    const saved = localStorage.getItem('groupSizes');
+    if (saved) {
+      return JSON.parse(saved);
+    } else {
+      const sizes = Array(consensusGroups - 1).fill(100 / consensusGroups);
+      return sizes.map((size, index) => size * (index + 1));
+    }
+  });
+  const [groupingThreshold, setGroupingThreshold] = useState(() => {
+    const saved = localStorage.getItem('groupingThreshold');
+    return saved ? parseFloat(saved) : DEFAULT_GROUPING_THRESHOLD;
+  });
+  const [rangeValues, setRangeValues] = useState(() => {
+    const saved = localStorage.getItem('rangeValues');
+    if (saved) {
+      return JSON.parse(saved);
+    } else {
+      return [DEFAULT_AGREE_PERCENTAGE, DEFAULT_AGREE_PERCENTAGE + DEFAULT_DISAGREE_PERCENTAGE];
+    }
+  });
+  
+  const [tempParticipants, setTempParticipants] = useState(participants);
+  const [tempComments, setTempComments] = useState(comments);
+  const [tempGroupSimilarity, setTempGroupSimilarity] = useState(groupSimilarity);
+  const [tempGroupSizes, setTempGroupSizes] = useState(groupSizes);
+
+  const [voteMatrix, setVoteMatrix] = useState(() => {
+    const saved = localStorage.getItem('voteMatrix');
+    return saved ? JSON.parse(saved) : Array(participants).fill().map(() => Array(comments).fill(0));
   });
 
   const [agreePercentage, setAgreePercentage] = useState(rangeValues[0]);
   const [disagreePercentage, setDisagreePercentage] = useState(rangeValues[1] - rangeValues[0]);
 
+  const saveState = useCallback(() => {
+    const stateToSave = {
+      participants,
+      comments,
+      groupSimilarity,
+      groupSizes,
+      voteMatrix,
+      agreePercentage,
+      disagreePercentage,
+      consensusGroups,
+      groupingThreshold,
+      rangeValues
+    };
+    localStorage.setItem('polisSimulationState', JSON.stringify(stateToSave));
+    // Also save individual items
+    Object.entries(stateToSave).forEach(([key, value]) => {
+      localStorage.setItem(key, JSON.stringify(value));
+    });
+  }, [participants, comments, groupSimilarity, groupSizes, voteMatrix, agreePercentage, disagreePercentage, consensusGroups, groupingThreshold, rangeValues]);
+
+  useEffect(() => {
+    const savedState = localStorage.getItem('polisSimulationState');
+    if (savedState) {
+      const parsedState = JSON.parse(savedState);
+      setParticipants(parsedState.participants);
+      setComments(parsedState.comments);
+      setGroupSimilarity(parsedState.groupSimilarity);
+      setGroupSizes(parsedState.groupSizes);
+      setTempParticipants(parsedState.participants);
+      setTempComments(parsedState.comments);
+      setTempGroupSimilarity(parsedState.groupSimilarity);
+      setTempGroupSizes(parsedState.groupSizes);
+      setVoteMatrix(parsedState.voteMatrix);
+      setAgreePercentage(parsedState.agreePercentage);
+      setDisagreePercentage(parsedState.disagreePercentage);
+      setConsensusGroups(parsedState.consensusGroups);
+      setGroupingThreshold(parsedState.groupingThreshold);
+      setRangeValues(parsedState.rangeValues);
+    }
+  }, []);
+
+  const [pcaProjection, setPcaProjection] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [selectedGroup, setSelectedGroup] = useState(null);
+
   const [actualPercentages, setActualPercentages] = useState({ agree: 0, disagree: 0, pass: 0 });
   const [actualCounts, setActualCounts] = useState({ agree: 0, disagree: 0, pass: 0 });
   const [showVoteMatrix, setShowVoteMatrix] = useState(true);
-
-  const [groupSimilarity, setGroupSimilarity] = useState(DEFAULT_GROUP_SIMILARITY);
 
   const calculateActualPercentages = useCallback(() => {
     if (!voteMatrix || voteMatrix.length === 0) return;
@@ -264,44 +329,83 @@ const PolisSimulation = () => {
     generateRandomVoteMatrix();
   }, [generateRandomVoteMatrix, participants, comments, agreePercentage, disagreePercentage]);
 
+  useEffect(() => {
+    const savedState = localStorage.getItem('polisSimulationState');
+    if (savedState) {
+      const parsedState = JSON.parse(savedState);
+      setParticipants(parsedState.participants);
+      setComments(parsedState.comments);
+      setGroupSimilarity(parsedState.groupSimilarity);
+      setGroupSizes(parsedState.groupSizes);
+      setTempParticipants(parsedState.participants);
+      setTempComments(parsedState.comments);
+      setTempGroupSimilarity(parsedState.groupSimilarity);
+      setTempGroupSizes(parsedState.groupSizes);
+      setVoteMatrix(parsedState.voteMatrix);
+      setAgreePercentage(parsedState.agreePercentage);
+      setDisagreePercentage(parsedState.disagreePercentage);
+      setConsensusGroups(parsedState.consensusGroups);
+      setGroupingThreshold(parsedState.groupingThreshold);
+    }
+  }, []);
+
+  const performPCA = useCallback(() => {
+    const projection = pca(voteMatrix);
+    setPcaProjection(projection.map((coords, i) => ({ x: coords[0], y: coords[1], id: i })));
+  }, [voteMatrix]);
+  
   const resetState = useCallback(() => {
     setParticipants(DEFAULT_PARTICIPANTS);
     setComments(DEFAULT_COMMENTS);
-    setRangeValues(DEFAULT_RANGE_VALUES);
+    setTempParticipants(DEFAULT_PARTICIPANTS);
+    setTempComments(DEFAULT_COMMENTS);
     setConsensusGroups(DEFAULT_CONSENSUS_GROUPS);
+    const sizes = Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(100 / DEFAULT_CONSENSUS_GROUPS);
+    const defaultGroupSizes = sizes.map((size, index) => size * (index + 1));
+    setGroupSizes(defaultGroupSizes);
+    setTempGroupSizes(defaultGroupSizes);
+    setGroupSimilarity(DEFAULT_GROUP_SIMILARITY);
+    setTempGroupSimilarity(DEFAULT_GROUP_SIMILARITY);
     setGroupingThreshold(DEFAULT_GROUPING_THRESHOLD);
     setPcaProjection([]);
     setGroups([]);
-    setGroupSimilarity(DEFAULT_GROUP_SIMILARITY);
     setSelectedGroup(null);
     setGroupSizes(Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(0).map((_, index) => ((index + 1) * 100) / DEFAULT_CONSENSUS_GROUPS));
-    setAgreePercentage(DEFAULT_RANGE_VALUES[0]);
-    setDisagreePercentage(DEFAULT_RANGE_VALUES[1] - DEFAULT_RANGE_VALUES[0]);
+    setAgreePercentage(DEFAULT_AGREE_PERCENTAGE);
+    setDisagreePercentage(DEFAULT_DISAGREE_PERCENTAGE);
+    setRangeValues([DEFAULT_AGREE_PERCENTAGE, DEFAULT_AGREE_PERCENTAGE + DEFAULT_DISAGREE_PERCENTAGE]);
+    // Reset the Vote Matrix
+    const newVoteMatrix = Array(DEFAULT_PARTICIPANTS).fill().map(() => 
+      Array(DEFAULT_COMMENTS).fill(0)
+    );
+    setVoteMatrix(newVoteMatrix);
+    
+    // Reset groups
+    setGroups([]);
+    setSelectedGroup(null);
   }, []);
 
   useEffect(() => {
     if (voteMatrix.length === 0) {
       generateRandomVoteMatrix();
     } else {
+      performPCA();
       calculateActualPercentages();
     }
-  }, [voteMatrix, calculateActualPercentages, generateRandomVoteMatrix]);
+  }, [voteMatrix, performPCA, calculateActualPercentages, generateRandomVoteMatrix]);
 
   useEffect(() => {
     calculateActualPercentages();
   }, [voteMatrix, calculateActualPercentages]);
 
-  const performPCA = useCallback(() => {
-    const projection = pca(voteMatrix);
-    setPcaProjection(projection.map((coords, i) => ({ x: coords[0], y: coords[1], id: i })));
-  }, [voteMatrix]);
+  
 
   useEffect(() => {
     if (voteMatrix.length > 0) {
       performPCA();
-      saveState({ participants, comments, voteMatrix, groupingThreshold, rangeValues, consensusGroups });
+      saveState();
     }
-  }, [voteMatrix, performPCA, participants, comments, groupingThreshold, rangeValues, consensusGroups]);
+  }, [voteMatrix, performPCA, saveState, participants, comments, groupingThreshold, rangeValues, consensusGroups]);
 
   const identifyGroups = useCallback(() => {
     const newGroups = [];
@@ -351,34 +455,34 @@ const PolisSimulation = () => {
   }, []);
 
   const handleParticipantsChange = useCallback((value) => {
-    const newValue = Math.max(1, value); // Ensure at least 1 participant
-    setParticipants(newValue);
+    setParticipants(value);
+    setTempParticipants(value);
     setVoteMatrix(prevMatrix => {
-      if (newValue > prevMatrix.length) {
+      if (value > prevMatrix.length) {
         // Add new rows
         return [
           ...prevMatrix,
-          ...Array(newValue - prevMatrix.length).fill().map(() => Array(comments).fill(0))
+          ...Array(value - prevMatrix.length).fill().map(() => Array(comments).fill(0))
         ];
-      } else if (newValue < prevMatrix.length) {
+      } else if (value < prevMatrix.length) {
         // Remove rows
-        return prevMatrix.slice(0, newValue);
+        return prevMatrix.slice(0, value);
       }
       return prevMatrix;
     });
   }, [comments]);
-
+  
   const handleCommentsChange = useCallback((value) => {
-    const newValue = Math.max(1, value); // Ensure at least 1 comment
-    setComments(newValue);
+    setComments(value);
+    setTempComments(value);
     setVoteMatrix(prevMatrix => 
       prevMatrix.map(row => {
-        if (newValue > row.length) {
+        if (value > row.length) {
           // Add new columns
-          return [...row, ...Array(newValue - row.length).fill(0)];
-        } else if (newValue < row.length) {
+          return [...row, ...Array(value - row.length).fill(0)];
+        } else if (value < row.length) {
           // Remove columns
-          return row.slice(0, newValue);
+          return row.slice(0, value);
         }
         return row;
       })
@@ -393,10 +497,18 @@ const PolisSimulation = () => {
     generateRandomVoteMatrix();
   };
 
-  const handleConsensusGroupsChange = (value) => {
+  const handleConsensusGroupsChange = useCallback((value) => {
     setConsensusGroups(value);
-    setGroupSizes(Array(value - 1).fill(0).map((_, index) => ((index + 1) * 100) / value));
-  };
+    const newSizes = Array(value - 1).fill(100 / value);
+    const newGroupSizes = newSizes.map((size, index) => size * (index + 1));
+    setGroupSizes(newGroupSizes);
+    setTempGroupSizes(newGroupSizes);
+  }, []);
+
+  const handleGroupSimilarityChange = useCallback((value) => {
+    setGroupSimilarity(value);
+    setTempGroupSimilarity(value);
+  }, []);
   
   const handleGroupSizesChange = useCallback((newValues) => {
     const adjustedValues = newValues.map((value, index) => {
@@ -404,44 +516,51 @@ const PolisSimulation = () => {
       return Math.max(value, newValues[index - 1] + 1);
     });
     setGroupSizes(adjustedValues);
+    setTempGroupSizes(adjustedValues);
     generateRandomVoteMatrix();
   }, [generateRandomVoteMatrix]);
 
   const toggleVoteMatrix = () => setShowVoteMatrix(prev => !prev);
 
   const renderVoteMatrix = useMemo(() => {
+    const handleScroll = (e) => {
+      const labels = document.querySelector('.column-labels');
+      const container = e.target;
+      if (labels) {
+        labels.style.transform = `translateX(-${container.scrollLeft}px)`;
+      }
+    };
+  
     return (
-      <div className="vote-matrix-container">
+      <div className="vote-matrix-outer-container">
         <div className="axis-label participants-label">Participants</div>
         <div className="axis-label comments-label">Comments</div>
-        <div className="vote-matrix">
-          <div className="column-labels">
-            {voteMatrix[0].map((_, j) => (
-              <div key={j} className="column-label">
-                {j < 3 || j === voteMatrix[0].length - 1 ? j + 1 : (j === 3 ? '...' : '')}
+        <div className="vote-matrix-container" onScroll={handleScroll}>
+          <div className="vote-matrix">
+            <div className="column-labels-container">
+              <div className="column-labels">
+                {voteMatrix[0].map((_, j) => (
+                  <div key={j} className="column-label">
+                    {j + 1}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div style={{ display: 'flex' }}>
-            <div className="row-labels">
-              {voteMatrix.map((_, i) => (
-                <div key={i} className="row-label">
-                  {i < 3 || i === voteMatrix.length - 1 ? i + 1 : (i === 3 ? '...' : '')}
-                </div>
-              ))}
             </div>
-            <div className="matrix-content">
-              {voteMatrix.map((row, i) => (
-                <div key={i} className={`matrix-row ${selectedGroup !== null && groups[selectedGroup].points.includes(i) ? 'highlighted' : ''}`}>
-                  {row.map((vote, j) => (
-                    <div
-                      key={j}
-                      className={`matrix-cell ${vote === 1 ? 'agree' : vote === -1 ? 'disagree' : 'pass'}`}
-                      onClick={() => handleVoteChange(i, j)}
-                    />
-                  ))}
-                </div>
-              ))}
+            <div className="matrix-scroll-container">
+              <div className="matrix-content">
+                {voteMatrix.map((row, i) => (
+                  <div key={i} className={`matrix-row ${selectedGroup !== null && groups[selectedGroup].points.includes(i) ? 'highlighted' : ''}`}>
+                    <div className="row-label">{i + 1}</div>
+                    {row.map((vote, j) => (
+                      <div
+                        key={j}
+                        className={`matrix-cell ${vote === 1 ? 'agree' : vote === -1 ? 'disagree' : 'pass'}`}
+                        onClick={() => handleVoteChange(i, j)}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -510,23 +629,92 @@ const PolisSimulation = () => {
     };
   }, [setParticipants, setComments, generateRandomVoteMatrix, participants, comments, voteMatrix, pcaProjection, groups, groupingThreshold, rangeValues, consensusGroups, resetState]);
 
+  const IntroductionBox = () => (
+    <div className="explanation-box">
+      <p>This tool demonstrates how Polis analyzes participant opinions on various comments to identify consensus groups. We'll simulate participants voting on comments and visualize how these votes form distinct opinion clusters.</p>
+    </div>
+  );
+  
+  const OverallSliderExplanation = () => (
+    <div className="explanation-box">
+      <h3>Simulation Controls</h3>
+      <ul>
+        <li><strong>Participants:</strong> The number of people voting.</li>
+        <li><strong>Comments:</strong> The number of statements being voted on.</li>
+        <li><strong>Agree/Disagree %:</strong> The overall distribution of votes across all participants and comments.</li>
+      </ul>
+    </div>
+  );
+  
+  const GroupControlsExplanation = () => (
+    <div className="explanation-box">
+      <h3>Group Controls</h3>
+      <ul>
+        <li><strong>Consensus Groups:</strong> The number of distinct opinion groups to generate.</li>
+        <li><strong>Group Similarity:</strong> How closely the groups' opinions align. Lower similarity creates more distinct groups.</li>
+      </ul>
+    </div>
+  );
+
+  const GroupSliderExplanation = () => (
+    <div className="explanation-box">
+      <p>Set the portion of participants in each Group:</p>
+    </div>
+  );
+
+  const VoteMatrixExplanation = () => (
+    <div className="explanation-box">
+      <h3>Vote Matrix</h3>
+      <p>The Vote Matrix shows how each participant (rows) voted on each comment (columns). Green = Agree, Red = Disagree, Gray = Pass. This matrix is the raw data that Polis analyzes to find opinion groups.</p>
+    </div>
+  );
+  
+  const PCAExplanation = () => (
+    <div className="explanation-box">
+      <h3>PCA (Principal Component Analysis) Projection</h3>
+      <p>This scatter plot shows participants grouped by their voting patterns. Each dot represents a participant.</p>
+      <p><strong>X-axis:</strong> First Principal Component</p>
+      <p><strong>Y-axis:</strong> Second Principal Component</p>
+      <p>PCA reduces the high-dimensional vote data (one dimension per comment) into two dimensions that capture the most variation in voting patterns. Participants with similar opinions will cluster together in this projection.</p>
+      <p>The colored areas represent the identified consensus groups based on the Grouping Threshold.</p>
+    </div>
+  );
+  
+  const GroupAnalysisExplanation = () => (
+    <div className="explanation-box">
+      <h3>Group Analysis</h3>
+      <p>This section shows the voting patterns for each identified consensus group. It helps you understand what opinions define each group and how they differ from others.</p>
+      <p>Click on a group to highlight its participants in the Vote Matrix and PCA Projection.</p>
+    </div>
+  );
+  
+
+
   return (
     <div key={`${participants}-${comments}`} className="App">
       <h1>Polis Vote Matrix and PCA Simulation</h1>
+      <IntroductionBox />
+      <OverallSliderExplanation />
       <div>
-        <label>Participants: </label>
+        <label>Participants: {tempParticipants}</label>
         <input
-          type="number"
-          value={participants}
-          onChange={(e) => handleParticipantsChange(Number(e.target.value))}
+          type="range"
           min="1"
+          max={MAX_PARTICIPANTS_COMMENTS}
+          value={tempParticipants}
+          onChange={(e) => setTempParticipants(Number(e.target.value))}
+          onMouseUp={() => handleParticipantsChange(tempParticipants)}
         />
-        <label> Comments: </label>
+      </div>
+      <div>
+        <label>Comments: {tempComments}</label>
         <input
-          type="number"
-          value={comments}
-          onChange={(e) => handleCommentsChange(Number(e.target.value))}
+          type="range"
           min="1"
+          max={MAX_PARTICIPANTS_COMMENTS}
+          value={tempComments}
+          onChange={(e) => setTempComments(Number(e.target.value))}
+          onMouseUp={() => handleCommentsChange(tempComments)}
         />
       </div>
       
@@ -599,6 +787,8 @@ const PolisSimulation = () => {
         />
       </div>
       
+      <GroupControlsExplanation />
+
       <div>
         <label>Consensus Groups: </label>
         <input
@@ -609,84 +799,90 @@ const PolisSimulation = () => {
       </div>
 
       <div>
-        <label>Group Similarity: </label>
+        <label>Group Similarity: {tempGroupSimilarity}</label>
         <input
           type="range"
           min="0"
           max="100"
-          value={groupSimilarity}
-          onChange={(e) => setGroupSimilarity(Number(e.target.value))}
+          value={tempGroupSimilarity}
+          onChange={(e) => setTempGroupSimilarity(Number(e.target.value))}
+          onMouseUp={() => handleGroupSimilarityChange(tempGroupSimilarity)}
         />
-        <span>{groupSimilarity}%</span>
       </div>
-      
+
+      <GroupSliderExplanation />
+
       <div style={{ margin: '20px 0' }}>
         <div style={{ position: 'relative', height: '40px', marginBottom: '10px' }}>
           {renderConsensusGroupLabels}
         </div>
-        <Range
-          values={groupSizes}
-          step={1}
-          min={0}
-          max={100}
-          onChange={handleGroupSizesChange}
-          renderTrack={({ props, children }) => (
-            <div
-              onMouseDown={props.onMouseDown}
-              onTouchStart={props.onTouchStart}
-              style={{
-                ...props.style,
-                height: '36px',
-                display: 'flex',
-                width: '100%'
-              }}
-            >
+        <div>
+          <label>Group %</label>
+          <Range
+            values={tempGroupSizes}
+            step={1}
+            min={0}
+            max={100}
+            onChange={setTempGroupSizes}
+            onFinalChange={handleGroupSizesChange}
+            renderTrack={({ props, children }) => (
               <div
-                ref={props.ref}
+                onMouseDown={props.onMouseDown}
+                onTouchStart={props.onTouchStart}
                 style={{
-                  height: '5px',
-                  width: '100%',
-                  borderRadius: '4px',
-                  background: getTrackBackground({
-                    values: groupSizes,
-                    colors: Array(consensusGroups).fill().map((_, i) => 
-                      `hsl(${(i * 360) / consensusGroups}, 70%, 50%)`
-                    ),
-                    min: 0,
-                    max: 100
-                  }),
-                  alignSelf: 'center'
+                  ...props.style,
+                  height: '36px',
+                  display: 'flex',
+                  width: '100%'
                 }}
               >
-                {children}
+                <div
+                  ref={props.ref}
+                  style={{
+                    height: '5px',
+                    width: '100%',
+                    borderRadius: '4px',
+                    background: getTrackBackground({
+                      values: groupSizes,
+                      colors: Array(consensusGroups).fill().map((_, i) => 
+                        `hsl(${(i * 360) / consensusGroups}, 70%, 50%)`
+                      ),
+                      min: 0,
+                      max: 100
+                    }),
+                    alignSelf: 'center'
+                  }}
+                >
+                  {children}
+                </div>
               </div>
-            </div>
-          )}
-          renderThumb={({ props, isDragged, index }) => (
-            <div
-              {...props}
-              style={{
-                ...props.style,
-                height: '42px',
-                width: '42px',
-                borderRadius: '4px',
-                backgroundColor: '#FFF',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                boxShadow: '0px 2px 6px #AAA'
-              }}
-            >
+            )}
+            renderThumb={({ props, isDragged, index }) => (
               <div
+                {...props}
                 style={{
-                  height: '16px',
-                  width: '5px',
-                  backgroundColor: isDragged ? '#548BF4' : '#CCC'
+                  ...props.style,
+                  height: '42px',
+                  width: '42px',
+                  borderRadius: '4px',
+                  backgroundColor: '#FFF',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  boxShadow: '0px 2px 6px #AAA'
                 }}
-              />
-            </div>
-          )}
-        />
+              >
+                <div
+                  style={{
+                    height: '16px',
+                    width: '5px',
+                    backgroundColor: isDragged ? '#548BF4' : '#CCC'
+                  }}
+                />
+              </div>
+            )}
+          />
+        </div>
       </div>
       
       <button onClick={resetState}>Reset</button>
@@ -696,6 +892,7 @@ const PolisSimulation = () => {
         {showVoteMatrix ? 'Hide' : 'Show'} Vote Matrix
       </button>
 
+      <VoteMatrixExplanation />
       <h2>Vote Matrix</h2>
       {showVoteMatrix && renderVoteMatrix}
       
@@ -717,10 +914,11 @@ const PolisSimulation = () => {
         <span>Pass: {actualCounts.pass}</span>
       </div>
       
+      <PCAExplanation />
       <h2>PCA Projection</h2>
       <ScatterChart width={400} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-        <XAxis type="number" dataKey="x" name="PC1" />
-        <YAxis type="number" dataKey="y" name="PC2" />
+        <XAxis type="number" dataKey="x" name="PC1" label={{ value: 'First Principal Component', position: 'bottom' }} />
+        <YAxis type="number" dataKey="y" name="PC2" label={{ value: 'Second Principal Component', angle: -90, position: 'left' }} />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} />
         <Scatter name="Participants" data={pcaProjection} fill="#8884d8" />
         {selectedGroup !== null && (
@@ -732,6 +930,7 @@ const PolisSimulation = () => {
         )}
       </ScatterChart>
       
+      <GroupAnalysisExplanation />
       <h2>Groups</h2>
       <div>
         <label>Grouping Threshold: </label>
@@ -745,6 +944,7 @@ const PolisSimulation = () => {
         />
         <span>{groupingThreshold.toFixed(1)}</span>
       </div>
+
       <ul>
         {groups.map((group, i) => (
           <li
