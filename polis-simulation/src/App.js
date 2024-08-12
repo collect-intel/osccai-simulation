@@ -8,6 +8,8 @@ const DEFAULT_COMMENTS = 50;
 const DEFAULT_RANGE_VALUES = [33, 66];
 const DEFAULT_CONSENSUS_GROUPS = 3;
 const DEFAULT_GROUPING_THRESHOLD = 2.0;
+const DEFAULT_GROUP_SIMILARITY = 50;
+const PROPORTIONAL_ADJUSTMENT_FACTOR = 3/4;
 
 // PCA function
 function pca(X) {
@@ -86,6 +88,8 @@ const PolisSimulation = () => {
   const [actualCounts, setActualCounts] = useState({ agree: 0, disagree: 0, pass: 0 });
   const [showVoteMatrix, setShowVoteMatrix] = useState(true);
 
+  const [groupSimilarity, setGroupSimilarity] = useState(DEFAULT_GROUP_SIMILARITY);
+
   const calculateActualPercentages = useCallback(() => {
     if (!voteMatrix || voteMatrix.length === 0) return;
 
@@ -113,7 +117,7 @@ const PolisSimulation = () => {
       const rows = prevMatrix.length || participants;
       const cols = prevMatrix[0]?.length || comments;
       let newMatrix = Array(rows).fill().map(() => Array(cols).fill(0));
-
+  
       console.log("Initial distribution:", {
         agree: agreePercentage,
         disagree: disagreePercentage,
@@ -132,7 +136,6 @@ const PolisSimulation = () => {
         const groupSize = groupBoundaries[g + 1] - groupBoundaries[g];
         const groupWeight = groupSize / rows;
   
-        const PROPORTIONAL_ADJUSTMENT_FACTOR = 1/2;
         // Calculate proportional adjustments
         const adjustAgree = (agreePercentage * (1 - agreePercentage / 100)) * PROPORTIONAL_ADJUSTMENT_FACTOR;
         const adjustDisagree = (disagreePercentage * (1 - disagreePercentage / 100)) * PROPORTIONAL_ADJUSTMENT_FACTOR;
@@ -172,7 +175,9 @@ const PolisSimulation = () => {
         groupDistributions.push({
           agree: groupAgree,
           disagree: groupDisagree,
-          pass: groupPass
+          pass: groupPass,
+          startIndex: groupBoundaries[g],
+          endIndex: groupBoundaries[g + 1]
         });
   
         console.log(`Group ${g + 1} distribution:`, groupDistributions[g]);
@@ -208,9 +213,52 @@ const PolisSimulation = () => {
         }
       }
   
+      // Step 3: Reshuffle votes for selected comments
+      const reshufflePercentage = (100 - groupSimilarity) / 100;
+      const reshuffleIntensity = (100 - groupSimilarity) / 50; // 0 to 2
+  
+      const commentsToReshuffle = Math.floor(cols * reshufflePercentage);
+      const reshuffledComments = new Set();
+  
+      while (reshuffledComments.size < commentsToReshuffle) {
+        const commentIndex = Math.floor(Math.random() * cols);
+        if (!reshuffledComments.has(commentIndex)) {
+          reshuffledComments.add(commentIndex);
+  
+          // Select groups to swap votes
+          const groupIndices = Array.from({length: consensusGroups}, (_, i) => i);
+          const agreeGroup = groupIndices.splice(Math.floor(Math.random() * groupIndices.length), 1)[0];
+          const disagreeGroup = groupIndices.splice(Math.floor(Math.random() * groupIndices.length), 1)[0];
+  
+          // Count current votes for the comment
+          const voteCounts = {agree: 0, disagree: 0, pass: 0};
+          for (let i = 0; i < rows; i++) {
+            if (newMatrix[i][commentIndex] === 1) voteCounts.agree++;
+            else if (newMatrix[i][commentIndex] === -1) voteCounts.disagree++;
+            else voteCounts.pass++;
+          }
+  
+          // Calculate number of votes to swap
+          const maxSwapVotes = Math.min(voteCounts.agree, voteCounts.disagree);
+          const swapVotes = Math.floor(maxSwapVotes * reshuffleIntensity * Math.random());
+  
+          // Perform the swap
+          let agreeSwapped = 0, disagreeSwapped = 0;
+          for (let i = 0; i < rows; i++) {
+            if (i >= groupDistributions[agreeGroup].startIndex && i < groupDistributions[agreeGroup].endIndex && newMatrix[i][commentIndex] === -1 && agreeSwapped < swapVotes) {
+              newMatrix[i][commentIndex] = 1;
+              agreeSwapped++;
+            } else if (i >= groupDistributions[disagreeGroup].startIndex && i < groupDistributions[disagreeGroup].endIndex && newMatrix[i][commentIndex] === 1 && disagreeSwapped < swapVotes) {
+              newMatrix[i][commentIndex] = -1;
+              disagreeSwapped++;
+            }
+          }
+        }
+      }
+  
       return newMatrix;
     });
-  }, [agreePercentage, disagreePercentage, consensusGroups, groupSizes, participants, comments]);
+  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity]);
 
   useEffect(() => {
     generateRandomVoteMatrix();
@@ -224,6 +272,7 @@ const PolisSimulation = () => {
     setGroupingThreshold(DEFAULT_GROUPING_THRESHOLD);
     setPcaProjection([]);
     setGroups([]);
+    setGroupSimilarity(DEFAULT_GROUP_SIMILARITY);
     setSelectedGroup(null);
     setGroupSizes(Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(0).map((_, index) => ((index + 1) * 100) / DEFAULT_CONSENSUS_GROUPS));
     setAgreePercentage(DEFAULT_RANGE_VALUES[0]);
@@ -557,6 +606,18 @@ const PolisSimulation = () => {
           value={consensusGroups}
           onChange={(e) => handleConsensusGroupsChange(Number(e.target.value))}
         />
+      </div>
+
+      <div>
+        <label>Group Similarity: </label>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={groupSimilarity}
+          onChange={(e) => setGroupSimilarity(Number(e.target.value))}
+        />
+        <span>{groupSimilarity}%</span>
       </div>
       
       <div style={{ margin: '20px 0' }}>
