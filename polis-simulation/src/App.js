@@ -3,6 +3,12 @@ import { ScatterChart, Scatter, XAxis, YAxis, Tooltip } from 'recharts';
 import { Range, getTrackBackground } from 'react-range';
 import './App.css';
 
+const DEFAULT_PARTICIPANTS = 50;
+const DEFAULT_COMMENTS = 50;
+const DEFAULT_RANGE_VALUES = [33, 66];
+const DEFAULT_CONSENSUS_GROUPS = 3;
+const DEFAULT_GROUPING_THRESHOLD = 0.5;
+
 // PCA function
 function pca(X) {
   const m = X.length;
@@ -50,25 +56,24 @@ const loadState = () => {
   return savedState ? JSON.parse(savedState) : null;
 };
 
-const generateConsensusVote = () => (Math.random() < 0.9 ? 1 : -1);
 
 const PolisSimulation = () => {
   const savedState = loadState();
 
-  const [participants, setParticipants] = useState(savedState && savedState.participants > 0 ? savedState.participants : 5);
-  const [comments, setComments] = useState(savedState ? savedState.comments : 4);
+  const [participants, setParticipants] = useState(savedState?.participants || DEFAULT_PARTICIPANTS);
+  const [comments, setComments] = useState(savedState?.comments || DEFAULT_COMMENTS);
   const [voteMatrix, setVoteMatrix] = useState(() => {
-    if (savedState && savedState.voteMatrix && savedState.voteMatrix.length > 0) {
+    if (savedState?.voteMatrix?.length > 0) {
       return savedState.voteMatrix;
     }
-    return Array(participants).fill().map(() => Array(comments).fill(0));
+    return Array(DEFAULT_PARTICIPANTS).fill().map(() => Array(DEFAULT_COMMENTS).fill(0));
   });
   const [pcaProjection, setPcaProjection] = useState([]);
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
-  const [groupingThreshold, setGroupingThreshold] = useState(savedState && savedState.groupingThreshold !== undefined ? savedState.groupingThreshold : 0.5);
-  const [rangeValues, setRangeValues] = useState(savedState && savedState.rangeValues ? savedState.rangeValues : [33, 66]);
-  const [consensusGroups, setConsensusGroups] = useState(savedState ? savedState.consensusGroups : 2);
+  const [rangeValues, setRangeValues] = useState(savedState?.rangeValues || DEFAULT_RANGE_VALUES);
+  const [consensusGroups, setConsensusGroups] = useState(savedState?.consensusGroups || DEFAULT_CONSENSUS_GROUPS);
+  const [groupingThreshold, setGroupingThreshold] = useState(savedState?.groupingThreshold ?? DEFAULT_GROUPING_THRESHOLD);
   const [groupSizes, setGroupSizes] = useState(() => {
     const sizes = Array(consensusGroups - 1).fill(100 / consensusGroups);
     return sizes.map((size, index) => size * (index + 1));
@@ -107,91 +112,108 @@ const PolisSimulation = () => {
     setVoteMatrix(prevMatrix => {
       const rows = prevMatrix.length || participants;
       const cols = prevMatrix[0]?.length || comments;
-      const newMatrix = Array(rows).fill().map(() => Array(cols).fill(0));
-  
-      for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-          const rand = Math.random() * 100;
-          if (rand < agreePercentage) {
-            newMatrix[i][j] = 1;
-          } else if (rand < agreePercentage + disagreePercentage) {
-            newMatrix[i][j] = -1;
-          } else {
-            newMatrix[i][j] = 0;
-          }
-        }
-      }
+      let newMatrix = Array(rows).fill().map(() => Array(cols).fill(0));
 
-      const groupBoundaries = [0, ...groupSizes.map(size => Math.floor((size / 100) * newMatrix.length)), newMatrix.length];
+      console.log("Initial distribution:", {
+        agree: agreePercentage,
+        disagree: disagreePercentage,
+        pass: 100 - agreePercentage - disagreePercentage
+      });
+  
+      // Step 1: Generate group distributions
+      const groupDistributions = [];
+      let remainingAgree = agreePercentage;
+      let remainingDisagree = disagreePercentage;
+      let remainingPass = 100 - agreePercentage - disagreePercentage;
+  
+      const groupBoundaries = [0, ...groupSizes.map(size => Math.floor((size / 100) * rows)), rows];
+  
+      for (let g = 0; g < consensusGroups; g++) {
+        const groupSize = groupBoundaries[g + 1] - groupBoundaries[g];
+        const groupWeight = groupSize / rows;
+  
+        // Calculate proportional adjustments
+        const adjustAgree = (agreePercentage * (1 - agreePercentage / 100)) / 5;
+        const adjustDisagree = (disagreePercentage * (1 - disagreePercentage / 100)) / 5;
+        const adjustPass = (remainingPass * (1 - remainingPass / 100)) / 5;
+
+        console.log(`Group ${g + 1} proportional adjustments:`, {
+          adjustAgree,
+          adjustDisagree,
+          adjustPass
+        });
+  
+        // Apply proportional random adjustments
+        const groupAgree = Math.min(Math.max(
+          remainingAgree + (Math.random() * 2 - 1) * adjustAgree * groupWeight, 
+          0
+        ), 100 * groupWeight);
+        const groupDisagree = Math.min(Math.max(
+          remainingDisagree + (Math.random() * 2 - 1) * adjustDisagree * groupWeight, 
+          0
+        ), 100 * groupWeight - groupAgree);
+        const groupPass = 100 * groupWeight - groupAgree - groupDisagree;
+  
+        groupDistributions.push({
+          agree: groupAgree / groupWeight,
+          disagree: groupDisagree / groupWeight,
+          pass: groupPass / groupWeight
+        });
+
+        console.log(`Group ${g + 1} distribution:`, groupDistributions[g]);
+  
+        remainingAgree -= groupAgree;
+        remainingDisagree -= groupDisagree;
+        remainingPass -= groupPass;
+
+        console.log(`Remaining after Group ${g + 1}:`, {
+          remainingAgree,
+          remainingDisagree,
+          remainingPass
+        });
+      }
+  
+      // Step 2: Fill the matrix based on group distributions
       for (let g = 0; g < consensusGroups; g++) {
         const startIndex = groupBoundaries[g];
         const endIndex = groupBoundaries[g + 1];
-
-        for (let j = 0; j < newMatrix[0].length; j++) {
-          const consensusVote = generateConsensusVote();
-          for (let i = startIndex; i < endIndex; i++) {
-            if (Math.random() < 0.8) {
-              newMatrix[i][j] = consensusVote;
+        const distribution = groupDistributions[g];
+  
+        for (let i = startIndex; i < endIndex; i++) {
+          for (let j = 0; j < cols; j++) {
+            const rand = Math.random() * 100;
+            if (rand < distribution.agree) {
+              newMatrix[i][j] = 1;
+            } else if (rand < distribution.agree + distribution.disagree) {
+              newMatrix[i][j] = -1;
+            } else {
+              newMatrix[i][j] = 0;
             }
           }
         }
       }
-
-
-    // Adjust votes to respect percentages
-    const totalVotes = participants * comments;
-    const targetAgree = Math.floor((agreePercentage / 100) * totalVotes);
-    const targetDisagree = Math.floor((disagreePercentage / 100) * totalVotes);
-    const targetPass = totalVotes - targetAgree - targetDisagree;
-
-    let currentAgree = 0;
-    let currentDisagree = 0;
-    let currentPass = 0;
-
-    console.log('Before adjustment:', { currentAgree, currentDisagree, currentPass });
-
-    for (let i = 0; i < participants; i++) {
-      for (let j = 0; j < comments; j++) {
-        if (newMatrix[i][j] === 1) currentAgree++;
-        else if (newMatrix[i][j] === -1) currentDisagree++;
-        else currentPass++;
-      }
-    }
-
-    const adjustVotes = (from, to, target) => {
-      for (let i = 0; i < participants && from > target; i++) {
-        for (let j = 0; j < comments && from > target; j++) {
-          if (newMatrix[i][j] === from) {
-            newMatrix[i][j] = to;
-            from--;
-            to++;
-          }
-        }
-      }
-    };
-
-    adjustVotes(1, 0, targetAgree);
-    adjustVotes(-1, 0, targetDisagree);
-    adjustVotes(0, 1, targetPass);
-    console.log('After adjustment:', { currentAgree: targetAgree, currentDisagree: targetDisagree, currentPass: targetPass });
-    return newMatrix;
+  
+      return newMatrix;
     });
-  }, [agreePercentage, disagreePercentage, consensusGroups, groupSizes]);
+  }, [agreePercentage, disagreePercentage, consensusGroups, groupSizes, participants, comments]);
 
-  const resetState = () => {
-    setParticipants(5);
-    setComments(4);
-    setRangeValues([33, 66]);
-    setConsensusGroups(2);
-    setGroupingThreshold(0.5);
-    setVoteMatrix(Array(5).fill().map(() => Array(4).fill(0)));
+  useEffect(() => {
+    generateRandomVoteMatrix();
+  }, [generateRandomVoteMatrix, participants, comments, agreePercentage, disagreePercentage]);
+
+  const resetState = useCallback(() => {
+    setParticipants(DEFAULT_PARTICIPANTS);
+    setComments(DEFAULT_COMMENTS);
+    setRangeValues(DEFAULT_RANGE_VALUES);
+    setConsensusGroups(DEFAULT_CONSENSUS_GROUPS);
+    setGroupingThreshold(DEFAULT_GROUPING_THRESHOLD);
     setPcaProjection([]);
     setGroups([]);
     setSelectedGroup(null);
-    setGroupSizes([50]);
-    setAgreePercentage(33);
-    setDisagreePercentage(33);
-  };
+    setGroupSizes(Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(0).map((_, index) => ((index + 1) * 100) / DEFAULT_CONSENSUS_GROUPS));
+    setAgreePercentage(DEFAULT_RANGE_VALUES[0]);
+    setDisagreePercentage(DEFAULT_RANGE_VALUES[1] - DEFAULT_RANGE_VALUES[0]);
+  }, []);
 
   useEffect(() => {
     if (voteMatrix.length === 0) {
@@ -311,7 +333,7 @@ const PolisSimulation = () => {
     setConsensusGroups(value);
     setGroupSizes(Array(value - 1).fill(0).map((_, index) => ((index + 1) * 100) / value));
   };
-
+  
   const handleGroupSizesChange = useCallback((newValues) => {
     const adjustedValues = newValues.map((value, index) => {
       if (index === 0) return value;
