@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "ml-kmeans": "^6.0.0",
     "react-range": "^1.10.0"
   },
   "scripts": {

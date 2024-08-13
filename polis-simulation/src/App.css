@@ -93,6 +93,10 @@
   flex-shrink: 0;
 }
 
+.column-label.highlighted {
+  background-color: yellow;
+}
+
 .matrix-scroll-container {
   overflow-y: auto;
   max-height: 400px;
@@ -138,4 +142,34 @@
   border: 2px solid yellow;
   width: 16px;
   height: 16px;
+}
+
+.matrix-cell.highlighted {
+  border: 2px solid yellow;
+}
+
+.consensus-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.consensus-table th, .consensus-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.vote-bar {
+  width: 100%;
+  background-color: #ffcccb;
+  height: 20px;
+}
+
+.agree-bar {
+  background-color: #90ee90;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
 }
