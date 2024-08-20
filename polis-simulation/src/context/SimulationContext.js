@@ -11,31 +11,37 @@ const DEFAULT_GROUP_SIMILARITY = 50;
 const SimulationContext = createContext();
 
 export const SimulationProvider = ({ children }) => {
-  const [participants, setParticipants] = useState(DEFAULT_PARTICIPANTS);
-  const [comments, setComments] = useState(DEFAULT_COMMENTS);
-  const [groupSimilarity, setGroupSimilarity] = useState(DEFAULT_GROUP_SIMILARITY);
-  const [consensusGroups, setConsensusGroups] = useState(DEFAULT_CONSENSUS_GROUPS);
-  const [groupSizes, setGroupSizes] = useState(() => {
-    const sizes = Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(100 / DEFAULT_CONSENSUS_GROUPS);
-    return sizes.map((size, index) => size * (index + 1));
-  });
-  const [groupingThreshold, setGroupingThreshold] = useState(DEFAULT_GROUPING_THRESHOLD);
-  const [agreePercentage, setAgreePercentage] = useState(DEFAULT_AGREE_PERCENTAGE);
-  const [disagreePercentage, setDisagreePercentage] = useState(DEFAULT_DISAGREE_PERCENTAGE);
-  const [voteMatrix, setVoteMatrix] = useState([]);
-  const [pcaProjection, setPcaProjection] = useState([]);
-  const [groups, setGroups] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState(null);
-  const [consensusScores, setConsensusScores] = useState([]);
-  const [consensusThreshold, setConsensusThreshold] = useState(0.5);
-  const [rangeValues, setRangeValues] = useState(() => {
-      return [DEFAULT_AGREE_PERCENTAGE, DEFAULT_AGREE_PERCENTAGE + DEFAULT_DISAGREE_PERCENTAGE];
+    const [participants, setParticipants] = useState(DEFAULT_PARTICIPANTS);
+    const [comments, setComments] = useState(DEFAULT_COMMENTS);
+    const [groupSimilarity, setGroupSimilarity] = useState(DEFAULT_GROUP_SIMILARITY);
+    const [consensusGroups, setConsensusGroups] = useState(DEFAULT_CONSENSUS_GROUPS);
+    const [groupSizes, setGroupSizes] = useState(() => {
+        const sizes = Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(100 / DEFAULT_CONSENSUS_GROUPS);
+        return sizes.map((size, index) => size * (index + 1));
     });
+    const [groupingThreshold, setGroupingThreshold] = useState(DEFAULT_GROUPING_THRESHOLD);
+    const [agreePercentage, setAgreePercentage] = useState(DEFAULT_AGREE_PERCENTAGE);
+    const [disagreePercentage, setDisagreePercentage] = useState(DEFAULT_DISAGREE_PERCENTAGE);
+    const [voteMatrix, setVoteMatrix] = useState([]);
+    const [pcaProjection, setPcaProjection] = useState([]);
+    const [groups, setGroups] = useState([]);
+    const [selectedGroup, setSelectedGroup] = useState(null);
+    const [consensusScores, setConsensusScores] = useState([]);
+    const [consensusThreshold, setConsensusThreshold] = useState(0.5);
+    const [rangeValues, setRangeValues] = useState(() => {
+        return [DEFAULT_AGREE_PERCENTAGE, DEFAULT_AGREE_PERCENTAGE + DEFAULT_DISAGREE_PERCENTAGE];
+        });
 
     const [tempParticipants, setTempParticipants] = useState(participants);
     const [tempComments, setTempComments] = useState(comments);
     const [tempGroupSimilarity, setTempGroupSimilarity] = useState(groupSimilarity);
     const [tempGroupSizes, setTempGroupSizes] = useState(groupSizes);
+
+    const [highlightedComment, setHighlightedComment] = useState(null);
+
+    const highlightComment = (commentIndex) => {
+        setHighlightedComment(commentIndex);
+    };
 
     const handleParticipantsChange = (value) => {
         setParticipants(value);
@@ -54,6 +60,7 @@ export const SimulationProvider = ({ children }) => {
     };
 
     const handleConsensusGroupsChange = (value) => {
+        console.log("handleConsensusGroupsChange", value);
         setConsensusGroups(value);
         const newSizes = Array(value - 1).fill(100 / value);
         const newGroupSizes = newSizes.map((size, index) => size * (index + 1));
@@ -74,6 +81,27 @@ export const SimulationProvider = ({ children }) => {
         setGroupSizes(adjustedValues);
         setTempGroupSizes(adjustedValues);
     };
+
+    const resetState = () => {
+        setParticipants(DEFAULT_PARTICIPANTS);
+        setComments(DEFAULT_COMMENTS);
+        setAgreePercentage(DEFAULT_AGREE_PERCENTAGE);
+        setDisagreePercentage(DEFAULT_DISAGREE_PERCENTAGE);
+        setRangeValues([DEFAULT_AGREE_PERCENTAGE, DEFAULT_AGREE_PERCENTAGE + DEFAULT_DISAGREE_PERCENTAGE]);
+        setConsensusGroups(DEFAULT_CONSENSUS_GROUPS);
+        setGroupSizes(Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(100 / DEFAULT_CONSENSUS_GROUPS).map((size, index) => size * (index + 1)));
+        setGroupSimilarity(DEFAULT_GROUP_SIMILARITY);
+        setVoteMatrix(Array(DEFAULT_PARTICIPANTS).fill().map(() => Array(DEFAULT_COMMENTS).fill(0)));
+        setPcaProjection([]);
+        setGroups([]);
+        setSelectedGroup(null);
+        setConsensusThreshold(0.5); // Reset consensus threshold
+        setTempParticipants(DEFAULT_PARTICIPANTS);
+        setTempComments(DEFAULT_COMMENTS);
+        setTempGroupSimilarity(DEFAULT_GROUP_SIMILARITY);
+        setTempGroupSizes(Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(100 / DEFAULT_CONSENSUS_GROUPS).map((size, index) => size * (index + 1)));
+        localStorage.removeItem('polisSimulationState');
+      };
 
   useEffect(() => {
     const savedState = localStorage.getItem('polisSimulationState');
@@ -137,6 +165,9 @@ export const SimulationProvider = ({ children }) => {
         handleConsensusGroupsChange,
         handleGroupSimilarityChange,
         handleGroupSizesChange,
+        highlightComment,
+        highlightedComment, setHighlightedComment,
+        resetState,
       }}>
         {children}
       </SimulationContext.Provider>

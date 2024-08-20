@@ -2,21 +2,23 @@ import { useCallback } from 'react';
 import { kMeansClustering } from '../utils/kMeansClustering';
 
 const useGroupIdentification = (pcaProjection, consensusGroups) => {
-  const identifyGroups = useCallback(() => {
-    if (pcaProjection.length === 0) return [];
-
+  return useCallback(() => {
+    if (!pcaProjection || pcaProjection.length === 0) {
+      return [];
+    }
+    console.log("pcaProjection given to useGroupIdentification", pcaProjection);
     const points = pcaProjection.map(p => [p.x, p.y]);
-    const clusters = kMeansClustering(points, consensusGroups);
-
-    const groups = clusters.map(cluster => ({
-      centroid: cluster.centroid,
-      points: cluster.points.map((_, i) => pcaProjection[i].id)
-    }));
-
-    return groups;
+    try {
+      const groups = kMeansClustering(points, consensusGroups);
+      return groups.map(group => ({
+        centroid: group.centroid,
+        points: group.points.map(index => pcaProjection[index].id)
+      }));
+    } catch (error) {
+      console.error("Error in kMeansClustering:", error);
+      return [];
+    }
   }, [pcaProjection, consensusGroups]);
-
-  return identifyGroups;
 };
 
 export default useGroupIdentification;

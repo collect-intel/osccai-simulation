@@ -13,7 +13,7 @@ const PCAProjection = ({ pcaProjection, selectedGroup, groups }) => {
           {pcaProjection.map((entry, index) => (
             <Cell
               key={`cell-${index}`}
-              fill={selectedGroup !== null && groups[selectedGroup].points.includes(index) ? '#FF0000' : '#8884d8'}
+              fill={selectedGroup !== null && groups[selectedGroup] && groups[selectedGroup].points.includes(index) ? '#FF0000' : '#8884d8'}
             />
           ))}
         </Scatter>

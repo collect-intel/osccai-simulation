@@ -1,25 +1,15 @@
 import React from 'react';
-import { Range, getTrackBackground } from 'react-range';
+import { Range } from 'react-range';
 import { useSimulation } from '../context/SimulationContext';
 
 const SimulationControls = () => {
   const {
-    participants,
-    setParticipants,
-    comments,
-    setComments,
-    rangeValues,
-    setRangeValues,
-    consensusGroups,
-    setConsensusGroups,
-    groupSimilarity,
-    setGroupSimilarity,
-    groupSizes,
-    setGroupSizes,
     tempParticipants,
     setTempParticipants,
     tempComments,
     setTempComments,
+    rangeValues,
+    consensusGroups,
     tempGroupSimilarity,
     setTempGroupSimilarity,
     tempGroupSizes,
@@ -31,6 +21,13 @@ const SimulationControls = () => {
     handleGroupSimilarityChange,
     handleGroupSizesChange,
   } = useSimulation();
+
+  const getGroupColors = (groupCount) => {
+    return Array.from({ length: groupCount }, (_, i) => {
+      const hue = (i / groupCount) * 360;
+      return `hsl(${hue}, 100%, 50%)`;
+    });
+  };
 
   // event handlers for inputs
   const handleParticipantsInputChange = (e) => {
@@ -72,16 +69,63 @@ const SimulationControls = () => {
   const handleGroupSizesRangeFinalChange = () => {
     handleGroupSizesChange(tempGroupSizes);
   };
-  
+
+  const renderTrack = ({ props, children }) => {
+    const colors = getGroupColors(consensusGroups);
+    return (
+      <div
+        onMouseDown={props.onMouseDown}
+        onTouchStart={props.onTouchStart}
+        style={{
+          ...props.style,
+          height: '36px',
+          display: 'flex',
+          width: '100%'
+        }}
+      >
+        <div
+          ref={props.ref}
+          style={{
+            height: '5px',
+            width: '100%',
+            borderRadius: '4px',
+            background: 'transparent',
+            alignSelf: 'center',
+            display: 'flex'
+          }}
+        >
+          {tempGroupSizes.map((_, index) => {
+            const leftPosition = index === 0 ? 0 : tempGroupSizes[index - 1];
+            const rightPosition = tempGroupSizes[index];
+            const width = rightPosition - leftPosition;
+            return (
+              <div
+                key={index}
+                style={{
+                  position: 'absolute',
+                  left: `${leftPosition}%`,
+                  width: `${width}%`,
+                  height: '100%',
+                  backgroundColor: colors[index]
+                }}
+              />
+            );
+          })}
+          {children}
+        </div>
+      </div>
+    );
+  };
 
   const renderConsensusGroupLabels = () => {
     const labels = [];
     let previousPercentage = 0;
+    const colors = getGroupColors(consensusGroups);
 
     for (let i = 0; i < consensusGroups; i++) {
-      const percentage = i < consensusGroups - 1 ? groupSizes[i] : 100;
+      const percentage = i < consensusGroups - 1 ? tempGroupSizes[i] : 100;
       const groupPercentage = percentage - previousPercentage;
-      const participantCount = Math.round((groupPercentage / 100) * participants);
+      const participantCount = Math.round((groupPercentage / 100) * tempParticipants);
       
       labels.push(
         <div
@@ -92,6 +136,7 @@ const SimulationControls = () => {
             width: `${groupPercentage}%`,
             textAlign: 'center',
             fontSize: '0.8em',
+            color: colors[i]  // Use the corresponding color for each group
           }}
         >
           <div>Group {i + 1}: {groupPercentage.toFixed(1)}%</div>
@@ -103,6 +148,91 @@ const SimulationControls = () => {
     }
 
     return labels;
+  };
+
+  const renderAgreeDisagreeTrack = ({ props, children }) => {
+    return (
+      <div
+        onMouseDown={props.onMouseDown}
+        onTouchStart={props.onTouchStart}
+        style={{
+          ...props.style,
+          height: '36px',
+          display: 'flex',
+          width: '100%'
+        }}
+      >
+        <div
+          ref={props.ref}
+          style={{
+            height: '36px',
+            width: '100%',
+            borderRadius: '4px',
+            alignSelf: 'center',
+            background: 'transparent'
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              height: '100%',
+              width: `${rangeValues[0]}%`,
+              backgroundColor: 'var(--agree-color)'
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              height: '100%',
+              width: `${rangeValues[1] - rangeValues[0]}%`,
+              left: `${rangeValues[0]}%`,
+              backgroundColor: 'var(--disagree-color)'
+            }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              height: '100%',
+              width: `${100 - rangeValues[1]}%`,
+              left: `${rangeValues[1]}%`,
+              backgroundColor: 'var(--pass-color)'
+            }}
+          />
+          {children}
+        </div>
+      </div>
+    );
+  };
+
+  const renderThumb = ({ props, isDragged }) => {
+    const { key, ...restProps } = props;
+    return (
+      <div
+        key={key}
+        {...restProps}
+        style={{
+          ...restProps.style,
+          height: '36px',
+          width: '36px',
+          borderRadius: '4px',
+          backgroundColor: '#FFF',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          boxShadow: '0px 2px 6px #AAA',
+          zIndex: 2,
+          transform: 'translateY(-50%)'
+        }}
+      >
+        <div
+          style={{
+            height: '16px',
+            width: '5px',
+            backgroundColor: isDragged ? '#548BF4' : '#CCC'
+          }}
+        />
+      </div>
+    );
   };
 
   return (
@@ -143,64 +273,8 @@ const SimulationControls = () => {
           min={0}
           max={100}
           onChange={handleAgreeDisagreeRangeChange}
-          renderTrack={({ props, children }) => (
-            <div
-              onMouseDown={props.onMouseDown}
-              onTouchStart={props.onTouchStart}
-              style={{
-                ...props.style,
-                height: '36px',
-                display: 'flex',
-                width: '100%'
-              }}
-            >
-              <div
-                ref={props.ref}
-                style={{
-                  height: '5px',
-                  width: '100%',
-                  borderRadius: '4px',
-                  background: getTrackBackground({
-                    values: rangeValues,
-                    colors: ['#548BF4', '#ccc', '#ccc'],
-                    min: 0,
-                    max: 100
-                  }),
-                  alignSelf: 'center'
-                }}
-              >
-                {children}
-              </div>
-            </div>
-          )}
-          renderThumb={({ props, isDragged }) => {
-            const { key, ...restProps } = props;
-            return (
-              <div
-                key={key}
-                {...restProps}
-                style={{
-                  ...restProps.style,
-                  height: '42px',
-                  width: '42px',
-                  borderRadius: '4px',
-                  backgroundColor: '#FFF',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  boxShadow: '0px 2px 6px #AAA'
-                }}
-              >
-                <div
-                  style={{
-                    height: '16px',
-                    width: '5px',
-                    backgroundColor: isDragged ? '#548BF4' : '#CCC'
-                  }}
-                />
-              </div>
-            );
-          }}
+          renderTrack={renderAgreeDisagreeTrack}
+          renderThumb={renderThumb}
         />
       </div>
       
@@ -238,65 +312,9 @@ const SimulationControls = () => {
             max={100}
             onChange={handleGroupSizesRangeChange}
             onFinalChange={handleGroupSizesRangeFinalChange}
-            renderTrack={({ props, children }) => (
-                <div
-                onMouseDown={props.onMouseDown}
-                onTouchStart={props.onTouchStart}
-                style={{
-                    ...props.style,
-                    height: '36px',
-                    display: 'flex',
-                    width: '100%'
-                }}
-                >
-                <div
-                    ref={props.ref}
-                    style={{
-                    height: '5px',
-                    width: '100%',
-                    borderRadius: '4px',
-                    background: getTrackBackground({
-                        values: rangeValues || [0, 0],
-                        colors: ['#548BF4', '#ccc', '#ccc'],
-                        min: 0,
-                        max: 100
-                    }),
-                    alignSelf: 'center'
-                    }}
-                >
-                    {children}
-                </div>
-                </div>
-            )}
-            renderThumb={({ props, isDragged }) => {
-                const { key, ...restProps } = props;
-                return (
-                <div
-                    key={key}
-                    {...restProps}
-                    style={{
-                    ...restProps.style,
-                    height: '42px',
-                    width: '42px',
-                    borderRadius: '4px',
-                    backgroundColor: '#FFF',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    boxShadow: '0px 2px 6px #AAA'
-                    }}
-                >
-                    <div
-                    style={{
-                        height: '16px',
-                        width: '5px',
-                        backgroundColor: isDragged ? '#548BF4' : '#CCC'
-                    }}
-                    />
-                </div>
-                );
-            }}
-            />
+            renderTrack={renderTrack}
+            renderThumb={renderThumb}
+          />
         </div>
       </div>
     </div>

@@ -134,9 +134,9 @@
   flex-shrink: 0;
 }
 
-.matrix-cell.agree { background-color: green; }
-.matrix-cell.disagree { background-color: red; }
-.matrix-cell.pass { background-color: gray; }
+.matrix-cell.agree { background-color: var(--agree-color); }
+.matrix-cell.disagree { background-color: var(--disagree-color); }
+.matrix-cell.pass { background-color: var(--pass-color); }
 
 .matrix-row.highlighted .matrix-cell {
   border: 2px solid yellow;
@@ -166,10 +166,29 @@
 }
 
 .agree-bar {
-  background-color: #90ee90;
+  background-color: #bdbdbd;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: black;
+}
+
+.react-range-track {
+  height: 36px !important;
+}
+
+.react-range-thumb {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+  box-shadow: 0px 2px 6px #AAA !important;
+  z-index: 2 !important;
+}
+
+:root {
+  --agree-color: green;
+  --disagree-color: red;
+  --pass-color: gray;
 }

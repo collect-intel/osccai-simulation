@@ -7,13 +7,18 @@ import SimulationControls from './components/SimulationControls';
 import useVoteMatrix from './hooks/useVoteMatrix';
 import usePCA from './hooks/usePCA';
 import useGroupIdentification from './hooks/useGroupIdentification';
+import './App.css';
 
 const SimulationContent = () => {
   const {
     participants,
+    setParticipants,
     comments,
+    setComments,
     agreePercentage,
+    setAgreePercentage,
     disagreePercentage,
+    setDisagreePercentage,
     rangeValues,
     setRangeValues,
     consensusGroups,
@@ -29,7 +34,11 @@ const SimulationContent = () => {
     setSelectedGroup,
     consensusScores,
     consensusThreshold,
-    setConsensusThreshold
+    setConsensusThreshold,
+    highlightComment,
+    highlightedComment,
+    setHighlightedComment,
+    resetState
   } = useSimulation();
 
   const { generateRandomVoteMatrix, handleVoteChange } = useVoteMatrix(
@@ -37,7 +46,6 @@ const SimulationContent = () => {
     comments,
     agreePercentage,
     disagreePercentage,
-    rangeValues,
     consensusGroups,
     groupSizes,
     groupSimilarity
@@ -45,31 +53,46 @@ const SimulationContent = () => {
 
   const performPCA = usePCA(voteMatrix);
   const identifyGroups = useGroupIdentification(pcaProjection, consensusGroups);
+  console.log("pcaProjection for identifyGroups", pcaProjection);
 
   useEffect(() => {
     const newVoteMatrix = generateRandomVoteMatrix();
     setVoteMatrix(newVoteMatrix);
-  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity, generateRandomVoteMatrix, setVoteMatrix, rangeValues]);
+    console.log("New vote matrix generated:", newVoteMatrix);
+  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity, generateRandomVoteMatrix]);
+  
   
   useEffect(() => {
     if (voteMatrix && voteMatrix.length > 0) {
       const newPcaProjection = performPCA();
       setPcaProjection(newPcaProjection);
     }
-  }, [voteMatrix, performPCA, setPcaProjection]);
+  }, [voteMatrix, performPCA]);
   
   useEffect(() => {
-    const newGroups = identifyGroups();
-    setGroups(newGroups);
-  }, [pcaProjection, consensusGroups, identifyGroups, setGroups]);
+    if (pcaProjection && pcaProjection.length > 0) {
+      const newGroups = identifyGroups();
+      console.log("New groups identified:", newGroups);
+      setGroups(newGroups);
+    } else {
+      setGroups([]);
+    }
+  }, [pcaProjection, consensusGroups, identifyGroups]);
 
-  // Add any additional effects or calculations here
+  
 
   return (
     <div className="App">
       <h1>Polis Vote Matrix and PCA Simulation</h1>
       <SimulationControls />
-      <VoteMatrix voteMatrix={voteMatrix} handleVoteChange={handleVoteChange} />
+      <button onClick={resetState}>Reset</button>
+      <VoteMatrix 
+        voteMatrix={voteMatrix} 
+        handleVoteChange={handleVoteChange} 
+        selectedGroup={selectedGroup}
+        groups={groups}
+        highlightedComment={highlightedComment}
+      />
       <PCAProjection pcaProjection={pcaProjection} groups={groups} selectedGroup={selectedGroup} setSelectedGroup={setSelectedGroup} />
       <GroupAnalysis 
         groups={groups}
@@ -78,6 +101,8 @@ const SimulationContent = () => {
         consensusScores={consensusScores}
         consensusThreshold={consensusThreshold}
         setConsensusThreshold={setConsensusThreshold}
+        highlightComment={highlightComment}
+        selectedGroup={selectedGroup}
       />
     </div>
   );
