@@ -9,6 +9,7 @@ const SimulationControls = () => {
     tempComments,
     setTempComments,
     rangeValues,
+    setRangeValues,
     consensusGroups,
     tempGroupSimilarity,
     setTempGroupSimilarity,
@@ -47,7 +48,11 @@ const SimulationControls = () => {
   };
 
   const handleAgreeDisagreeRangeChange = (values) => {
-    handleRangeChange(values);
+    setRangeValues(values);
+  };
+
+  const handleAgreeDisagreeRangeFinalChange = () => {
+    handleRangeChange(rangeValues);
   };
 
   const handleConsensusGroupsInputChange = (e) => {
@@ -70,34 +75,74 @@ const SimulationControls = () => {
     handleGroupSizesChange(tempGroupSizes);
   };
 
-  const renderTrack = ({ props, children }) => {
-    const colors = getGroupColors(consensusGroups);
+  const renderTrack = ({ props, children, values, colors, labels }) => {
     return (
       <div
         onMouseDown={props.onMouseDown}
         onTouchStart={props.onTouchStart}
         style={{
           ...props.style,
-          height: '36px',
           display: 'flex',
-          width: '100%'
+          width: '100%',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          paddingTop: '40px' // Add padding to make room for labels
         }}
       >
         <div
+          style={{
+            display: 'flex',
+            width: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0
+          }}
+        >
+          {labels.map((label, index) => {
+            const leftPosition = index === 0 ? 0 : (values[index - 1] + values[index]) / 2;
+            return (
+              <div
+                key={index}
+                style={{
+                  position: 'absolute',
+                  left: `${leftPosition}%`,
+                  width: '100%',
+                  textAlign: 'center',
+                  color: colors[index],
+                  fontSize: '0.8em',
+                  transform: 'translateX(-50%)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  minHeight: '40px' // Ensure minimum height for multi-line labels
+                }}
+              >
+                {Array.isArray(label) ? (
+                  label.map((line, lineIndex) => (
+                    <div key={lineIndex}>{line}</div>
+                  ))
+                ) : (
+                  <div>{label}</div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+        <div
           ref={props.ref}
           style={{
-            height: '5px',
+            height: '36px',
             width: '100%',
             borderRadius: '4px',
             background: 'transparent',
-            alignSelf: 'center',
-            display: 'flex'
+            position: 'relative'
           }}
         >
-          {tempGroupSizes.map((_, index) => {
-            const leftPosition = index === 0 ? 0 : tempGroupSizes[index - 1];
-            const rightPosition = tempGroupSizes[index];
-            const width = rightPosition - leftPosition;
+          {values.map((value, index) => {
+            const leftPosition = index === 0 ? 0 : values[index - 1];
+            const width = index === values.length - 1 ? 100 - leftPosition : values[index] - leftPosition;
             return (
               <div
                 key={index}
@@ -117,91 +162,30 @@ const SimulationControls = () => {
     );
   };
 
-  const renderConsensusGroupLabels = () => {
-    const labels = [];
-    let previousPercentage = 0;
-    const colors = getGroupColors(consensusGroups);
-
-    for (let i = 0; i < consensusGroups; i++) {
-      const percentage = i < consensusGroups - 1 ? tempGroupSizes[i] : 100;
-      const groupPercentage = percentage - previousPercentage;
-      const participantCount = Math.round((groupPercentage / 100) * tempParticipants);
-      
-      labels.push(
-        <div
-          key={i}
-          style={{
-            position: 'absolute',
-            left: `${previousPercentage}%`,
-            width: `${groupPercentage}%`,
-            textAlign: 'center',
-            fontSize: '0.8em',
-            color: colors[i]  // Use the corresponding color for each group
-          }}
-        >
-          <div>Group {i + 1}: {groupPercentage.toFixed(1)}%</div>
-          <div>{participantCount} participants</div>
-        </div>
-      );
-
-      previousPercentage = percentage;
-    }
-
-    return labels;
+  const renderAgreeDisagreeTrack = ({ props, children }) => {
+    const values = [rangeValues[0], rangeValues[1], 100];
+    const colors = ['var(--agree-color)', 'var(--disagree-color)', 'var(--pass-color)'];
+    const labels = [
+      `Agree: ${rangeValues[0]}%`,
+      `Disagree: ${rangeValues[1] - rangeValues[0]}%`,
+      `Pass: ${100 - rangeValues[1]}%`
+    ];
+    return renderTrack({ props, children, values, colors, labels });
   };
 
-  const renderAgreeDisagreeTrack = ({ props, children }) => {
-    return (
-      <div
-        onMouseDown={props.onMouseDown}
-        onTouchStart={props.onTouchStart}
-        style={{
-          ...props.style,
-          height: '36px',
-          display: 'flex',
-          width: '100%'
-        }}
-      >
-        <div
-          ref={props.ref}
-          style={{
-            height: '36px',
-            width: '100%',
-            borderRadius: '4px',
-            alignSelf: 'center',
-            background: 'transparent'
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              height: '100%',
-              width: `${rangeValues[0]}%`,
-              backgroundColor: 'var(--agree-color)'
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              height: '100%',
-              width: `${rangeValues[1] - rangeValues[0]}%`,
-              left: `${rangeValues[0]}%`,
-              backgroundColor: 'var(--disagree-color)'
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              height: '100%',
-              width: `${100 - rangeValues[1]}%`,
-              left: `${rangeValues[1]}%`,
-              backgroundColor: 'var(--pass-color)'
-            }}
-          />
-          {children}
-        </div>
-      </div>
-    );
+  const renderGroupSizesTrack = ({ props, children }) => {
+    const values = [...tempGroupSizes, 100];
+    const colors = getGroupColors(consensusGroups);
+    const labels = values.map((value, index) => {
+      const previousValue = index === 0 ? 0 : values[index - 1];
+      const groupPercentage = value - previousValue;
+      const participantCount = Math.round((groupPercentage / 100) * tempParticipants);
+      return [
+        `Group ${index + 1}: ${groupPercentage.toFixed(1)}%`,
+        `${participantCount} participants`
+      ];
+    });
+    return renderTrack({ props, children, values, colors, labels });
   };
 
   const renderThumb = ({ props, isDragged }) => {
@@ -221,7 +205,7 @@ const SimulationControls = () => {
           alignItems: 'center',
           boxShadow: '0px 2px 6px #AAA',
           zIndex: 2,
-          transform: 'translateY(-50%)'
+          transform: 'translate(-50%, -50%)'
         }}
       >
         <div
@@ -262,17 +246,13 @@ const SimulationControls = () => {
       </div>
       
       <div style={{ margin: '20px 0' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-          <span>Agree: {rangeValues[0]}%</span>
-          <span>Disagree: {rangeValues[1] - rangeValues[0]}%</span>
-          <span>Pass: {100 - rangeValues[1]}%</span>
-        </div>
         <Range
           values={rangeValues}
           step={1}
           min={0}
           max={100}
           onChange={handleAgreeDisagreeRangeChange}
+          onFinalChange={handleAgreeDisagreeRangeFinalChange}
           renderTrack={renderAgreeDisagreeTrack}
           renderThumb={renderThumb}
         />
@@ -300,22 +280,16 @@ const SimulationControls = () => {
       </div>
 
       <div style={{ margin: '20px 0' }}>
-        <div style={{ position: 'relative', height: '40px', marginBottom: '10px' }}>
-          {renderConsensusGroupLabels()}
-        </div>
-        <div>
-          <label>Group %</label>
-          <Range
-            values={tempGroupSizes}
-            step={1}
-            min={0}
-            max={100}
-            onChange={handleGroupSizesRangeChange}
-            onFinalChange={handleGroupSizesRangeFinalChange}
-            renderTrack={renderTrack}
-            renderThumb={renderThumb}
-          />
-        </div>
+        <Range
+          values={tempGroupSizes}
+          step={1}
+          min={0}
+          max={100}
+          onChange={handleGroupSizesRangeChange}
+          onFinalChange={handleGroupSizesRangeFinalChange}
+          renderTrack={renderGroupSizesTrack}
+          renderThumb={renderThumb}
+        />
       </div>
     </div>
   );
