@@ -93,6 +93,10 @@
   flex-shrink: 0;
 }
 
+.column-label.highlighted {
+  background-color: yellow;
+}
+
 .matrix-scroll-container {
   overflow-y: auto;
   max-height: 400px;
@@ -130,12 +134,119 @@
   flex-shrink: 0;
 }
 
-.matrix-cell.agree { background-color: green; }
-.matrix-cell.disagree { background-color: red; }
-.matrix-cell.pass { background-color: gray; }
+.matrix-cell.agree { background-color: var(--agree-color); }
+.matrix-cell.disagree { background-color: var(--disagree-color); }
+.matrix-cell.pass { background-color: var(--pass-color); }
 
 .matrix-row.highlighted .matrix-cell {
   border: 2px solid yellow;
   width: 16px;
   height: 16px;
 }
+
+.matrix-cell.highlighted {
+  border: 2px solid yellow;
+}
+
+.consensus-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.consensus-table th, .consensus-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.vote-bar {
+  width: 100%;
+  background-color: #ffcccb;
+  height: 20px;
+}
+
+.agree-bar {
+  background-color: #bdbdbd;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.react-range-track {
+  height: 36px !important;
+}
+
+.react-range-thumb {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+  box-shadow: 0px 2px 6px #AAA !important;
+  z-index: 2 !important;
+}
+
+:root {
+  --agree-color: green;
+  --disagree-color: red;
+  --pass-color: gray;
+}
+
+.actual-vote-bar {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.vote-bar {
+  display: flex;
+  height: 20px;
+  background-color: #ddd;
+}
+
+.agree-bar {
+  background-color: var(--agree-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.disagree-bar {
+  background-color: var(--disagree-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.pass-bar {
+  background-color: var(--pass-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.side-by-side-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.group-list {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+}
+
+.group-list li {
+  margin-bottom: 10px;
+}
+
+/* Add colors for groups */
+.group-color-0 { color: #8884d8; }
+.group-color-1 { color: #82ca9d; }
+.group-color-2 { color: #ffc658; }
+.group-color-3 { color: #ff7300; }
+.group-color-4 { color: #0088FE; }
+.group-color-5 { color: #00C49F; }
