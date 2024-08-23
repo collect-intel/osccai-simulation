@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import ActualVoteBar from './ActualVoteBar';
 
 const VoteMatrix = ({ voteMatrix, handleVoteChange, selectedGroup, groups, highlightedComment }) => {
     console.log("VoteMatrix props:", { voteMatrix, selectedGroup, groups, highlightedComment });
@@ -18,6 +19,7 @@ const VoteMatrix = ({ voteMatrix, handleVoteChange, selectedGroup, groups, highl
   
       return (
         <div className="vote-matrix-outer-container">
+          <h2>Vote Matrix</h2> {/* Add title */}
           <div className="axis-label participants-label">Participants</div>
           <div className="axis-label comments-label">Comments</div>
           <div className="vote-matrix-container" onScroll={handleScroll}>
@@ -52,6 +54,8 @@ const VoteMatrix = ({ voteMatrix, handleVoteChange, selectedGroup, groups, highl
               </div>
             </div>
           </div>
+          <h3>Actual Vote Breakdown</h3> {/* Add label */}
+          <ActualVoteBar voteMatrix={voteMatrix} />
         </div>
       );
     }, [voteMatrix, handleVoteChange, selectedGroup, groups, highlightedComment]);

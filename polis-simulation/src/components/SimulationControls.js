@@ -83,7 +83,8 @@ const SimulationControls = () => {
         style={{
           ...props.style,
           display: 'flex',
-          width: '100%',
+          width: '80%', // Adjust width to 80%
+          margin: '0 auto', // Center the track
           flexDirection: 'column',
           alignItems: 'stretch',
           paddingTop: '40px' // Add padding to make room for labels

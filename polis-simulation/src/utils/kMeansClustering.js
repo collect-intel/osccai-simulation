@@ -9,8 +9,16 @@ export function kMeansClustering(data, k) {
 
   const result = kmeans(data, k);
 
-  return result.centroids.map((centroid, index) => ({
-    centroid: centroid.centroid,
-    points: data.filter((_, i) => result.clusters[i] === index).map((_, i) => i)
+  // Create an array to store the points for each cluster
+  const clusters = Array(k).fill().map(() => []);
+
+  // Assign each point to its cluster
+  result.clusters.forEach((clusterIndex, pointIndex) => {
+    clusters[clusterIndex].push(pointIndex);
+  });
+
+  return clusters.map((points, index) => ({
+    centroid: result.centroids[index],
+    points: points
   }));
 }
