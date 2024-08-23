@@ -1,19 +1,8 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
 const PROPORTIONAL_ADJUSTMENT_FACTOR = 3/4;
 
-const useVoteMatrix = (participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity) => {
-    const [voteMatrix, setVoteMatrix] = useState(() => {
-      const saved = localStorage.getItem('voteMatrix');
-      if (saved) {
-        return JSON.parse(saved);
-      } else {
-        return generateRandomVoteMatrix();
-      }
-    });
-
-
-  
+const useVoteMatrix = (participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity, voteMatrix, setVoteMatrix) => {
     const generateRandomVoteMatrix = useCallback(() => {
         const rows = participants;
         const cols = comments;
@@ -163,29 +152,21 @@ const useVoteMatrix = (participants, comments, agreePercentage, disagreePercenta
           }
         }
       
-        setVoteMatrix(newMatrix);
         return newMatrix;
     }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity]);
-  
+
     const handleVoteChange = useCallback((participant, comment) => {
       setVoteMatrix(prevMatrix => {
-        const newMatrix = [...prevMatrix];
-        newMatrix[participant] = [...newMatrix[participant]];
-        newMatrix[participant][comment] = (newMatrix[participant][comment] + 2) % 3 - 1;
+        const newMatrix = prevMatrix.map(row => [...row]);
+        newMatrix[participant][comment] = (newMatrix[participant][comment] + 2) % 3 - 1; // Cycle through Agree -> Disagree -> Pass -> Agree
         return newMatrix;
       });
-    }, []);
-  
-    useEffect(() => {
-      localStorage.setItem('voteMatrix', JSON.stringify(voteMatrix));
-    }, [voteMatrix]);
+    }, [setVoteMatrix]);
   
     return {
-      voteMatrix,
-      setVoteMatrix,
       generateRandomVoteMatrix,
       handleVoteChange,
     };
-  };
+};
 
 export default useVoteMatrix;

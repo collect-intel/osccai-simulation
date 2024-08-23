@@ -48,7 +48,9 @@ const SimulationContent = () => {
     disagreePercentage,
     consensusGroups,
     groupSizes,
-    groupSimilarity
+    groupSimilarity,
+    voteMatrix,
+    setVoteMatrix
   );
 
   const performPCA = usePCA(voteMatrix);
@@ -56,10 +58,12 @@ const SimulationContent = () => {
   console.log("pcaProjection for identifyGroups", pcaProjection);
 
   useEffect(() => {
-    const newVoteMatrix = generateRandomVoteMatrix();
-    setVoteMatrix(newVoteMatrix);
-    console.log("New vote matrix generated:", newVoteMatrix);
-  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity, generateRandomVoteMatrix]);
+    if (!voteMatrix || voteMatrix.length === 0) {
+      const newVoteMatrix = generateRandomVoteMatrix();
+      setVoteMatrix(newVoteMatrix);
+      console.log("New vote matrix generated:", newVoteMatrix);
+    }
+  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity, generateRandomVoteMatrix, voteMatrix, setVoteMatrix]);
 
   useEffect(() => {
     if (voteMatrix && voteMatrix.length > 0) {

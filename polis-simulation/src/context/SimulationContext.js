@@ -31,13 +31,57 @@ export const SimulationProvider = ({ children }) => {
     const [rangeValues, setRangeValues] = useState(() => {
         return [DEFAULT_AGREE_PERCENTAGE, DEFAULT_AGREE_PERCENTAGE + DEFAULT_DISAGREE_PERCENTAGE];
         });
+    const [highlightedComment, setHighlightedComment] = useState(null);
+
+    // Load state from localStorage on initial render
+    useEffect(() => {
+        const savedState = localStorage.getItem('polisSimulationState');
+        if (savedState) {
+            const parsedState = JSON.parse(savedState);
+            setParticipants(parsedState.participants);
+            setComments(parsedState.comments);
+            setAgreePercentage(parsedState.agreePercentage);
+            setDisagreePercentage(parsedState.disagreePercentage);
+            setRangeValues(parsedState.rangeValues);
+            setConsensusGroups(parsedState.consensusGroups);
+            setGroupSizes(parsedState.groupSizes);
+            setGroupSimilarity(parsedState.groupSimilarity);
+            setVoteMatrix(parsedState.voteMatrix);
+            setPcaProjection(parsedState.pcaProjection);
+            setGroups(parsedState.groups);
+            setSelectedGroup(parsedState.selectedGroup);
+            setConsensusScores(parsedState.consensusScores);
+            setConsensusThreshold(parsedState.consensusThreshold);
+            setHighlightedComment(parsedState.highlightedComment);
+        }
+    }, []);
+
+    // Save state to localStorage whenever it changes
+    useEffect(() => {
+        const stateToSave = {
+            participants,
+            comments,
+            agreePercentage,
+            disagreePercentage,
+            rangeValues,
+            consensusGroups,
+            groupSizes,
+            groupSimilarity,
+            voteMatrix,
+            pcaProjection,
+            groups,
+            selectedGroup,
+            consensusScores,
+            consensusThreshold,
+            highlightedComment,
+        };
+        localStorage.setItem('polisSimulationState', JSON.stringify(stateToSave));
+    }, [participants, comments, agreePercentage, disagreePercentage, rangeValues, consensusGroups, groupSizes, groupSimilarity, voteMatrix, pcaProjection, groups, selectedGroup, consensusScores, consensusThreshold, highlightedComment]);
 
     const [tempParticipants, setTempParticipants] = useState(participants);
     const [tempComments, setTempComments] = useState(comments);
     const [tempGroupSimilarity, setTempGroupSimilarity] = useState(groupSimilarity);
     const [tempGroupSizes, setTempGroupSizes] = useState(groupSizes);
-
-    const [highlightedComment, setHighlightedComment] = useState(null);
 
     const highlightComment = (commentIndex) => {
         setHighlightedComment(commentIndex);
@@ -91,7 +135,7 @@ export const SimulationProvider = ({ children }) => {
         setConsensusGroups(DEFAULT_CONSENSUS_GROUPS);
         setGroupSizes(Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(100 / DEFAULT_CONSENSUS_GROUPS).map((size, index) => size * (index + 1)));
         setGroupSimilarity(DEFAULT_GROUP_SIMILARITY);
-        setVoteMatrix(Array(DEFAULT_PARTICIPANTS).fill().map(() => Array(DEFAULT_COMMENTS).fill(0)));
+        setVoteMatrix([]);
         setPcaProjection([]);
         setGroups([]);
         setSelectedGroup(null);
@@ -103,75 +147,40 @@ export const SimulationProvider = ({ children }) => {
         localStorage.removeItem('polisSimulationState');
       };
 
-  useEffect(() => {
-    const savedState = localStorage.getItem('polisSimulationState');
-    if (savedState) {
-      const parsedState = JSON.parse(savedState);
-      setParticipants(parsedState.participants);
-      setComments(parsedState.comments);
-      setGroupSimilarity(parsedState.groupSimilarity);
-      setGroupSizes(parsedState.groupSizes);
-      setVoteMatrix(parsedState.voteMatrix);
-      setAgreePercentage(parsedState.agreePercentage);
-      setDisagreePercentage(parsedState.disagreePercentage);
-      setConsensusGroups(parsedState.consensusGroups);
-      setGroupingThreshold(parsedState.groupingThreshold);
-      setRangeValues(parsedState.rangeValues);
-    }
-  }, []);
-
-
-
-  useEffect(() => {
-    const stateToSave = {
-      participants,
-      comments,
-      groupSimilarity,
-      groupSizes,
-      voteMatrix,
-      agreePercentage,
-      disagreePercentage,
-      consensusGroups,
-      groupingThreshold,
-      rangeValues,
-    };
-    localStorage.setItem('polisSimulationState', JSON.stringify(stateToSave));
-  }, [participants, comments, groupSimilarity, groupSizes, voteMatrix, agreePercentage, disagreePercentage, consensusGroups, groupingThreshold, rangeValues]);
-
-  return (
-    <SimulationContext.Provider value={{
-        participants, setParticipants,
-        comments, setComments,
-        groupSimilarity, setGroupSimilarity,
-        consensusGroups, setConsensusGroups,
-        groupSizes, setGroupSizes,
-        groupingThreshold, setGroupingThreshold,
-        agreePercentage, setAgreePercentage,
-        disagreePercentage, setDisagreePercentage,
-        voteMatrix, setVoteMatrix,
-        pcaProjection, setPcaProjection,
-        groups, setGroups,
-        selectedGroup, setSelectedGroup,
-        consensusScores, setConsensusScores,
-        consensusThreshold, setConsensusThreshold,
-        rangeValues, setRangeValues,
-        tempParticipants, setTempParticipants,
-        tempComments, setTempComments,
-        tempGroupSimilarity, setTempGroupSimilarity,
-        tempGroupSizes, setTempGroupSizes,
-        handleParticipantsChange,
-        handleCommentsChange,
-        handleRangeChange,
-        handleConsensusGroupsChange,
-        handleGroupSimilarityChange,
-        handleGroupSizesChange,
-        highlightComment,
-        highlightedComment, setHighlightedComment,
-        resetState,
-      }}>
-        {children}
-      </SimulationContext.Provider>
-  );
+    return (
+        <SimulationContext.Provider value={{
+            participants, setParticipants,
+            comments, setComments,
+            groupSimilarity, setGroupSimilarity,
+            consensusGroups, setConsensusGroups,
+            groupSizes, setGroupSizes,
+            groupingThreshold, setGroupingThreshold,
+            agreePercentage, setAgreePercentage,
+            disagreePercentage, setDisagreePercentage,
+            voteMatrix, setVoteMatrix,
+            pcaProjection, setPcaProjection,
+            groups, setGroups,
+            selectedGroup, setSelectedGroup,
+            consensusScores, setConsensusScores,
+            consensusThreshold, setConsensusThreshold,
+            rangeValues, setRangeValues,
+            tempParticipants, setTempParticipants,
+            tempComments, setTempComments,
+            tempGroupSimilarity, setTempGroupSimilarity,
+            tempGroupSizes, setTempGroupSizes,
+            handleParticipantsChange,
+            handleCommentsChange,
+            handleRangeChange,
+            handleConsensusGroupsChange,
+            handleGroupSimilarityChange,
+            handleGroupSizesChange,
+            highlightComment,
+            highlightedComment, setHighlightedComment,
+            resetState,
+          }}>
+            {children}
+        </SimulationContext.Provider>
+    );
 };
 
 export const useSimulation = () => useContext(SimulationContext);
