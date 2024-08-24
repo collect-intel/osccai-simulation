@@ -1,11 +1,12 @@
 import { kmeans } from 'ml-kmeans';
+import { debug } from './debug';
 
 export function kMeansClustering(data, k) {
   if (!data || data.length === 0 || !Array.isArray(data[0]) || data[0].length !== 2) {
-    console.log("Invalid input data for kMeansClustering", data);
+    debug("Invalid input data for kMeansClustering", data);
     throw new Error("Invalid input data for kMeansClustering");
   }
-  console.log("Valid input data for kMeansClustering", data);
+  debug("Valid input data for kMeansClustering", data);
 
   const result = kmeans(data, k);
 

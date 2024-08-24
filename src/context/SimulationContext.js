@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { debug } from '../utils/debug';
 
 const DEFAULT_PARTICIPANTS = 50;
 const DEFAULT_COMMENTS = 50;
@@ -104,7 +105,7 @@ export const SimulationProvider = ({ children }) => {
     };
 
     const handleConsensusGroupsChange = (value) => {
-        console.log("handleConsensusGroupsChange", value);
+        debug("handleConsensusGroupsChange", value);
         setConsensusGroups(value);
         const newSizes = Array(value - 1).fill(100 / value);
         const newGroupSizes = newSizes.map((size, index) => size * (index + 1));

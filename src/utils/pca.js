@@ -1,4 +1,8 @@
 export function pca(X) {
+    if (X.length === 0 || X[0].length === 0) {
+        throw new Error("Input matrix cannot be empty");
+    }
+
     const m = X.length;
     const n = X[0].length;
   
@@ -14,6 +18,13 @@ export function pca(X) {
       }
     }
   
+    // Check if covariance matrix is all zeros
+    const isZeroMatrix = cov.every(row => row.every(val => Math.abs(val) < 1e-10));
+    if (isZeroMatrix) {
+      // Return zero vectors if all input vectors are identical
+      return X.map(() => [0, 0]);
+    }
+  
     // Compute eigenvalues and eigenvectors (using a very simple power iteration method)
     function powerIteration(A, numIterations = 100) {
       const multiplyAb = (A, b) => A.map(row => row.reduce((sum, a, j) => sum + a * b[j], 0));
@@ -22,6 +33,7 @@ export function pca(X) {
       for (let i = 0; i < numIterations; i++) {
         const Ab = multiplyAb(A, b);
         const norm = Math.sqrt(Ab.reduce((sum, x) => sum + x * x, 0));
+        if (norm < 1e-10) break; // Break if the vector becomes too small
         b = Ab.map(x => x / norm);
       }
       return b;

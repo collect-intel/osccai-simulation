@@ -224,8 +224,9 @@ const SimulationControls = () => {
     <div>
       <h2>Simulation Controls</h2>
       <div>
-        <label>Participants: {tempParticipants}</label>
+        <label htmlFor="participants">Participants: {tempParticipants}</label>
         <input
+          id="participants"
           type="range"
           min="1"
           max={1000}

@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { debug } from '../utils/debug';
 
 const PROPORTIONAL_ADJUSTMENT_FACTOR = 3/4;
 
@@ -11,7 +12,7 @@ const useVoteMatrix = (participants, comments, agreePercentage, disagreePercenta
         // Ensure groupSizes is an array
         const safeGroupSizes = Array.isArray(groupSizes) ? groupSizes : [];
       
-        console.log("Initial distribution:", {
+        debug("Initial distribution:", {
           agree: agreePercentage,
           disagree: disagreePercentage,
           pass: 100 - agreePercentage - disagreePercentage
@@ -25,8 +26,8 @@ const useVoteMatrix = (participants, comments, agreePercentage, disagreePercenta
       
         const groupBoundaries = [0, ...safeGroupSizes.map(size => Math.floor((size / 100) * rows)), rows];
 
-        console.log("groupBoundaries", groupBoundaries);
-        console.log("consensusGroups", consensusGroups);
+        debug("groupBoundaries", groupBoundaries);
+        debug("consensusGroups", consensusGroups);
       
         for (let g = 0; g < consensusGroups; g++) {
           const groupSize = groupBoundaries[g + 1] - groupBoundaries[g];
@@ -37,7 +38,7 @@ const useVoteMatrix = (participants, comments, agreePercentage, disagreePercenta
           const adjustDisagree = (disagreePercentage * (1 - disagreePercentage / 100)) * PROPORTIONAL_ADJUSTMENT_FACTOR;
           const adjustPass = ((100 - agreePercentage - disagreePercentage) * (1 - (100 - agreePercentage - disagreePercentage) / 100)) * PROPORTIONAL_ADJUSTMENT_FACTOR;
       
-          console.log(`Group ${g + 1} proportional adjustments:`, {
+          debug(`Group ${g + 1} proportional adjustments:`, {
             adjustAgree,
             adjustDisagree,
             adjustPass
@@ -76,13 +77,13 @@ const useVoteMatrix = (participants, comments, agreePercentage, disagreePercenta
             endIndex: groupBoundaries[g + 1]
           });
       
-          console.log(`Group ${g + 1} distribution:`, groupDistributions[g]);
+          debug(`Group ${g + 1} distribution:`, groupDistributions[g]);
       
           remainingAgree -= groupAgree * groupWeight;
           remainingDisagree -= groupDisagree * groupWeight;
           remainingPass -= groupPass * groupWeight;
       
-          console.log(`Remaining after Group ${g + 1}:`, {
+          debug(`Remaining after Group ${g + 1}:`, {
             remainingAgree,
             remainingDisagree,
             remainingPass

@@ -7,6 +7,7 @@ import SimulationControls from './components/SimulationControls';
 import useVoteMatrix from './hooks/useVoteMatrix';
 import usePCA from './hooks/usePCA';
 import useGroupIdentification from './hooks/useGroupIdentification';
+import { debug } from './utils/debug';
 import './App.css';
 
 const SimulationContent = () => {
@@ -55,15 +56,12 @@ const SimulationContent = () => {
 
   const performPCA = usePCA(voteMatrix);
   const identifyGroups = useGroupIdentification(pcaProjection, consensusGroups);
-  console.log("pcaProjection for identifyGroups", pcaProjection);
 
   useEffect(() => {
-    if (!voteMatrix || voteMatrix.length === 0) {
-      const newVoteMatrix = generateRandomVoteMatrix();
-      setVoteMatrix(newVoteMatrix);
-      console.log("New vote matrix generated:", newVoteMatrix);
-    }
-  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity, generateRandomVoteMatrix, voteMatrix, setVoteMatrix]);
+    const newVoteMatrix = generateRandomVoteMatrix();
+    setVoteMatrix(newVoteMatrix);
+    debug("New vote matrix generated:", newVoteMatrix);
+  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity, generateRandomVoteMatrix]);
 
   useEffect(() => {
     if (voteMatrix && voteMatrix.length > 0) {
@@ -75,7 +73,7 @@ const SimulationContent = () => {
   useEffect(() => {
     if (pcaProjection && pcaProjection.length > 0) {
       const newGroups = identifyGroups();
-      console.log("New groups identified:", newGroups);
+      debug("New groups identified:", newGroups);
       setGroups(newGroups);
     } else {
       setGroups([]);

@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import ActualVoteBar from './ActualVoteBar';
+import { debug } from '../utils/debug';
 
 const VoteMatrix = ({ voteMatrix, handleVoteChange, selectedGroup, groups, highlightedComment }) => {
-    console.log("VoteMatrix props:", { voteMatrix, selectedGroup, groups, highlightedComment });
+    debug("VoteMatrix props:", { voteMatrix, selectedGroup, groups, highlightedComment });
     const renderVoteMatrix = useMemo(() => {
       if (!voteMatrix || voteMatrix.length === 0 || !voteMatrix[0]) {
-        console.log("No vote matrix data available");
+        debug("No vote matrix data available");
         return <div>No vote matrix data available</div>;
       }
   
