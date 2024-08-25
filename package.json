@@ -20,7 +20,9 @@
     "test:coverage": "jest --coverage",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "test:silhouette": "jest src/__tests__/utils/silhouetteCoefficient.test.js",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cluster": "node --require @babel/register src/scripts/runClustering.js",
+    "cluster:debug": "node --require @babel/register src/scripts/runClustering.js --debug"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +46,7 @@
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
+    "@babel/register": "^7.24.6",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.0",
     "babel-jest": "^29.7.0",

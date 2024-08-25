@@ -1,4 +1,4 @@
-export const DEBUG = process.env.DEBUG === 'true';
+export const DEBUG = process.argv.includes('--debug');
 
 export function debug(...args) {
   if (DEBUG) {

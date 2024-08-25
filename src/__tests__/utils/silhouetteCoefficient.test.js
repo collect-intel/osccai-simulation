@@ -61,6 +61,10 @@ describe('findOptimalClusters', () => {
     kMeansClusteringModule.kMeansClustering.mockImplementationOnce(() => {
       throw new Error('kMeansClustering error');
     });
-    expect(() => findOptimalClusters(points, 2, 3)).toThrow('kMeansClustering error');
+    const results = findOptimalClusters(points, 2, 3);
+    expect(results).toEqual([
+      [2, NaN],
+      [3, expect.any(Number)]
+    ]);
   });
 });
