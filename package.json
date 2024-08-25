@@ -15,7 +15,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test:silhouette": "jest src/__tests__/utils/silhouetteCoefficient.test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,7 +41,17 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
     "@testing-library/jest-dom": "^6.5.0",
-    "@testing-library/react": "^16.0.0"
+    "@testing-library/react": "^16.0.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^27.5.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   }
 }

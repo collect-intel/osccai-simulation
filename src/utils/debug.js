@@ -1,4 +1,4 @@
-export const DEBUG = process.env.REACT_APP_DEBUG === 'true';
+export const DEBUG = process.env.DEBUG === 'true';
 
 export function debug(...args) {
   if (DEBUG) {
