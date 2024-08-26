@@ -39,7 +39,8 @@ const SimulationContent = () => {
     highlightComment,
     highlightedComment,
     setHighlightedComment,
-    resetState
+    resetState,
+    kMeansK
   } = useSimulation();
 
   const { generateRandomVoteMatrix, handleVoteChange } = useVoteMatrix(
@@ -55,7 +56,7 @@ const SimulationContent = () => {
   );
 
   const performPCA = usePCA(voteMatrix);
-  const identifyGroups = useGroupIdentification(pcaProjection, consensusGroups);
+  const identifyGroups = useGroupIdentification(pcaProjection, kMeansK);
 
   useEffect(() => {
     const newVoteMatrix = generateRandomVoteMatrix();
@@ -78,7 +79,7 @@ const SimulationContent = () => {
     } else {
       setGroups([]);
     }
-  }, [pcaProjection, consensusGroups, identifyGroups]);
+  }, [pcaProjection, kMeansK, identifyGroups]);
 
   return (
     <div className="App">

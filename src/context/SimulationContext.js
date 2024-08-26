@@ -8,6 +8,7 @@ const DEFAULT_DISAGREE_PERCENTAGE = 33;
 const DEFAULT_CONSENSUS_GROUPS = 3;
 const DEFAULT_GROUPING_THRESHOLD = 2.0;
 const DEFAULT_GROUP_SIMILARITY = 50;
+const DEFAULT_KMEANS_K = 3;
 
 const SimulationContext = createContext();
 
@@ -33,6 +34,7 @@ export const SimulationProvider = ({ children }) => {
         return [DEFAULT_AGREE_PERCENTAGE, DEFAULT_AGREE_PERCENTAGE + DEFAULT_DISAGREE_PERCENTAGE];
         });
     const [highlightedComment, setHighlightedComment] = useState(null);
+    const [kMeansK, setKMeansK] = useState(DEFAULT_KMEANS_K);
 
     // Load state from localStorage on initial render
     useEffect(() => {
@@ -127,6 +129,10 @@ export const SimulationProvider = ({ children }) => {
         setTempGroupSizes(adjustedValues);
     };
 
+    const handleKMeansKChange = (value) => {
+        setKMeansK(Number(value));
+    };
+
     const resetState = () => {
         setParticipants(DEFAULT_PARTICIPANTS);
         setComments(DEFAULT_COMMENTS);
@@ -178,6 +184,9 @@ export const SimulationProvider = ({ children }) => {
             highlightComment,
             highlightedComment, setHighlightedComment,
             resetState,
+            kMeansK,
+            setKMeansK,
+            handleKMeansKChange,
           }}>
             {children}
         </SimulationContext.Provider>
