@@ -61,9 +61,7 @@ function calculateAverageDistance(point, clusterPoints, data, pointIndex) {
   return totalDistance / (clusterPoints.length - 1);
 }
 
-export { findOptimalClusters };
-
-function findOptimalClusters(points, startK = 2, endK = 9) {
+export function findOptimalClusters(points, startK = 2, endK = 9) {
   debug("Entering findOptimalClusters", { points, startK, endK });
   if (!points || points.length === 0 || !Array.isArray(points[0]) || points[0].length !== 2) {
     debug("Invalid input data for findOptimalClusters", points);
@@ -102,4 +100,10 @@ function findOptimalClusters(points, startK = 2, endK = 9) {
 
   debug("Silhouette Coefficient results:", results);
   return results;
+}
+
+export function getBestK(results) {
+  return results.reduce((best, current) => 
+    current[1] > best[1] ? current : best
+  );
 }

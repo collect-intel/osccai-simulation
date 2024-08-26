@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSimulation } from '../context/SimulationContext';
 import { generateColor } from '../utils/colorUtils';
+import SilhouetteTable from './SilhouetteTable';
 
-const GroupAnalysis = ({ groups, setSelectedGroup, voteMatrix, consensusScores, consensusThreshold, setConsensusThreshold, highlightComment, selectedGroup }) => {
-  const { kMeansK, handleKMeansKChange } = useSimulation();
+const GroupAnalysis = ({ groups, setSelectedGroup, selectedGroup }) => {
+  const { kMeansK, handleKMeansKChange, silhouetteCoefficients, bestK } = useSimulation();
 
   return (
     <div>
@@ -32,6 +33,8 @@ const GroupAnalysis = ({ groups, setSelectedGroup, voteMatrix, consensusScores, 
           </li>
         ))}
       </ul>
+      <h3>Silhouette Coefficients</h3>
+      <SilhouetteTable coefficients={silhouetteCoefficients} bestK={bestK} />
     </div>
   );
 };

@@ -40,7 +40,11 @@ const SimulationContent = () => {
     highlightedComment,
     setHighlightedComment,
     resetState,
-    kMeansK
+    kMeansK,
+    handleKMeansKChange,
+    silhouetteCoefficients,
+    bestK,
+    calculateSilhouetteCoefficients
   } = useSimulation();
 
   const { generateRandomVoteMatrix, handleVoteChange } = useVoteMatrix(
@@ -81,6 +85,12 @@ const SimulationContent = () => {
     }
   }, [pcaProjection, kMeansK, identifyGroups]);
 
+  useEffect(() => {
+    if (pcaProjection && pcaProjection.length > 0) {
+      calculateSilhouetteCoefficients(pcaProjection);
+    }
+  }, [pcaProjection, calculateSilhouetteCoefficients]);
+
   return (
     <div className="App">
       <h1>Polis Vote Matrix and PCA Simulation</h1>
@@ -104,6 +114,10 @@ const SimulationContent = () => {
           setConsensusThreshold={setConsensusThreshold}
           highlightComment={highlightComment}
           selectedGroup={selectedGroup}
+          kMeansK={kMeansK}
+          handleKMeansKChange={handleKMeansKChange}
+          silhouetteCoefficients={silhouetteCoefficients}
+          bestK={bestK}
         />
       </div>
       <div className="group-aware-consensus">

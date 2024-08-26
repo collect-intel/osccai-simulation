@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { debug } from '../utils/debug';
+import { findOptimalClusters, getBestK } from '../utils/silhouetteCoefficient';
 
 const DEFAULT_PARTICIPANTS = 50;
 const DEFAULT_COMMENTS = 50;
@@ -35,6 +36,8 @@ export const SimulationProvider = ({ children }) => {
         });
     const [highlightedComment, setHighlightedComment] = useState(null);
     const [kMeansK, setKMeansK] = useState(DEFAULT_KMEANS_K);
+    const [silhouetteCoefficients, setSilhouetteCoefficients] = useState([]);
+    const [bestK, setBestK] = useState(DEFAULT_KMEANS_K);
 
     // Load state from localStorage on initial render
     useEffect(() => {
@@ -154,6 +157,15 @@ export const SimulationProvider = ({ children }) => {
         localStorage.removeItem('polisSimulationState');
       };
 
+    const calculateSilhouetteCoefficients = (pcaProjection) => {
+        const points = pcaProjection.map(p => [p.x, p.y]);
+        const results = findOptimalClusters(points, 2, 9);
+        setSilhouetteCoefficients(results);
+        const [newBestK, _] = getBestK(results);
+        setBestK(newBestK);
+        setKMeansK(newBestK);
+    };
+
     return (
         <SimulationContext.Provider value={{
             participants, setParticipants,
@@ -187,6 +199,9 @@ export const SimulationProvider = ({ children }) => {
             kMeansK,
             setKMeansK,
             handleKMeansKChange,
+            silhouetteCoefficients,
+            bestK,
+            calculateSilhouetteCoefficients,
           }}>
             {children}
         </SimulationContext.Provider>
