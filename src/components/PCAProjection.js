@@ -1,30 +1,27 @@
 import React from 'react';
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, Cell } from 'recharts';
+import { generateColor } from '../utils/colorUtils';
 
 const PCAProjection = ({ pcaProjection, selectedGroup, groups }) => {
   const getColor = (index, isSelected) => {
-    const colors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#0088FE', '#00C49F'];
-    const baseColor = colors[index % colors.length];
+    const baseColor = generateColor(index, groups.length);
     
     if (selectedGroup === null || isSelected) {
       return baseColor;
     } else {
-      // Convert to RGB and reduce opacity
-      const r = parseInt(baseColor.slice(1, 3), 16);
-      const g = parseInt(baseColor.slice(3, 5), 16);
-      const b = parseInt(baseColor.slice(5, 7), 16);
-      return `rgba(${r}, ${g}, ${b}, 0.3)`;
+      // Convert HSL to RGB and reduce opacity
+      const [h, s, l] = baseColor.match(/\d+/g).map(Number);
+      return `hsla(${h}, ${s}%, ${l}%, 0.3)`; // 30% opacity for non-selected groups
     }
   };
 
   const getPointColor = (index) => {
-    if (selectedGroup === null) return getColor(0, true);
     for (let i = 0; i < groups.length; i++) {
       if (groups[i].points.includes(index)) {
         return getColor(i, selectedGroup === i);
       }
     }
-    return getColor(0, true);
+    return getColor(0, true); // Default color if point is not in any group
   };
 
   return (

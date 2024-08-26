@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSimulation } from '../context/SimulationContext';
+import { generateColor } from '../utils/colorUtils';
 
 const GroupAnalysis = ({ groups, setSelectedGroup, voteMatrix, consensusScores, consensusThreshold, setConsensusThreshold, highlightComment, selectedGroup }) => {
   const { kMeansK, handleKMeansKChange } = useSimulation();
@@ -20,8 +21,11 @@ const GroupAnalysis = ({ groups, setSelectedGroup, voteMatrix, consensusScores, 
         {groups.map((group, i) => (
           <li
             key={i}
-            className={`group-color-${i}`}
-            style={{ cursor: 'pointer', fontWeight: selectedGroup === i ? 'bold' : 'normal' }}
+            style={{
+              cursor: 'pointer',
+              fontWeight: selectedGroup === i ? 'bold' : 'normal',
+              color: generateColor(i, groups.length)
+            }}
             onClick={() => setSelectedGroup(i)}
           >
             Group {i+1}: {group.points.length} participants

@@ -242,11 +242,3 @@
 .group-list li {
   margin-bottom: 10px;
 }
-
-/* Add colors for groups */
-.group-color-0 { color: #8884d8; }
-.group-color-1 { color: #82ca9d; }
-.group-color-2 { color: #ffc658; }
-.group-color-3 { color: #ff7300; }
-.group-color-4 { color: #0088FE; }
-.group-color-5 { color: #00C49F; }
