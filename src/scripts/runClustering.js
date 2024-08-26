@@ -1,8 +1,10 @@
 const { findOptimalClusters } = require('../utils/silhouetteCoefficient.js');
-const { debug } = require('../utils/debug.js');
+const { debug, DEBUG } = require('../utils/debug.js');
 
-// Pass all command-line arguments to the debug module
-process.argv = process.argv.slice(2);
+// If running from command line, pass arguments to debug module
+if (typeof process !== 'undefined' && process.argv) {
+  process.argv = process.argv.slice(2);
+}
 
 // Sample data matrix
 const dataMatrix = [
