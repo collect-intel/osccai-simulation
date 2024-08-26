@@ -78,18 +78,10 @@ const SimulationContent = () => {
   useEffect(() => {
     if (pcaProjection && pcaProjection.length > 0) {
       const newGroups = identifyGroups();
-      debug("New groups identified:", newGroups);
       setGroups(newGroups);
-    } else {
-      setGroups([]);
-    }
-  }, [pcaProjection, kMeansK, identifyGroups]);
-
-  useEffect(() => {
-    if (pcaProjection && pcaProjection.length > 0) {
       calculateSilhouetteCoefficients(pcaProjection);
     }
-  }, [pcaProjection, calculateSilhouetteCoefficients]);
+  }, [pcaProjection, kMeansK, identifyGroups, calculateSilhouetteCoefficients]);
 
   return (
     <div className="App">

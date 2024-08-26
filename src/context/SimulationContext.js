@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { debug } from '../utils/debug';
 import { findOptimalClusters, getBestK } from '../utils/silhouetteCoefficient';
 
@@ -157,14 +157,14 @@ export const SimulationProvider = ({ children }) => {
         localStorage.removeItem('polisSimulationState');
       };
 
-    const calculateSilhouetteCoefficients = (pcaProjection) => {
+    const calculateSilhouetteCoefficients = useCallback((pcaProjection) => {
         const points = pcaProjection.map(p => [p.x, p.y]);
         const results = findOptimalClusters(points, 2, 9);
         setSilhouetteCoefficients(results);
         const [newBestK, _] = getBestK(results);
         setBestK(newBestK);
         setKMeansK(newBestK);
-    };
+    }, []);
 
     return (
         <SimulationContext.Provider value={{
