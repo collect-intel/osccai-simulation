@@ -275,3 +275,18 @@
 .group-list li {
   margin-bottom: 10px;
 }
+
+.copy-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.copy-button:hover {
+  background-color: #45a049;
+}
