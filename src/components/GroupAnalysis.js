@@ -4,20 +4,11 @@ import { generateColor } from '../utils/colorUtils';
 import SilhouetteTable from './SilhouetteTable';
 
 const GroupAnalysis = ({ groups, setSelectedGroup, selectedGroup }) => {
-  const { kMeansK, handleKMeansKChange, silhouetteCoefficients, bestK } = useSimulation();
+  const { kMeansK, updateKMeansK, silhouetteCoefficients, bestK } = useSimulation();
 
   return (
     <div>
       <h2>K-means Clustering Groups</h2>
-      <div>
-        <label>Clusters: </label>
-        <input
-          type="number"
-          min="1"
-          value={kMeansK}
-          onChange={(e) => handleKMeansKChange(e.target.value)}
-        />
-      </div>
       <ul className="group-list">
         {groups.map((group, i) => (
           <li
@@ -34,7 +25,12 @@ const GroupAnalysis = ({ groups, setSelectedGroup, selectedGroup }) => {
         ))}
       </ul>
       <h3>Silhouette Coefficients</h3>
-      <SilhouetteTable coefficients={silhouetteCoefficients} bestK={bestK} />
+      <SilhouetteTable 
+        coefficients={silhouetteCoefficients} 
+        bestK={bestK} 
+        selectedK={kMeansK}
+        onKSelect={updateKMeansK}
+      />
     </div>
   );
 };

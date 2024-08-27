@@ -41,7 +41,7 @@ const SimulationContent = () => {
     setHighlightedComment,
     resetState,
     kMeansK,
-    handleKMeansKChange,
+    updateKMeansK, // Changed from handleKMeansKChange
     silhouetteCoefficients,
     bestK,
     calculateSilhouetteCoefficients
@@ -72,16 +72,16 @@ const SimulationContent = () => {
     if (voteMatrix && voteMatrix.length > 0) {
       const newPcaProjection = performPCA();
       setPcaProjection(newPcaProjection);
+      calculateSilhouetteCoefficients(newPcaProjection);
     }
-  }, [voteMatrix, performPCA]);
+  }, [voteMatrix, performPCA, calculateSilhouetteCoefficients]);
   
   useEffect(() => {
     if (pcaProjection && pcaProjection.length > 0) {
       const newGroups = identifyGroups();
       setGroups(newGroups);
-      calculateSilhouetteCoefficients(pcaProjection);
     }
-  }, [pcaProjection, kMeansK, identifyGroups, calculateSilhouetteCoefficients]);
+  }, [pcaProjection, identifyGroups, kMeansK]);
 
   return (
     <div className="App">
@@ -107,7 +107,7 @@ const SimulationContent = () => {
           highlightComment={highlightComment}
           selectedGroup={selectedGroup}
           kMeansK={kMeansK}
-          handleKMeansKChange={handleKMeansKChange}
+          updateKMeansK={updateKMeansK} // Changed from handleKMeansKChange
           silhouetteCoefficients={silhouetteCoefficients}
           bestK={bestK}
         />

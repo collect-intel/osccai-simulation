@@ -158,12 +158,19 @@ export const SimulationProvider = ({ children }) => {
       };
 
     const calculateSilhouetteCoefficients = useCallback((pcaProjection) => {
+        console.log("Calculating Silhouette Coefficients");
         const points = pcaProjection.map(p => [p.x, p.y]);
         const results = findOptimalClusters(points, 2, 9);
         setSilhouetteCoefficients(results);
         const [newBestK, _] = getBestK(results);
         setBestK(newBestK);
-        setKMeansK(newBestK);
+        // Remove this line to prevent automatic reset of kMeansK
+        // setKMeansK(newBestK);
+    }, []);
+
+    // Add a new function to update kMeansK without recalculating
+    const updateKMeansK = useCallback((newK) => {
+        setKMeansK(newK);
     }, []);
 
     return (
@@ -197,12 +204,11 @@ export const SimulationProvider = ({ children }) => {
             highlightedComment, setHighlightedComment,
             resetState,
             kMeansK,
-            setKMeansK,
-            handleKMeansKChange,
+            updateKMeansK,
             silhouetteCoefficients,
             bestK,
             calculateSilhouetteCoefficients,
-          }}>
+        }}>
             {children}
         </SimulationContext.Provider>
     );

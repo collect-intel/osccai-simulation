@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SilhouetteTable = ({ coefficients, bestK }) => (
+const SilhouetteTable = ({ coefficients, bestK, selectedK, onKSelect }) => (
   <table>
     <thead>
       <tr>
@@ -10,9 +10,19 @@ const SilhouetteTable = ({ coefficients, bestK }) => (
     </thead>
     <tbody>
       {coefficients.map(([k, coefficient]) => (
-        <tr key={k} style={{ fontWeight: k === bestK ? 'bold' : 'normal' }}>
+        <tr 
+          key={k} 
+          style={{ 
+            fontWeight: k === selectedK ? 'bold' : 'normal',
+            cursor: 'pointer'
+          }}
+          onClick={() => onKSelect(k)}
+        >
           <td>{k}</td>
-          <td>{coefficient.toFixed(2)}</td>
+          <td>
+            {coefficient.toFixed(2)}
+            {k === bestK && ' (highest)'}
+          </td>
         </tr>
       ))}
     </tbody>
