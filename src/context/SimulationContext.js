@@ -132,10 +132,6 @@ export const SimulationProvider = ({ children }) => {
         setTempGroupSizes(adjustedValues);
     };
 
-    const handleKMeansKChange = (value) => {
-        setKMeansK(Number(value));
-    };
-
     const resetState = () => {
         setParticipants(DEFAULT_PARTICIPANTS);
         setComments(DEFAULT_COMMENTS);
@@ -162,10 +158,8 @@ export const SimulationProvider = ({ children }) => {
         const points = pcaProjection.map(p => [p.x, p.y]);
         const results = findOptimalClusters(points, 2, 9);
         setSilhouetteCoefficients(results);
-        const [newBestK, _] = getBestK(results);
+        const [newBestK] = getBestK(results);
         setBestK(newBestK);
-        // Remove this line to prevent automatic reset of kMeansK
-        // setKMeansK(newBestK);
     }, []);
 
     // Add a new function to update kMeansK without recalculating
