@@ -1,5 +1,6 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { debug } from '../utils/debug';
+import { findOptimalClusters, getBestK } from '../utils/silhouetteCoefficient';
 
 const DEFAULT_PARTICIPANTS = 50;
 const DEFAULT_COMMENTS = 50;
@@ -8,6 +9,7 @@ const DEFAULT_DISAGREE_PERCENTAGE = 33;
 const DEFAULT_CONSENSUS_GROUPS = 3;
 const DEFAULT_GROUPING_THRESHOLD = 2.0;
 const DEFAULT_GROUP_SIMILARITY = 50;
+const DEFAULT_KMEANS_K = 3;
 
 const SimulationContext = createContext();
 
@@ -33,6 +35,9 @@ export const SimulationProvider = ({ children }) => {
         return [DEFAULT_AGREE_PERCENTAGE, DEFAULT_AGREE_PERCENTAGE + DEFAULT_DISAGREE_PERCENTAGE];
         });
     const [highlightedComment, setHighlightedComment] = useState(null);
+    const [kMeansK, setKMeansK] = useState(DEFAULT_KMEANS_K);
+    const [silhouetteCoefficients, setSilhouetteCoefficients] = useState([]);
+    const [bestK, setBestK] = useState(DEFAULT_KMEANS_K);
 
     // Load state from localStorage on initial render
     useEffect(() => {
@@ -148,6 +153,20 @@ export const SimulationProvider = ({ children }) => {
         localStorage.removeItem('polisSimulationState');
       };
 
+    const calculateSilhouetteCoefficients = useCallback((pcaProjection) => {
+        console.log("Calculating Silhouette Coefficients");
+        const points = pcaProjection.map(p => [p.x, p.y]);
+        const results = findOptimalClusters(points, 2, 9);
+        setSilhouetteCoefficients(results);
+        const [newBestK] = getBestK(results);
+        setBestK(newBestK);
+    }, []);
+
+    // Add a new function to update kMeansK without recalculating
+    const updateKMeansK = useCallback((newK) => {
+        setKMeansK(newK);
+    }, []);
+
     return (
         <SimulationContext.Provider value={{
             participants, setParticipants,
@@ -178,7 +197,12 @@ export const SimulationProvider = ({ children }) => {
             highlightComment,
             highlightedComment, setHighlightedComment,
             resetState,
-          }}>
+            kMeansK,
+            updateKMeansK,
+            silhouetteCoefficients,
+            bestK,
+            calculateSilhouetteCoefficients,
+        }}>
             {children}
         </SimulationContext.Provider>
     );

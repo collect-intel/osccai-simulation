@@ -1,7 +1,8 @@
 import { kmeans } from 'ml-kmeans';
 import { debug } from './debug';
 
-export function kMeansClustering(data, k) {
+function kMeansClustering(data, k) {
+  debug("Entering kMeansClustering", { data, k });
   if (!data || data.length === 0 || !Array.isArray(data[0]) || data[0].length !== 2) {
     debug("Invalid input data for kMeansClustering", data);
     throw new Error("Invalid input data for kMeansClustering");
@@ -22,4 +23,11 @@ export function kMeansClustering(data, k) {
     centroid: result.centroids[index],
     points: points
   }));
+}
+
+export { kMeansClustering };
+
+// For CommonJS compatibility
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { kMeansClustering };
 }

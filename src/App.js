@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { SimulationProvider, useSimulation } from './context/SimulationContext';
 import VoteMatrix from './components/VoteMatrix';
 import PCAProjection from './components/PCAProjection';
@@ -13,15 +13,9 @@ import './App.css';
 const SimulationContent = () => {
   const {
     participants,
-    setParticipants,
     comments,
-    setComments,
     agreePercentage,
-    setAgreePercentage,
     disagreePercentage,
-    setDisagreePercentage,
-    rangeValues,
-    setRangeValues,
     consensusGroups,
     groupSizes,
     groupSimilarity,
@@ -38,8 +32,12 @@ const SimulationContent = () => {
     setConsensusThreshold,
     highlightComment,
     highlightedComment,
-    setHighlightedComment,
-    resetState
+    resetState,
+    kMeansK,
+    updateKMeansK,
+    silhouetteCoefficients,
+    bestK,
+    calculateSilhouetteCoefficients
   } = useSimulation();
 
   const { generateRandomVoteMatrix, handleVoteChange } = useVoteMatrix(
@@ -55,30 +53,32 @@ const SimulationContent = () => {
   );
 
   const performPCA = usePCA(voteMatrix);
-  const identifyGroups = useGroupIdentification(pcaProjection, consensusGroups);
+  const identifyGroups = useGroupIdentification(pcaProjection, kMeansK);
 
-  useEffect(() => {
+  const generateNewVoteMatrix = useCallback(() => {
     const newVoteMatrix = generateRandomVoteMatrix();
     setVoteMatrix(newVoteMatrix);
     debug("New vote matrix generated:", newVoteMatrix);
-  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity, generateRandomVoteMatrix]);
+  }, [generateRandomVoteMatrix, setVoteMatrix]);
+
+  useEffect(() => {
+    generateNewVoteMatrix();
+  }, [participants, comments, agreePercentage, disagreePercentage, consensusGroups, groupSizes, groupSimilarity, generateNewVoteMatrix]);
 
   useEffect(() => {
     if (voteMatrix && voteMatrix.length > 0) {
       const newPcaProjection = performPCA();
       setPcaProjection(newPcaProjection);
+      calculateSilhouetteCoefficients(newPcaProjection);
     }
-  }, [voteMatrix, performPCA]);
+  }, [voteMatrix, performPCA, setPcaProjection, calculateSilhouetteCoefficients]);
   
   useEffect(() => {
     if (pcaProjection && pcaProjection.length > 0) {
       const newGroups = identifyGroups();
-      debug("New groups identified:", newGroups);
       setGroups(newGroups);
-    } else {
-      setGroups([]);
     }
-  }, [pcaProjection, consensusGroups, identifyGroups]);
+  }, [pcaProjection, identifyGroups, setGroups]);
 
   return (
     <div className="App">
@@ -103,6 +103,10 @@ const SimulationContent = () => {
           setConsensusThreshold={setConsensusThreshold}
           highlightComment={highlightComment}
           selectedGroup={selectedGroup}
+          kMeansK={kMeansK}
+          updateKMeansK={updateKMeansK} // Changed from handleKMeansKChange
+          silhouetteCoefficients={silhouetteCoefficients}
+          bestK={bestK}
         />
       </div>
       <div className="group-aware-consensus">
