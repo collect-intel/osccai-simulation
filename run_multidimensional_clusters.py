@@ -21,25 +21,29 @@ def load_vote_matrix(file_path):
     return np.array(module.voteMatrix)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python run_multidimensional_clusters.py <path_to_vote_matrix_file>")
+    if len(sys.argv) not in [2, 3]:
+        print("Usage: python run_multidimensional_clusters.py <path_to_vote_matrix_file> [max_pca_components]")
         sys.exit(1)
 
     vote_matrix_file = sys.argv[1]
+    max_pca_components = int(sys.argv[2]) if len(sys.argv) == 3 else 2
     vote_matrix = load_vote_matrix(vote_matrix_file)
 
     k_values = range(2, 10)
 
-    # Perform PCA
-    print("Performing PCA projection...")
-    start_time = time.time()
-    pca = PCA(n_components=2)
-    pca_projection = pca.fit_transform(vote_matrix)
-    print(f"PCA projection completed in {time.time() - start_time:.2f} seconds")
+    # Perform PCA for different numbers of components
+    print("Performing PCA projections...")
+    pca_projections = []
+    for n_components in range(2, max_pca_components + 1):
+        start_time = time.time()
+        pca = PCA(n_components=n_components)
+        projection = pca.fit_transform(vote_matrix)
+        pca_projections.append(projection)
+        print(f"PCA projection with {n_components} components completed in {time.time() - start_time:.2f} seconds")
 
     # Initialize lists to store scores
     silhouette_scores_matrix = []
-    silhouette_scores_pca = []
+    silhouette_scores_pca = [[] for _ in range(len(pca_projections))]
 
     # Compute silhouette scores for different K values
     print("Computing silhouette scores...")
@@ -50,55 +54,62 @@ if __name__ == "__main__":
         silhouette_scores_matrix.append(score_matrix)
         print(f"Matrix-based Silhouette Coefficient for K={k}: {score_matrix:.4f} (Time: {time.time() - start_time:.2f}s)")
         
-        # PCA-based analysis
-        start_time = time.time()
-        score_pca, _ = kmeans_silhouette(pca_projection, k)
-        silhouette_scores_pca.append(score_pca)
-        print(f"PCA-based Silhouette Coefficient for K={k}: {score_pca:.4f} (Time: {time.time() - start_time:.2f}s)")
+        # PCA-based analysis for each projection
+        for i, projection in enumerate(pca_projections):
+            start_time = time.time()
+            score_pca, _ = kmeans_silhouette(projection, k)
+            silhouette_scores_pca[i].append(score_pca)
+            print(f"PCA-{i+2}-based Silhouette Coefficient for K={k}: {score_pca:.4f} (Time: {time.time() - start_time:.2f}s)")
 
-    # Find the optimal K for both methods
+    # Find the optimal K for all methods
     optimal_k_matrix = k_values[np.argmax(silhouette_scores_matrix)]
-    optimal_k_pca = k_values[np.argmax(silhouette_scores_pca)]
+    optimal_k_pca = [k_values[np.argmax(scores)] for scores in silhouette_scores_pca]
     print(f"\nOptimal K value (Matrix): {optimal_k_matrix}")
-    print(f"Optimal K value (PCA): {optimal_k_pca}")
+    for i, k in enumerate(optimal_k_pca):
+        print(f"Optimal K value (PCA-{i+2}): {k}")
 
-    # Perform K-means clustering with the optimal K for both methods
+    # Perform K-means clustering with the optimal K for all methods
     print("\nPerforming final clustering...")
     start_time = time.time()
     _, kmeans_matrix = kmeans_silhouette(vote_matrix, optimal_k_matrix)
     print(f"Matrix-based clustering completed in {time.time() - start_time:.2f} seconds")
 
-    start_time = time.time()
-    _, kmeans_pca = kmeans_silhouette(pca_projection, optimal_k_pca)
-    print(f"PCA-based clustering completed in {time.time() - start_time:.2f} seconds")
+    kmeans_pca = []
+    for i, projection in enumerate(pca_projections):
+        start_time = time.time()
+        _, kmeans = kmeans_silhouette(projection, optimal_k_pca[i])
+        kmeans_pca.append(kmeans)
+        print(f"PCA-{i+2}-based clustering completed in {time.time() - start_time:.2f} seconds")
 
-    # Get cluster sizes for both methods
+    # Get cluster sizes for all methods
     cluster_sizes_matrix = np.bincount(kmeans_matrix.labels_)
-    cluster_sizes_pca = np.bincount(kmeans_pca.labels_)
-
     print("\nMatrix-based cluster sizes (big to small):")
     for i, size in enumerate(sorted(cluster_sizes_matrix, reverse=True)):
         print(f"Cluster {i+1}: {size}")
 
-    print("\nPCA-based cluster sizes (big to small):")
-    for i, size in enumerate(sorted(cluster_sizes_pca, reverse=True)):
-        print(f"Cluster {i+1}: {size}")
+    for i, kmeans in enumerate(kmeans_pca):
+        cluster_sizes = np.bincount(kmeans.labels_)
+        print(f"\nPCA-{i+2}-based cluster sizes (big to small):")
+        for j, size in enumerate(sorted(cluster_sizes, reverse=True)):
+            print(f"Cluster {j+1}: {size}")
 
     # Plot silhouette scores
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(12, 6))
     plt.plot(k_values, silhouette_scores_matrix, 'bo-', label='Matrix-based')
-    plt.plot(k_values, silhouette_scores_pca, 'ro-', label='PCA-based')
+    for i, scores in enumerate(silhouette_scores_pca):
+        plt.plot(k_values, scores, 'o-', label=f'PCA-{i+2}-based')
     plt.xlabel('Number of Clusters (K)')
     plt.ylabel('Silhouette Score')
     plt.title('Silhouette Score vs. Number of Clusters')
     plt.legend()
     plt.show()
 
-    # Plot PCA projection
-    plt.figure(figsize=(10, 8))
-    scatter = plt.scatter(pca_projection[:, 0], pca_projection[:, 1], c=kmeans_pca.labels_, cmap='viridis')
-    plt.colorbar(scatter)
-    plt.xlabel('PC1')
-    plt.ylabel('PC2')
-    plt.title('PCA Projection with K-means Clustering')
-    plt.show()
+    # Plot PCA projection (only for 2D)
+    if max_pca_components >= 2:
+        plt.figure(figsize=(10, 8))
+        scatter = plt.scatter(pca_projections[0][:, 0], pca_projections[0][:, 1], c=kmeans_pca[0].labels_, cmap='viridis')
+        plt.colorbar(scatter)
+        plt.xlabel('PC1')
+        plt.ylabel('PC2')
+        plt.title('PCA-2 Projection with K-means Clustering')
+        plt.show()
