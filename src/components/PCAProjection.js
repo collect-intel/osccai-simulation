@@ -25,7 +25,7 @@ const PCAProjection = ({ pcaProjection, selectedGroup, groups }) => {
   };
 
   return (
-    <div>
+    <div className="pca-projection">
       <h2>PCA Projection</h2>
       <ScatterChart width={400} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
         <XAxis type="number" dataKey="x" name="PC1" />

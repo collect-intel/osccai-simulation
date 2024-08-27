@@ -1,11 +1,11 @@
 import React from 'react';
 
 const SilhouetteTable = ({ coefficients, bestK, selectedK, onKSelect }) => (
-  <table>
+  <table className="silhouette-table">
     <thead>
       <tr>
         <th>K</th>
-        <th>S. Coefficient</th>
+        <th>SC</th>
       </tr>
     </thead>
     <tbody>

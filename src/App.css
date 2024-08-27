@@ -230,13 +230,46 @@
 
 .side-by-side-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 40px;
   margin-top: 20px;
 }
 
+.pca-projection,
+.group-analysis {
+  flex: 1;
+  max-width: 500px;
+}
+
 .group-list {
-  list-style-type: none; /* Remove bullet points */
+  list-style-type: none;
   padding: 0;
+}
+
+.group-list li {
+  margin-bottom: 10px;
+}
+
+.group-analysis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.silhouette-table-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.silhouette-table {
+  margin: 0 auto;
+}
+
+.group-list {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
 }
 
 .group-list li {

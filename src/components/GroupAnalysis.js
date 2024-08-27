@@ -7,8 +7,18 @@ const GroupAnalysis = ({ groups, setSelectedGroup, selectedGroup }) => {
   const { kMeansK, updateKMeansK, silhouetteCoefficients, bestK } = useSimulation();
 
   return (
-    <div>
+    <div className="group-analysis">
       <h2>K-means Clustering Groups</h2>
+      <h3>Silhouette Coefficients</h3>
+      <div className="silhouette-table-container">
+        <SilhouetteTable 
+          coefficients={silhouetteCoefficients} 
+          bestK={bestK} 
+          selectedK={kMeansK}
+          onKSelect={updateKMeansK}
+        />
+      </div>
+      <h3>Groups</h3>
       <ul className="group-list">
         {groups.map((group, i) => (
           <li
@@ -24,13 +34,6 @@ const GroupAnalysis = ({ groups, setSelectedGroup, selectedGroup }) => {
           </li>
         ))}
       </ul>
-      <h3>Silhouette Coefficients</h3>
-      <SilhouetteTable 
-        coefficients={silhouetteCoefficients} 
-        bestK={bestK} 
-        selectedK={kMeansK}
-        onKSelect={updateKMeansK}
-      />
     </div>
   );
 };
