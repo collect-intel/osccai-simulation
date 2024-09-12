@@ -7,6 +7,7 @@ import time
 from tqdm import tqdm
 import sys
 import importlib.util
+from kneed import KneeLocator
 
 def kmeans_silhouette(data, k):
     kmeans = KMeans(n_clusters=k, random_state=42)
@@ -20,26 +21,51 @@ def load_vote_matrix(file_path):
     spec.loader.exec_module(module)
     return np.array(module.voteMatrix)
 
+def find_elbow(x, y):
+    kneedle = KneeLocator(x, y, S=1.0, curve="convex", direction="decreasing")
+    return kneedle.elbow
+
 if __name__ == "__main__":
     if len(sys.argv) not in [2, 3]:
         print("Usage: python run_multidimensional_clusters.py <path_to_vote_matrix_file> [max_pca_components]")
         sys.exit(1)
 
     vote_matrix_file = sys.argv[1]
-    max_pca_components = int(sys.argv[2]) if len(sys.argv) == 3 else 2
+    max_pca_components = int(sys.argv[2]) if len(sys.argv) == 3 else min(100, vote_matrix.shape[1])
     vote_matrix = load_vote_matrix(vote_matrix_file)
 
     k_values = range(2, 10)
 
     # Perform PCA for different numbers of components
     print("Performing PCA projections...")
+    pca = PCA(n_components=max_pca_components)
+    pca.fit(vote_matrix)
+    
+    # Calculate explained variance ratio
+    explained_variance_ratio = pca.explained_variance_ratio_
+
+    # Find optimal number of components using elbow method
+    n_components = range(1, max_pca_components + 1)
+    optimal_components = find_elbow(n_components, explained_variance_ratio)
+
+    # Plot scree plot
+    plt.figure(figsize=(12, 6))
+    plt.plot(n_components, explained_variance_ratio, 'bo-')
+    plt.axvline(x=optimal_components, color='r', linestyle='--', label=f'Elbow: {optimal_components}')
+    plt.xlabel('Number of Components')
+    plt.ylabel('Explained Variance Ratio')
+    plt.title('Scree Plot')
+    plt.legend()
+    plt.show()
+
+    print(f"Optimal number of components (Elbow method): {optimal_components}")
+
+    # Perform PCA projections
     pca_projections = []
-    for n_components in range(2, max_pca_components + 1):
-        start_time = time.time()
-        pca = PCA(n_components=n_components)
-        projection = pca.fit_transform(vote_matrix)
+    for n_components in range(2, optimal_components + 1):
+        projection = pca.transform(vote_matrix)[:, :n_components]
         pca_projections.append(projection)
-        print(f"PCA projection with {n_components} components completed in {time.time() - start_time:.2f} seconds")
+        print(f"PCA projection with {n_components} components completed")
 
     # Initialize lists to store scores
     silhouette_scores_matrix = []
@@ -105,7 +131,7 @@ if __name__ == "__main__":
     plt.show()
 
     # Plot PCA projection (only for 2D)
-    if max_pca_components >= 2:
+    if len(pca_projections) > 0:
         plt.figure(figsize=(10, 8))
         scatter = plt.scatter(pca_projections[0][:, 0], pca_projections[0][:, 1], c=kmeans_pca[0].labels_, cmap='viridis')
         plt.colorbar(scatter)

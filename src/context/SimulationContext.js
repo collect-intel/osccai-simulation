@@ -41,7 +41,7 @@ export const SimulationProvider = ({ children }) => {
 
     // Load state from localStorage on initial render
     useEffect(() => {
-        const savedState = localStorage.getItem('polisSimulationState');
+        const savedState = localStorage.getItem('osccaiSimulationState');
         if (savedState) {
             const parsedState = JSON.parse(savedState);
             setParticipants(parsedState.participants);
@@ -81,7 +81,7 @@ export const SimulationProvider = ({ children }) => {
             consensusThreshold,
             highlightedComment,
         };
-        localStorage.setItem('polisSimulationState', JSON.stringify(stateToSave));
+        localStorage.setItem('osccaiSimulationState', JSON.stringify(stateToSave));
     }, [participants, comments, agreePercentage, disagreePercentage, rangeValues, consensusGroups, groupSizes, groupSimilarity, voteMatrix, pcaProjection, groups, selectedGroup, consensusScores, consensusThreshold, highlightedComment]);
 
     const [tempParticipants, setTempParticipants] = useState(participants);
@@ -150,7 +150,7 @@ export const SimulationProvider = ({ children }) => {
         setTempComments(DEFAULT_COMMENTS);
         setTempGroupSimilarity(DEFAULT_GROUP_SIMILARITY);
         setTempGroupSizes(Array(DEFAULT_CONSENSUS_GROUPS - 1).fill(100 / DEFAULT_CONSENSUS_GROUPS).map((size, index) => size * (index + 1)));
-        localStorage.removeItem('polisSimulationState');
+        localStorage.removeItem('osccaiSimulationState');
       };
 
     const calculateSilhouetteCoefficients = useCallback((pcaProjection) => {

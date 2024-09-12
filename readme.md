@@ -1,6 +1,6 @@
-# Polis Simulation
+# OSCCAI Simulation
 
-This application simulates the core functionality of [Pol.is](https://pol.is/), a real-time survey and opinion analysis tool. It demonstrates how Polis analyzes participant opinions on various comments to identify consensus groups.
+This application simulates the core functionality of the "Collective Constitution Creator" process (adapted from [Pol.is](https://pol.is/), a real-time survey and opinion analysis tool), part of the Open-Source Collective Constitutional AI project. It demonstrates how this tool analyzes participant opinions on various comments to identify consensus groups, and how these groups can be used to create a constitution.
 
 ## Features
 
@@ -27,8 +27,8 @@ This application simulates the core functionality of [Pol.is](https://pol.is/), 
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/polis-simulation.git
-   cd polis-simulation
+   git clone https://github.com/your-username/osccai-simulation.git
+   cd osccai-simulation
    ```
 
 2. Install dependencies:

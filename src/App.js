@@ -82,7 +82,7 @@ const SimulationContent = () => {
 
   return (
     <div className="App">
-      <h1>Polis Vote Matrix and PCA Simulation</h1>
+      <h1>Vote Matrix and PCA Simulation</h1>
       <SimulationControls />
       <button onClick={resetState}>Reset</button>
       <VoteMatrix 
