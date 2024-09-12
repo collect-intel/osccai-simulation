@@ -1,6 +1,7 @@
 import numpy as np
 import random
 from tqdm import tqdm
+from matrix_database import store_matrix
 
 # Constants for parameter ranges
 MIN_PARTICIPANTS = 10
@@ -145,9 +146,7 @@ def generate_vote_matrix(participants, comments, agree_percentage, disagree_perc
 
     return vote_matrix
 
-def generate_random_vote_matrices(N):
-    matrices = []
-    params = []
+def generate_and_store_matrices(N):
     for _ in tqdm(range(N), desc="Generating matrices", unit="matrix"):
         participants = np.random.randint(MIN_PARTICIPANTS, MAX_PARTICIPANTS + 1)
         comments = np.random.randint(MIN_COMMENTS, MAX_COMMENTS + 1)
@@ -160,9 +159,7 @@ def generate_random_vote_matrices(N):
         
         group_similarity = np.random.uniform(MIN_GROUP_SIMILARITY, MAX_GROUP_SIMILARITY)
 
-        matrix = generate_vote_matrix(participants, comments, agree_percentage, disagree_percentage, consensus_groups, group_sizes, group_similarity)
-        matrices.append(matrix)
-        params.append({
+        params = {
             'participants': participants,
             'comments': comments,
             'agree_percentage': agree_percentage,
@@ -170,5 +167,12 @@ def generate_random_vote_matrices(N):
             'consensus_groups': consensus_groups,
             'group_sizes': group_sizes,
             'group_similarity': group_similarity
-        })
-    return matrices, params
+        }
+
+        matrix = generate_vote_matrix(**params)
+        store_matrix(params, matrix)
+
+if __name__ == "__main__":
+    import sys
+    N = int(sys.argv[1]) if len(sys.argv) > 1 else 100
+    generate_and_store_matrices(N)
