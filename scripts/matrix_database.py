@@ -1,3 +1,6 @@
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import sqlite3
 import numpy as np
 from sqlalchemy import create_engine, Column, Integer, Float, LargeBinary, String
@@ -33,7 +36,7 @@ class VoteMatrix(Base):
             else:
                 raise ValueError(f"Stored data size ({len(bits)}) is smaller than expected size ({total_elements})")
 
-engine = create_engine('sqlite:///data/vote_matrices.db')
+engine = create_engine('sqlite:///../data/vote_matrices.db')
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 

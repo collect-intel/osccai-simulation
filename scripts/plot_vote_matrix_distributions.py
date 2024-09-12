@@ -1,9 +1,12 @@
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import argparse
-from matrix_database import get_matrices
-from vote_matrix_generator import generate_vote_matrix
+from scripts.matrix_database import get_matrices
+from scripts.vote_matrix_generator import generate_vote_matrix
 
 def plot_stored_matrices(min_participants=None, max_participants=None):
     print("Retrieving matrices from database...")
@@ -30,6 +33,7 @@ def plot_stored_matrices(min_participants=None, max_participants=None):
                 'agree_percentage': m.agree_percentage,
                 'disagree_percentage': m.disagree_percentage,
                 'consensus_groups': m.consensus_groups,
+                'group_sizes': m.group_sizes,
                 'group_similarity': m.group_similarity,
                 'matrix_size': m.participants * m.comments
             })

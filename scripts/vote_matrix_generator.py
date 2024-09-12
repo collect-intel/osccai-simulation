@@ -1,7 +1,10 @@
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import numpy as np
 import random
 from tqdm import tqdm
-from matrix_database import store_matrix
+from scripts.matrix_database import store_matrix
 
 # Constants for parameter ranges
 MIN_PARTICIPANTS = 10

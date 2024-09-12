@@ -1,4 +1,7 @@
-from matrix_database import get_matrices
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from scripts.matrix_database import get_matrices
 import numpy as np
 
 def run_tests():

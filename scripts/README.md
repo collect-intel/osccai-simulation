@@ -10,6 +10,12 @@ This folder contains Python scripts for generating, storing, and analyzing vote 
    pip install -r requirements.txt
    ```
 
+All scripts should be run from the `scripts/` directory. Navigate to this directory before running any commands:
+
+```
+cd scripts
+```
+
 ## 1. Generating and Storing Vote Matrices
 
 Use `vote_matrix_generator.py` to generate and store vote matrices in the database.
