@@ -22,6 +22,14 @@ class VoteMatrix(Base):
     group_sizes = Column(String)
     group_similarity = Column(Float)
     matrix_data = Column(LargeBinary)
+    
+    # Update these columns to use Integer instead of LargeBinary
+    optimal_components = Column(Integer)
+    silhouette_scores = Column(String)
+    max_silhouette_score = Column(Float)
+    optimal_k = Column(Integer)
+    pca2_silhouette_scores = Column(String)
+    pca2_optimal_k = Column(Integer)
 
     def get_matrix(self):
         unpacked = np.frombuffer(self.matrix_data, dtype=np.int8)
@@ -81,6 +89,27 @@ def get_database_summary():
     avg_comments = session.query(func.avg(VoteMatrix.comments)).scalar()
     avg_consensus_groups = session.query(func.avg(VoteMatrix.consensus_groups)).scalar()
     
+    # Get cluster analysis statistics
+    analyzed_count = session.query(func.count(VoteMatrix.id)).filter(VoteMatrix.optimal_components.isnot(None)).scalar()
+    avg_optimal_components = session.query(func.avg(VoteMatrix.optimal_components)).scalar()
+    avg_max_silhouette_score = session.query(func.avg(VoteMatrix.max_silhouette_score)).scalar()
+    avg_optimal_k = session.query(func.avg(VoteMatrix.optimal_k)).scalar()
+    avg_pca2_optimal_k = session.query(func.avg(VoteMatrix.pca2_optimal_k)).scalar()
+    
+    # Calculate average silhouette scores
+    matrices_with_scores = session.query(VoteMatrix).filter(VoteMatrix.silhouette_scores.isnot(None)).all()
+    avg_silhouette_scores = [0] * 8  # For K=2 to K=9
+    avg_pca2_silhouette_scores = [0] * 8  # For K=2 to K=9
+    if matrices_with_scores:
+        for matrix in matrices_with_scores:
+            scores = eval(matrix.silhouette_scores)
+            pca2_scores = eval(matrix.pca2_silhouette_scores)
+            for i in range(8):
+                avg_silhouette_scores[i] += scores[i]
+                avg_pca2_silhouette_scores[i] += pca2_scores[i]
+        avg_silhouette_scores = [score / len(matrices_with_scores) for score in avg_silhouette_scores]
+        avg_pca2_silhouette_scores = [score / len(matrices_with_scores) for score in avg_pca2_silhouette_scores]
+    
     session.close()
     
     return {
@@ -88,17 +117,38 @@ def get_database_summary():
         'file_size': file_size,
         'avg_participants': avg_participants,
         'avg_comments': avg_comments,
-        'avg_consensus_groups': avg_consensus_groups
+        'avg_consensus_groups': avg_consensus_groups,
+        'analyzed_count': analyzed_count,
+        'avg_optimal_components': avg_optimal_components,
+        'avg_silhouette_scores': avg_silhouette_scores,
+        'avg_max_silhouette_score': avg_max_silhouette_score,
+        'avg_optimal_k': avg_optimal_k,
+        'avg_pca2_silhouette_scores': avg_pca2_silhouette_scores,
+        'avg_pca2_optimal_k': avg_pca2_optimal_k
     }
 
 def print_database_summary():
     summary = get_database_summary()
     print(f"Database Summary:")
     print(f"Number of matrices: {summary['matrix_count']}")
+    print(f"Number of matrices analyzed: {summary['analyzed_count']}")
     print(f"Total file size: {summary['file_size'] / (1024*1024):.2f} MB")
     print(f"Average participants per matrix: {summary['avg_participants']:.2f}")
     print(f"Average comments per matrix: {summary['avg_comments']:.2f}")
     print(f"Average consensus groups per matrix: {summary['avg_consensus_groups']:.2f}")
+    
+    if summary['analyzed_count'] > 0:
+        print("\nCluster Analysis Summary:")
+        print(f"Average optimal components: {summary['avg_optimal_components']:.2f}")
+        print("Average silhouette scores:")
+        for k, score in enumerate(summary['avg_silhouette_scores'], 2):
+            print(f"  K={k}: {score:.4f}")
+        print(f"Average max silhouette score: {summary['avg_max_silhouette_score']:.4f}")
+        print(f"Average optimal k: {summary['avg_optimal_k']:.2f}")
+        print("Average PCA-2 silhouette scores:")
+        for k, score in enumerate(summary['avg_pca2_silhouette_scores'], 2):
+            print(f"  K={k}: {score:.4f}")
+        print(f"Average PCA-2 optimal k: {summary['avg_pca2_optimal_k']:.2f}")
 
 def find_identical_matrices():
     session = Session()
@@ -135,10 +185,10 @@ def find_identical_matrices():
 def get_matrix_by_id(matrix_id, print_matrix=False):
     session = Session()
     matrix = session.get(VoteMatrix, matrix_id)
-    session.close()
     
     if matrix is None:
         print(f"No matrix found with ID {matrix_id}")
+        session.close()
         return
     
     print(f"Matrix {matrix_id}:")
@@ -150,12 +200,31 @@ def get_matrix_by_id(matrix_id, print_matrix=False):
     print(f"  Group Sizes: {matrix.group_sizes}")
     print(f"  Group Similarity: {matrix.group_similarity}")
     
+    if matrix.optimal_components is not None:
+        print("\nCluster Analysis Summary:")
+        print(f"  Optimal Components: {matrix.optimal_components}")
+        print(f"  Max Silhouette Score: {matrix.max_silhouette_score:.4f}")
+        print(f"  Optimal K: {matrix.optimal_k}")
+        print("  Silhouette Scores:")
+        silhouette_scores = eval(matrix.silhouette_scores)
+        for k, score in enumerate(silhouette_scores, 2):
+            print(f"    K={k}: {score:.4f}")
+        print("  PCA-2 Silhouette Scores:")
+        pca2_silhouette_scores = eval(matrix.pca2_silhouette_scores)
+        for k, score in enumerate(pca2_silhouette_scores, 2):
+            print(f"    K={k}: {score:.4f}")
+        print(f"  PCA-2 Optimal K: {matrix.pca2_optimal_k}")
+    else:
+        print("\nCluster analysis has not been performed on this matrix.")
+    
     if print_matrix:
         matrix_data = matrix.get_matrix()
         print("\nVote Matrix:")
         np.set_printoptions(threshold=np.inf, linewidth=np.inf)
         print(matrix_data)
         np.set_printoptions()  # Reset print options to default
+    
+    session.close()
 
 def clear_database():
     session = Session()

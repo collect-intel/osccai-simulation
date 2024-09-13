@@ -21,7 +21,10 @@ python matrix_database.py clear <<< "y"
 # Generate new matrices
 python vote_matrix_generator.py $num_matrices
 
+# Perform cluster analysis
+python cluster_analysis.py --update
+
 # Print database summary
 python matrix_database.py summary
 
-echo "Database reset complete. $num_matrices matrices generated."
+echo "Database reset complete. $num_matrices matrices generated and analyzed."

@@ -153,17 +153,17 @@ def generate_vote_matrix(participants, comments, agree_percentage, disagree_perc
     return vote_matrix
 
 def generate_and_store_matrices(N):
-    for _ in tqdm(range(N), desc="Generating matrices", unit="matrix"):
+    for _ in range(N):
         participants = np.random.randint(MIN_PARTICIPANTS, MAX_PARTICIPANTS + 1)
         comments = np.random.randint(MIN_COMMENTS, MAX_COMMENTS + 1)
-        agree_percentage = np.random.uniform(MIN_AGREE_PERCENTAGE, MAX_AGREE_PERCENTAGE)
-        disagree_percentage = np.random.uniform(MIN_DISAGREE_PERCENTAGE, min(MAX_DISAGREE_PERCENTAGE, 100 - agree_percentage))
+        agree_percentage = np.random.randint(MIN_AGREE_PERCENTAGE, MAX_AGREE_PERCENTAGE + 1)
+        disagree_percentage = np.random.randint(MIN_DISAGREE_PERCENTAGE, min(MAX_DISAGREE_PERCENTAGE, 100 - agree_percentage) + 1)
         consensus_groups = np.random.randint(MIN_CONSENSUS_GROUPS, MAX_CONSENSUS_GROUPS + 1)
         
-        group_sizes = np.random.uniform(0, 100, consensus_groups)
-        group_sizes = (group_sizes / np.sum(group_sizes) * 100).tolist()
+        group_sizes = np.random.randint(1, 101, consensus_groups)
+        group_sizes = (group_sizes / np.sum(group_sizes) * 100).round().astype(int).tolist()
         
-        group_similarity = np.random.uniform(MIN_GROUP_SIMILARITY, MAX_GROUP_SIMILARITY)
+        group_similarity = np.random.randint(MIN_GROUP_SIMILARITY, MAX_GROUP_SIMILARITY + 1)
 
         params = {
             'participants': participants,
