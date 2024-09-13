@@ -7,14 +7,14 @@ from tqdm import tqdm
 from scripts.matrix_database import store_matrix
 
 # Constants for parameter ranges
-MIN_PARTICIPANTS = 10
+MIN_PARTICIPANTS = 50
 MAX_PARTICIPANTS = 1000
-MIN_COMMENTS = 5
-MAX_COMMENTS = 2000
-MIN_AGREE_PERCENTAGE = 5
-MAX_AGREE_PERCENTAGE = 60
-MIN_DISAGREE_PERCENTAGE = 5
-MAX_DISAGREE_PERCENTAGE = 60
+MIN_COMMENTS = 50
+MAX_COMMENTS = 3000
+MIN_AGREE_PERCENTAGE = 2
+MAX_AGREE_PERCENTAGE = 20
+MIN_DISAGREE_PERCENTAGE = 2
+MAX_DISAGREE_PERCENTAGE = 15
 MIN_CONSENSUS_GROUPS = 2
 MAX_CONSENSUS_GROUPS = 9
 MIN_GROUP_SIMILARITY = 0
@@ -153,7 +153,7 @@ def generate_vote_matrix(participants, comments, agree_percentage, disagree_perc
     return vote_matrix
 
 def generate_and_store_matrices(N):
-    for _ in range(N):
+    for _ in tqdm(range(N), desc="Generating matrices", unit="matrix"):
         participants = np.random.randint(MIN_PARTICIPANTS, MAX_PARTICIPANTS + 1)
         comments = np.random.randint(MIN_COMMENTS, MAX_COMMENTS + 1)
         agree_percentage = np.random.randint(MIN_AGREE_PERCENTAGE, MAX_AGREE_PERCENTAGE + 1)
