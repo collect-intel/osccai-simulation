@@ -23,3 +23,4 @@ yarn-error.log*
 /venv
 /__pycache__
 /scripts/__pycache__
+data/vote_matrices.db

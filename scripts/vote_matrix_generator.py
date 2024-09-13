@@ -8,9 +8,9 @@ from scripts.matrix_database import store_matrix
 
 # Constants for parameter ranges
 MIN_PARTICIPANTS = 10
-MAX_PARTICIPANTS = 1000
+MAX_PARTICIPANTS = 100
 MIN_COMMENTS = 5
-MAX_COMMENTS = 5000
+MAX_COMMENTS = 100
 MIN_AGREE_PERCENTAGE = 10
 MAX_AGREE_PERCENTAGE = 80
 MIN_DISAGREE_PERCENTAGE = 10
@@ -103,6 +103,9 @@ def generate_vote_matrix(participants, comments, agree_percentage, disagree_perc
                     vote_matrix[i, j] = -1
                 else:
                     vote_matrix[i, j] = 0
+
+    # Ensure the matrix is in int8 format
+    vote_matrix = vote_matrix.astype(np.int8)
 
     # Step 3: Reshuffle votes for selected comments
     reshuffle_percentage = (100 - group_similarity) / 100
