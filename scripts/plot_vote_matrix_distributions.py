@@ -10,7 +10,19 @@ from scripts.vote_matrix_generator import generate_vote_matrix
 
 def plot_stored_matrices(criteria):
     print("Retrieving matrices from database...")
-    matrices_data = get_matrices(criteria)
+    # Process criteria to handle min_ and max_ prefixes
+    db_criteria = {}
+    for key, value in criteria.items():
+        if key.startswith('min_'):
+            db_criteria[key[4:]] = db_criteria.get(key[4:], {})
+            db_criteria[key[4:]]['>='] = value
+        elif key.startswith('max_'):
+            db_criteria[key[4:]] = db_criteria.get(key[4:], {})
+            db_criteria[key[4:]]['<='] = value
+        else:
+            db_criteria[key] = value
+
+    matrices_data = get_matrices(db_criteria)
     
     if not matrices_data:
         print("No matrices found in the database matching the criteria.")
@@ -34,16 +46,14 @@ def plot_stored_matrices(criteria):
             successful_matrices += 1
         except Exception as e:
             print(f"Error processing matrix {m.id}: {str(e)}")
-            print(f"Matrix data: {m.__dict__}")  
+
+    print(f"Successfully processed {successful_matrices} out of {len(matrices_data)} matrices")
 
     if not params:
         print("No valid matrices found in the database.")
         return
-    else:
-        print(f"Successfully processed {successful_matrices} out of {len(matrices_data)} matrices")
-        plot_distributions(params, successful_matrices)
 
-    
+    plot_distributions(params, successful_matrices)  # Pass successful_matrices as N
 
 def plot_new_matrices(number_of_matrices, criteria):
     print(f"Generating {number_of_matrices} new matrices...")

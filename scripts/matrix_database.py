@@ -63,9 +63,10 @@ def get_matrices(criteria=None):
                         query = query.filter(getattr(VoteMatrix, key) <= val)
             else:
                 query = query.filter(getattr(VoteMatrix, key) == value)
-    results = query.all()
+    matrices = query.all()
+    result = [(m, m.get_matrix()) for m in matrices]
     session.close()
-    return [(result, result.get_matrix()) for result in results]
+    return result
 
 def get_database_summary():
     session = Session()
