@@ -6,12 +6,15 @@ from kneed import KneeLocator
 import matplotlib.pyplot as plt
 
 def find_optimal_pca_components(vote_matrix, max_components=100):
-    pca = PCA(n_components=min(max_components, vote_matrix.shape[1]))
+    n_samples, n_features = vote_matrix.shape
+    max_possible_components = min(n_samples, n_features, max_components)
+    
+    pca = PCA(n_components=max_possible_components)
     pca.fit(vote_matrix)
     explained_variance_ratio = pca.explained_variance_ratio_
-    n_components = range(1, len(explained_variance_ratio) + 1)
+    n_components = range(1, max_possible_components + 1)
     kneedle = KneeLocator(n_components, explained_variance_ratio, S=1.0, curve="convex", direction="decreasing")
-    return kneedle.elbow
+    return kneedle.elbow if kneedle.elbow else max_possible_components
 
 def perform_pca(vote_matrix, n_components):
     pca = PCA(n_components=n_components)
