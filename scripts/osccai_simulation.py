@@ -39,7 +39,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
-import openai
 from getpass import getpass
 from IPython.display import display, Markdown
 from google.colab import files
@@ -47,11 +46,12 @@ import pandas as pd
 import numpy as np
 from scipy.stats import beta, nbinom
 import random
+from openai import OpenAI
 
 # Set up OpenAI API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
 if not openai.api_key:
-    openai.api_key = getpass("Please enter your OpenAI API key: ")
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"),
+api_key=getpass("Please enter your OpenAI API key: "))
 
 # Get actual data to base distributions on
 # Use CCAI Polis Data! Here: https://docs.google.com/spreadsheets/d/1KodCqXdizeG6JgeXoI2Vt2hozV1EGypIktnxpzh90dQ/edit?gid=1456672975#gid=1456672975
@@ -102,7 +102,7 @@ def calculate_vote_distribution_per_participant(num_participants):
     """
     agree_a, agree_b = fit_beta_distribution(data['% agree'])
     disagree_a, disagree_b = fit_beta_distribution(data['% disagree'])
-    
+
     distributions = []
     for _ in range(num_participants):
         agree = np.random.beta(agree_a, agree_b)
@@ -110,7 +110,7 @@ def calculate_vote_distribution_per_participant(num_participants):
         pass_prob = max(0, 1 - (agree + disagree))
         total = agree + disagree + pass_prob
         distributions.append([round(agree/total, 3), round(disagree/total, 3), round(pass_prob/total, 3)])
-    
+
     return distributions
 
 # ---
@@ -243,16 +243,14 @@ def get_openai_completion(prompt, max_tokens=1500):
     Sends a prompt to the OpenAI API and returns the completion.
     """
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "You are an assistant that outputs JSON-formatted data."},
-                {"role": "user", "content": prompt}
-            ],
-            max_tokens=max_tokens,
-            temperature=0.7
-        )
-        return response['choices'][0]['message']['content']
+        response = client.chat.completions.create(model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an assistant that outputs JSON-formatted data."},
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=max_tokens,
+        temperature=0.7)
+        return response.choices[0].message.content
     except Exception as e:
         print(f"Error during OpenAI API call: {e}")
         return None
