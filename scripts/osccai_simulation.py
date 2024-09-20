@@ -434,24 +434,10 @@ vote_counts = vote_matrix.stack().value_counts()
 print("\n### Vote Distribution Statistics ###")
 print(vote_counts)
 
-# **8.3. Visualize subgroup voting patterns**
+# **8.3. Calculate and display statement agreement statistics**
 
-# This section requires additional data mapping participants to subgroups.
-# For simplicity, this is left as an exercise to enhance based on available data.
+# Calculate agreement for each statement
+statement_agreement = vote_matrix.sum(axis=0) / len(vote_matrix)
 
-# ---
-# **9. Error Handling and Input Validation**
-
-# Implemented throughout the code using try-except blocks and input validation.
-
-# ---
-# **10. Documentation and Comments**
-
-# Markdown cells and inline comments have been added throughout the notebook for clarity.
-
-# ---
-# **11. Notebook Finalization**
-
-# Run all cells to ensure functionality.
-# Outputs have been displayed where appropriate.
-
+# Display agreement statistics
+print("\n### Statement Agreement Statistics ###")
