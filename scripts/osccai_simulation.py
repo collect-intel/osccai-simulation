@@ -49,9 +49,10 @@ import random
 from openai import OpenAI
 
 # Set up OpenAI API key
-if not openai.api_key:
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"),
-api_key=getpass("Please enter your OpenAI API key: "))
+if os.getenv("OPENAI_API_KEY"):
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+else:
+    client = OpenAI(api_key=getpass("Please enter your OpenAI API key: "))
 
 # Get actual data to base distributions on
 # Use CCAI Polis Data! Here: https://docs.google.com/spreadsheets/d/1KodCqXdizeG6JgeXoI2Vt2hozV1EGypIktnxpzh90dQ/edit?gid=1456672975#gid=1456672975
