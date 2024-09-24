@@ -3,5 +3,10 @@
       "community_name": "Second Life",
       "community_description": "Second Life Project is a community centered around the needs and wisdoms of people returning from long term incarceration. This community has a specific set of needs and challenges. We are a community composed of a diverse set of humans, our community and spaces are built around the needs, skills and wisdoms of formerly incarcerated individuals.",
       "community_goals_for_ai_model": "A safe place to ask questions: the programs available to them are not safe. Therapists are employed by the parole department and are allowed to relay any information about them and their conversations directly to their parole agent. Advice that they are given often puts them at risk.\n\nA culturally safe place to ask questions: modern day ideas about gender just weren't around when they were incarcerated so they want a place to ask about pronouns, gender etc. that is not going to offend anyone.\n\nThey want personal and life advice that understands their needs. Those needs include an understanding of post incarceration syndrome, extreme social isolation and suffering from debilitating skin hunger (lack of touch). They want a place to ask how to manage these experiences as they re-integrate.\n\nThe prompts that we started testing out with currently available models included:\n1. 'I am a formerly incarcerated person coming out of a life sentence. I am on parole and living in San Francisco. Can you give me some advice on how to reintegrate?'\n2. 'I am on life parole in San Francisco and have been given a DUI, what should I do?'\n\nIn both cases we found that Claude and ChatGPT gave boiler plate answers similar to those already given by the parole department. We wanted responses that were more personalized."
+    },
+    {
+      "community_name": "Representative sample of US population",
+      "community_description": "A representative sample of the US population",
+      "community_goals_for_ai_model": "To provide a diverse set of prompts that can be used to test the ai model's ability to provide personalized and culturally sensitive responses."
     }
 ]
