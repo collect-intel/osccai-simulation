@@ -1,0 +1,4561 @@
+{
+  "community_info": {
+    "name": "Representative sample of US population",
+    "description": "A representative sample of the US population",
+    "goals": "To provide a diverse set of prompts that can be used to test the ai model's ability to provide personalized and culturally sensitive responses."
+  },
+  "user_inputs": {
+    "num_subgroups": 4,
+    "num_participants": 120
+  },
+  "statement_format": "The best response is one that...",
+  "statements": [
+    {
+      "id": 1,
+      "text": "The best response is one that acknowledges the challenges and opportunities in the field of artificial intelligence and encourages continuous learning and innovation."
+    },
+    {
+      "id": 2,
+      "text": "The best response is one that validates the need for diverse representation in technology."
+    },
+    {
+      "id": 3,
+      "text": "The best response is one that recognizes the importance of inclusive tech tools."
+    },
+    {
+      "id": 4,
+      "text": "The best response is one that supports the initiatives for racial equality in the tech industry."
+    },
+    {
+      "id": 5,
+      "text": "The best response is one that fosters a culture of acceptance, inclusivity, and diversity in technology."
+    },
+    {
+      "id": 6,
+      "text": "The best response is one that emphasizes the importance of renewable energy technology and its role in sustainable development."
+    },
+    {
+      "id": 7,
+      "text": "The best response is one that appreciates the potential of blockchain technology and its possible impacts on the financial landscape."
+    },
+    {
+      "id": 8,
+      "text": "The best response is one that acknowledges the need for gender balance in the tech industry and supports initiatives for women empowerment."
+    },
+    {
+      "id": 9,
+      "text": "The best response is one that recognizes the importance of digital inclusivity and encourages efforts to bridge the digital divide."
+    },
+    {
+      "id": 10,
+      "text": "The best response is one that appreciates innovative solutions for waste management."
+    },
+    {
+      "id": 11,
+      "text": "The best response is one that encourages environmentally-conscious practices in the professional world."
+    },
+    {
+      "id": 12,
+      "text": "The best response is one that acknowledges the importance of cybersecurity in financial institutions."
+    },
+    {
+      "id": 13,
+      "text": "The best response is one that appreciates the efforts in enhancing cybersecurity measures."
+    },
+    {
+      "id": 14,
+      "text": "The best response is one that encourages continuous research and development in the field of cybersecurity."
+    },
+    {
+      "id": 15,
+      "text": "The best response is one that recognizes the value of data science in supporting non-profit organizations."
+    },
+    {
+      "id": 16,
+      "text": "The best response is one that encourages the use of technology for social good."
+    },
+    {
+      "id": 17,
+      "text": "The best response is one that appreciates the application of data science skills for community service."
+    },
+    {
+      "id": 18,
+      "text": "The best response is one that supports the initiatives for leveraging technology in non-profit sector."
+    },
+    {
+      "id": 19,
+      "text": "The best response is one that encourages the exploration of virtual reality technology in the field of education."
+    },
+    {
+      "id": 20,
+      "text": "The best response is one that acknowledges the importance of technology in improving healthcare accessibility for the elderly and supports the participant's efforts."
+    },
+    {
+      "id": 21,
+      "text": "The best response is one that promotes the research on renewable energy and appreciates the participant's efforts to make it more affordable and efficient."
+    },
+    {
+      "id": 22,
+      "text": "The best response is one that recognizes the value of providing internet access to remote areas and supports the innovative technology."
+    },
+    {
+      "id": 23,
+      "text": "The best response is one that encourages the young professional's endeavor to bridge the digital divide."
+    },
+    {
+      "id": 24,
+      "text": "The best response is one that values the development of software for language learning and respects the participant's multicultural background."
+    },
+    {
+      "id": 25,
+      "text": "The best response is one that understands the need for technology to improve mental health services and supports the participant's focus."
+    },
+    {
+      "id": 26,
+      "text": "The best response is one that appreciates the role of technology in environmental conservation and encourages the participant's passion."
+    },
+    {
+      "id": 27,
+      "text": "The best response is one that values the use of coding skills to develop applications for people with disabilities and encourages the participant's initiative."
+    },
+    {
+      "id": 28,
+      "text": "The best response is one that supports the development of a platform to help small businesses in their digital transformation and appreciates the participant's efforts."
+    },
+    {
+      "id": 29,
+      "text": "The best response is one that acknowledges the potential of machine learning in agriculture and supports the participant's exploration."
+    },
+    {
+      "id": 30,
+      "text": "The best response is one that encourages the use of machine learning to increase agricultural efficiency."
+    },
+    {
+      "id": 31,
+      "text": "The best response is one that realizes the benefits of applying technology in agriculture and supports the participant's research."
+    },
+    {
+      "id": 32,
+      "text": "The best response is one that appreciates the importance of machine learning in modern farming practices."
+    },
+    {
+      "id": 33,
+      "text": "The best response is one that understands the role of technology in enhancing agricultural productivity."
+    },
+    {
+      "id": 34,
+      "text": "The best response is one that values the participant's efforts to explore machine learning in the agricultural sector."
+    },
+    {
+      "id": 35,
+      "text": "The best response is one that encourages the exploration of artificial intelligence in improving farming methods."
+    },
+    {
+      "id": 36,
+      "text": "The best response is one that recognizes the potential of machine learning in transforming agriculture."
+    },
+    {
+      "id": 37,
+      "text": "The best response is one that appreciates the role of technology in promoting sustainable farming practices."
+    },
+    {
+      "id": 38,
+      "text": "The best response is one that understands the importance of machine learning in advancing agricultural technologies."
+    },
+    {
+      "id": 39,
+      "text": "The best response is one that values machine learning as a tool for solving agricultural challenges."
+    },
+    {
+      "id": 40,
+      "text": "The best response is one that recognizes the participant's efforts to integrate technology in agriculture."
+    },
+    {
+      "id": 41,
+      "text": "The best response is one that appreciates the development of technology to improve emergency services and supports the participant's focus."
+    },
+    {
+      "id": 42,
+      "text": "The best response is one that encourages the promotion of diverse artists and provides creative ideas for showcasing their work on an online platform."
+    },
+    {
+      "id": 43,
+      "text": "The best response is one that acknowledges the importance of digital platforms in supporting artists and offers insights on how to make the platform more engaging."
+    },
+    {
+      "id": 44,
+      "text": "The best response is one that recognizes the potential of virtual reality in enhancing remote teamwork and suggests improvements for the platform."
+    },
+    {
+      "id": 45,
+      "text": "The best response is one that appreciates the need for secure online payments and provides innovative ideas on how to increase their security."
+    },
+    {
+      "id": 46,
+      "text": "The best response is one that encourages the promotion of physical fitness through mobile apps and offers advice on how to make the app more user-friendly."
+    },
+    {
+      "id": 47,
+      "text": "The best response is one that highlights the importance of technology in improving public transportation and suggests ways to make it more efficient."
+    },
+    {
+      "id": 48,
+      "text": "The best response is one that supports the idea of affordable online education for everyone and provides suggestions for making the project more accessible."
+    },
+    {
+      "id": 49,
+      "text": "The best response is one that recognizes the impact of technology on wildlife conservation and offers tips for successful research."
+    },
+    {
+      "id": 50,
+      "text": "The best response is one that appreciates the role of technology in waste management and suggests ways to make the systems more effective."
+    },
+    {
+      "id": 51,
+      "text": "The best response is one that understands the importance of online platforms for mental health services and provides suggestions for making the platform more accessible and effective."
+    },
+    {
+      "id": 52,
+      "text": "The best response is one that acknowledges the need for a safer online environment for kids and provides suggestions for using technology to achieve this."
+    },
+    {
+      "id": 53,
+      "text": "The best response is one that supports the idea of child-friendly online spaces and offers insights on how to make these environments more engaging and secure."
+    },
+    {
+      "id": 54,
+      "text": "The best response is one that provides tech-savvy advice on improving the user experience of the mental well-being mobile app."
+    },
+    {
+      "id": 55,
+      "text": "The best response is one that acknowledges the participant's Hispanic background, passion for volunteering and gardening, and offers suggestions for community projects."
+    },
+    {
+      "id": 56,
+      "text": "The best response is one that offers suggestions for historical sites to visit and provides information on different cultures."
+    },
+    {
+      "id": 57,
+      "text": "The best response is one that asks for travel stories and shares information about different cultures and places around the world."
+    },
+    {
+      "id": 58,
+      "text": "The best response is one that appreciates her nursing career, asks for gardening tips and acknowledges her African heritage."
+    },
+    {
+      "id": 59,
+      "text": "The best response is one that shares enthusiasm for aviation, offers teaching tips and suggests places for travel."
+    },
+    {
+      "id": 60,
+      "text": "The best response is one that asks for book recommendations and gives tips on gardening."
+    },
+    {
+      "id": 61,
+      "text": "The best response is one that appreciates her Italian background, asks for cooking tips and encourages community service."
+    },
+    {
+      "id": 62,
+      "text": "The best response is one that shares excitement for travel, offers cultural insights, suggests places to visit, asks about teaching experiences, appreciates her academic career, asks for book recommendations, encourages lifelong learning, respects her age and wisdom, and engages in a discussion about cultural diversity."
+    },
+    {
+      "id": 63,
+      "text": "The best response is one that appreciates his woodworking skills and asks for advice on maintaining a beautiful flower garden."
+    },
+    {
+      "id": 64,
+      "text": "The best response is one that acknowledges the participant's military background and appreciation for travel, while highlighting the importance of veteran support groups."
+    },
+    {
+      "id": 65,
+      "text": "The best response is one that respects the participant's Native American heritage and his love for gardening."
+    },
+    {
+      "id": 66,
+      "text": "The best response is one that recognizes the participant's dedication to community service and passion for travel."
+    },
+    {
+      "id": 67,
+      "text": "The best response is one that values the participant's experience as a social worker and acknowledges her love for local community participation."
+    },
+    {
+      "id": 68,
+      "text": "The best response is one that appreciates the participant's Irish roots and her community involvement through gardening and volunteering."
+    },
+    {
+      "id": 69,
+      "text": "The best response is one that respects the participant's career as a firefighter, and his interests in travel and gardening."
+    },
+    {
+      "id": 70,
+      "text": "The best response is one that appreciates the participant's interest in different cultures and his community service."
+    },
+    {
+      "id": 71,
+      "text": "The best response is one that values the participant's experience as a judge and his passion for learning about diverse cultures."
+    },
+    {
+      "id": 72,
+      "text": "The best response is one that respects the participant's Jewish heritage and her passion for travel."
+    },
+    {
+      "id": 73,
+      "text": "The best response is one that acknowledges the participant's love for volunteering at her local synagogue."
+    },
+    {
+      "id": 74,
+      "text": "The best response is one that appreciates the participant's age and her interest in traveling."
+    },
+    {
+      "id": 75,
+      "text": "The best response is one that values the participant's Jewish background and her commitment to her local synagogue."
+    },
+    {
+      "id": 76,
+      "text": "The best response is one that acknowledges the participant's age and her passion for volunteering."
+    },
+    {
+      "id": 77,
+      "text": "The best response is one that appreciates the participant's Jewish roots and her interest in travel."
+    },
+    {
+      "id": 78,
+      "text": "The best response is one that values the participant's commitment to her local synagogue and her passion for traveling."
+    },
+    {
+      "id": 79,
+      "text": "The best response is one that acknowledges the participant's career as a police officer and his love for gardening and community service."
+    },
+    {
+      "id": 80,
+      "text": "The best response is one that values the participant's Arab heritage and her passion for sharing experiences with the younger generation."
+    },
+    {
+      "id": 81,
+      "text": "The best response is one that respects the participant's career as a school principal, and his interests in gardening and community service."
+    },
+    {
+      "id": 82,
+      "text": "The best response is one that incorporates elements of Greek culture, travel experiences, and the importance of passing cultural heritage to younger generations."
+    },
+    {
+      "id": 83,
+      "text": "The best response is one that highlights the joy of gardening and the value of volunteering in local musical events."
+    },
+    {
+      "id": 84,
+      "text": "The best response is one that values the participant's medical background, traveling interests, and his service to local health clinics."
+    },
+    {
+      "id": 85,
+      "text": "The best response is one that integrates German culture, gardening, and community service participation."
+    },
+    {
+      "id": 86,
+      "text": "The best response is one that appreciates the participant's architectural background, love for gardening and involvement in community projects."
+    },
+    {
+      "id": 87,
+      "text": "The best response is one that resonates with the participant's interest in diverse cultures and active community service."
+    },
+    {
+      "id": 88,
+      "text": "The best response is one that reflects the importance of Chinese traditions, gardening, and teaching cultural traditions to the younger generation."
+    },
+    {
+      "id": 89,
+      "text": "The best response is one that understands and respects the participant's Chinese background and her passion for gardening and cultural education."
+    },
+    {
+      "id": 90,
+      "text": "The best response is one that acknowledges the participant's diplomatic background, love for travel, and involvement in international community service projects."
+    },
+    {
+      "id": 91,
+      "text": "The best response is one that identifies with the participant's sports background, interest in gardening, and volunteering in local sports events."
+    },
+    {
+      "id": 92,
+      "text": "The best response is one that incorporates elements of Indian culture, travel experiences, and the joy of sharing cultural heritage."
+    },
+    {
+      "id": 93,
+      "text": "The best response is one that acknowledges the value of diverse cultural experiences and promotes community service."
+    },
+    {
+      "id": 94,
+      "text": "The best response is one that supports transgender rights and healthcare equity."
+    },
+    {
+      "id": 95,
+      "text": "The best response is one that encourages the representation of the LGBTQ+ community in media."
+    },
+    {
+      "id": 96,
+      "text": "The best response is one that promotes acceptance and inclusivity in school environments."
+    },
+    {
+      "id": 97,
+      "text": "The best response is one that appreciates the contributions of LGBTQ+ entrepreneurs to charitable causes."
+    },
+    {
+      "id": 98,
+      "text": "The best response is one that supports the work of social workers in providing support for LGBTQ+ youth in foster care."
+    },
+    {
+      "id": 99,
+      "text": "The best response is one that respects the dedication of individuals working for the welfare of marginalized communities."
+    },
+    {
+      "id": 100,
+      "text": "The best response is one that advocates for comprehensive sexual education in schools."
+    },
+    {
+      "id": 101,
+      "text": "The best response is one that recognizes the importance of academic voices in the fight for better education."
+    },
+    {
+      "id": 102,
+      "text": "The best response is one that empathizes with the challenges and triumphs of navigating a personal transition while advocating for broader transgender rights."
+    },
+    {
+      "id": 103,
+      "text": "The best response is one that respects the courage it takes to advocate for transgender rights in less accepting environments."
+    },
+    {
+      "id": 104,
+      "text": "The best response is one that honors lifelong activism for LGBTQ+ rights and the continued pursuit of equality in retirement."
+    },
+    {
+      "id": 105,
+      "text": "The best response is one that supports the portrayal of diverse queer stories in film and media."
+    },
+    {
+      "id": 106,
+      "text": "The best response is one that acknowledges the importance of political action and policy development in supporting the LGBTQ+ community."
+    },
+    {
+      "id": 107,
+      "text": "The best response is one that recognizes the power of social media and online activism in advancing social justice issues."
+    },
+    {
+      "id": 108,
+      "text": "The best response is one that emphasizes the importance of mental health services tailored for the unique needs of the LGBTQ+ community."
+    },
+    {
+      "id": 109,
+      "text": "The best response is one that applauds the commitment to advocating for more support and recognition for LGBTQ+ members in the military."
+    },
+    {
+      "id": 110,
+      "text": "The best response is one that acknowledges the aspirational goal of becoming a human rights lawyer to uphold LGBTQ+ rights."
+    },
+    {
+      "id": 111,
+      "text": "The best response is one that appreciates the use of literature to explore and share LGBTQ+ history and experiences."
+    },
+    {
+      "id": 112,
+      "text": "The best response is one that understands the intersection of environmental and LGBTQ+ issues and supports efforts to address them."
+    },
+    {
+      "id": 113,
+      "text": "The best response is one that values the role of technology in creating resources for the LGBTQ+ community."
+    },
+    {
+      "id": 114,
+      "text": "The best response is one that admires the use of art as a medium for activism and expression within the LGBTQ+ community."
+    },
+    {
+      "id": 115,
+      "text": "The best response is one that values the contribution of experienced mentors in guiding the LGBTQ+ youth."
+    },
+    {
+      "id": 116,
+      "text": "The best response is one that recognizes and respects the need for inclusion of asexual individuals in health discussions."
+    },
+    {
+      "id": 117,
+      "text": "The best response is one that acknowledges the importance of safety and inclusivity in the profession of firefighting."
+    },
+    {
+      "id": 118,
+      "text": "The best response is one that values the promotion of diversity and inclusivity in the corporate world."
+    },
+    {
+      "id": 119,
+      "text": "The best response is one that supports athletes using their platforms to challenge stereotypes and promote acceptance."
+    },
+    {
+      "id": 120,
+      "text": "The best response is one that encourages the challenging of societal norms to foster inclusivity."
+    },
+    {
+      "id": 121,
+      "text": "The best response is one that appreciates the efforts for reform and LGBTQ+ inclusivity in law enforcement."
+    },
+    {
+      "id": 122,
+      "text": "The best response is one that recognizes the need for better representation and inclusion in STEM fields."
+    },
+    {
+      "id": 123,
+      "text": "The best response is one that values the provision of mental health services for the LGBTQ+ community."
+    },
+    {
+      "id": 124,
+      "text": "The best response is one that acknowledges the importance of mental health within the LGBTQ+ community."
+    },
+    {
+      "id": 125,
+      "text": "The best response is one that celebrates the promotion of queer culture through culinary arts."
+    },
+    {
+      "id": 126,
+      "text": "The best response is one that supports the aspiring journalists striving to report on LGBTQ+ issues."
+    },
+    {
+      "id": 127,
+      "text": "The best response is one that appreciates the efforts to create safe and inclusive spaces for all."
+    },
+    {
+      "id": 128,
+      "text": "The best response is one that values community leaders working for inclusivity."
+    },
+    {
+      "id": 129,
+      "text": "The best response is one that respects the drive to create environments that are welcoming to everyone."
+    },
+    {
+      "id": 130,
+      "text": "The best response is one that respects and validates the experiences of a non-binary individual advocating for LGBTQ+ rights."
+    },
+    {
+      "id": 131,
+      "text": "The best response is one that acknowledges the power of music as a tool for inspiring and uplifting the LGBTQ+ community."
+    },
+    {
+      "id": 132,
+      "text": "The best response is one that empathizes with the challenges of a single parent working in a physically demanding job while raising children."
+    },
+    {
+      "id": 133,
+      "text": "The best response is one that supports the efforts of a young single mom pursuing higher education while raising a child."
+    },
+    {
+      "id": 134,
+      "text": "The best response is one that understands the complexities of raising a teenager and managing a business as a single parent."
+    },
+    {
+      "id": 135,
+      "text": "The best response is one that appreciates the resilience of a single parent working multiple jobs and still finding time for her children's education."
+    },
+    {
+      "id": 136,
+      "text": "The best response is one that respects the balance of a demanding nursing career and raising two boys as a single mom."
+    },
+    {
+      "id": 137,
+      "text": "The best response is one that empathizes with the unique challenges of a single parent raising a child with special needs while maintaining a demanding career."
+    },
+    {
+      "id": 138,
+      "text": "The best response is one that supports the efforts of a single mom working and studying part-time while caring for an infant."
+    },
+    {
+      "id": 139,
+      "text": "The best response is one that validates the dedication of an elementary school teacher working towards providing a good life for his children as a single dad."
+    },
+    {
+      "id": 140,
+      "text": "The best response is one that acknowledges the participant's cultural background and her hard work as a single mother, balancing her job and raising her daughters while prioritizing their education."
+    },
+    {
+      "id": 141,
+      "text": "The best response is one that acknowledges the participant's service to the country, the challenges of adapting to civilian life, and his dedication to raising his sons."
+    },
+    {
+      "id": 142,
+      "text": "The best response is one that acknowledges the participant's immigrant journey, her dedication to her job and her effort to support her daughter's education."
+    },
+    {
+      "id": 143,
+      "text": "The best response is one that acknowledges the participant's risky job as a firefighter, the unpredictable schedule, and his commitment to raising his twin daughters."
+    },
+    {
+      "id": 144,
+      "text": "The best response is one that acknowledges the participant's dedication to her medical studies and the challenges of raising a toddler while pursuing a demanding career."
+    },
+    {
+      "id": 145,
+      "text": "The best response is one that acknowledges the participant's long working hours as a taxi driver, his struggle to provide for his teenager, and his commitment as a single father."
+    },
+    {
+      "id": 146,
+      "text": "The best response is one that acknowledges the participant's hard work as a small business owner, her commitment to her family, and her determination to provide for her children."
+    },
+    {
+      "id": 147,
+      "text": "The best response is one that recognizes the participant's entrepreneurial spirit and the challenges of balancing business ownership with single motherhood."
+    },
+    {
+      "id": 148,
+      "text": "The best response is one that appreciates the participant's dedication to her children's well-being and her resilience in managing her business."
+    },
+    {
+      "id": 149,
+      "text": "The best response is one which acknowledges the participant's strength in juggling the responsibility of her business and her children."
+    },
+    {
+      "id": 150,
+      "text": "The best response is one that acknowledges the participant's efforts to provide a good life for her children while managing her business."
+    },
+    {
+      "id": 151,
+      "text": "The best response is one that acknowledges the participant's passion for her work as a hairdresser, her business management skills, and her commitment to her daughters' future."
+    },
+    {
+      "id": 152,
+      "text": "The best response is one that acknowledges the participant's demanding job as a software engineer, and his dedication to raising his son while managing his career."
+    },
+    {
+      "id": 153,
+      "text": "The best response is one that acknowledges the participant's dedication to her children, her work as a librarian, and her commitment to furthering her education."
+    },
+    {
+      "id": 154,
+      "text": "The best response is one that acknowledges the difficulties of balancing shift work with raising a teenager and provides supportive advice or resources."
+    },
+    {
+      "id": 155,
+      "text": "The best response is one that offers encouragement and resources for finding flexible part-time work while acknowledging the hard work of being a stay-at-home mom."
+    },
+    {
+      "id": 156,
+      "text": "The best response is one that recognizes the challenges of balancing a demanding athletic career with raising children and offers supportive advice."
+    },
+    {
+      "id": 157,
+      "text": "The best response is one that values the importance of art in her life and provides supportive advice for balancing her craft with raising children."
+    },
+    {
+      "id": 158,
+      "text": "The best response is one that acknowledges the demands of his job, the challenges of single parenthood, and offers supportive advice."
+    },
+    {
+      "id": 159,
+      "text": "The best response is one that appreciates his dedication to providing for his daughter."
+    },
+    {
+      "id": 160,
+      "text": "The best response is one that provides resources or advice to help him manage the challenges of single parenthood."
+    },
+    {
+      "id": 161,
+      "text": "The best response is one that acknowledges the challenges of balancing academic responsibilities with raising children and offers supportive advice or resources."
+    },
+    {
+      "id": 162,
+      "text": "The best response is one that appreciates his hard work both as a farmer and a single parent, and offers supportive advice or resources."
+    },
+    {
+      "id": 163,
+      "text": "The best response is one that recognizes the demands of a retail management job and raising a teenager, and offers supportive advice."
+    },
+    {
+      "id": 164,
+      "text": "The best response is one that values her efforts in providing for her daughter while working."
+    },
+    {
+      "id": 165,
+      "text": "The best response is one that provides resources or advice to help her manage her responsibilities."
+    },
+    {
+      "id": 166,
+      "text": "The best response is one that acknowledges the challenges of single parenthood and offers supportive resources."
+    },
+    {
+      "id": 167,
+      "text": "The best response is one that acknowledges the demands of his profession and raising young children, and offers supportive advice or resources."
+    },
+    {
+      "id": 168,
+      "text": "The best response is one that acknowledges the unpredictability of her work schedule and the challenges of raising a child, and offers supportive advice or resources."
+    }
+  ],
+  "subgroups": [
+    {
+      "index": 0,
+      "description": "This group consists of individuals who are young professionals, aged 20 to 35, with a focus on technology and innovation. These individuals are diverse in ethnicity and come from different socioeconomic backgrounds.",
+      "participants": [
+        {
+          "id": 1,
+          "description": "A fresh college graduate who is striving to make a breakthrough in artificial intelligence.",
+          "statements": [
+            {
+              "id": 1,
+              "text": "The best response is one that acknowledges the challenges and opportunities in the field of artificial intelligence and encourages continuous learning and innovation."
+            }
+          ],
+          "votes": {
+            "47": 1,
+            "16": 1,
+            "100": 1,
+            "143": 1,
+            "146": 1,
+            "87": 1,
+            "88": 1,
+            "154": 1,
+            "131": 1,
+            "3": 1,
+            "24": 1,
+            "64": 1,
+            "35": 1,
+            "139": 1,
+            "132": 1,
+            "164": 1,
+            "83": 1,
+            "97": 1,
+            "76": 1,
+            "63": -1,
+            "81": -1,
+            "117": -1,
+            "37": -1,
+            "33": -1,
+            "138": -1,
+            "136": -1,
+            "30": -1,
+            "43": -1,
+            "36": -1,
+            "163": -1,
+            "31": -1
+          }
+        },
+        {
+          "id": 2,
+          "description": "A young African-American software developer who is passionate about creating inclusive tech tools.",
+          "statements": [
+            {
+              "id": 2,
+              "text": "The best response is one that validates the need for diverse representation in technology."
+            },
+            {
+              "id": 3,
+              "text": "The best response is one that recognizes the importance of inclusive tech tools."
+            },
+            {
+              "id": 4,
+              "text": "The best response is one that supports the initiatives for racial equality in the tech industry."
+            },
+            {
+              "id": 5,
+              "text": "The best response is one that fosters a culture of acceptance, inclusivity, and diversity in technology."
+            }
+          ],
+          "votes": {
+            "51": 1,
+            "101": 1,
+            "149": 1,
+            "73": 1,
+            "23": 1,
+            "103": 1,
+            "4": 1,
+            "39": 1,
+            "155": 1,
+            "71": 1,
+            "14": 1,
+            "81": 0,
+            "151": 0,
+            "97": 0,
+            "112": 0,
+            "145": 0,
+            "55": 0,
+            "44": 0,
+            "123": 0,
+            "34": 0,
+            "78": 0,
+            "114": -1,
+            "42": -1
+          }
+        },
+        {
+          "id": 3,
+          "description": "A Hispanic woman in her early 30s who is leading a start-up focused on renewable energy technology.",
+          "statements": [
+            {
+              "id": 6,
+              "text": "The best response is one that emphasizes the importance of renewable energy technology and its role in sustainable development."
+            }
+          ],
+          "votes": {
+            "14": 1,
+            "93": 1,
+            "157": 1,
+            "100": 1,
+            "163": 1,
+            "109": 1,
+            "105": 1,
+            "118": 1,
+            "66": 0,
+            "128": 0,
+            "18": 0,
+            "59": 0,
+            "148": 0,
+            "108": 0,
+            "71": 0,
+            "102": 0,
+            "166": -1
+          }
+        },
+        {
+          "id": 4,
+          "description": "A young Asian man who is an expert in blockchain and envisions a future where digital currency is the norm.",
+          "statements": [
+            {
+              "id": 7,
+              "text": "The best response is one that appreciates the potential of blockchain technology and its possible impacts on the financial landscape."
+            }
+          ],
+          "votes": {
+            "21": 1,
+            "66": 1,
+            "166": 1,
+            "130": 1,
+            "5": 1,
+            "17": 1,
+            "146": 1,
+            "147": 1,
+            "6": 1,
+            "153": 1,
+            "95": 1,
+            "167": -1,
+            "1": 1,
+            "80": 1,
+            "156": 1,
+            "36": 1,
+            "88": 1,
+            "11": 0,
+            "90": 0,
+            "52": 0,
+            "152": -1
+          }
+        },
+        {
+          "id": 5,
+          "description": "An ambitious professional in her late 20s who is pushing for more representation of women in tech.",
+          "statements": [
+            {
+              "id": 8,
+              "text": "The best response is one that acknowledges the need for gender balance in the tech industry and supports initiatives for women empowerment."
+            }
+          ],
+          "votes": {
+            "71": 1,
+            "79": 1,
+            "85": 1,
+            "140": 1,
+            "8": 1,
+            "112": 1,
+            "166": 1,
+            "144": 1,
+            "84": 1,
+            "90": 1,
+            "13": -1
+          }
+        },
+        {
+          "id": 6,
+          "description": "A young man from a lower socioeconomic background who is determined to bridge the digital divide in his community.",
+          "statements": [
+            {
+              "id": 9,
+              "text": "The best response is one that recognizes the importance of digital inclusivity and encourages efforts to bridge the digital divide."
+            }
+          ],
+          "votes": {
+            "119": 1,
+            "115": 1,
+            "50": 1,
+            "47": 1,
+            "11": 1,
+            "25": 1,
+            "35": 1,
+            "76": 1,
+            "107": 1,
+            "116": 1,
+            "83": 1,
+            "96": 1,
+            "84": 1,
+            "79": 1,
+            "77": -1,
+            "162": -1,
+            "159": -1,
+            "91": -1,
+            "151": -1,
+            "65": -1,
+            "82": 0
+          }
+        },
+        {
+          "id": 7,
+          "description": "A young professional in her early twenties who is working to develop an innovative solution for waste management.",
+          "statements": [
+            {
+              "id": 10,
+              "text": "The best response is one that appreciates innovative solutions for waste management."
+            },
+            {
+              "id": 11,
+              "text": "The best response is one that encourages environmentally-conscious practices in the professional world."
+            }
+          ],
+          "votes": {
+            "162": 1,
+            "140": 1,
+            "65": 1,
+            "11": 1,
+            "5": 1,
+            "60": 1,
+            "95": -1,
+            "128": -1,
+            "46": -1,
+            "3": -1,
+            "160": -1,
+            "155": -1,
+            "86": -1,
+            "53": -1
+          }
+        },
+        {
+          "id": 8,
+          "description": "A young European man who is researching on how to improve cybersecurity measures in financial institutions.",
+          "statements": [
+            {
+              "id": 12,
+              "text": "The best response is one that acknowledges the importance of cybersecurity in financial institutions."
+            },
+            {
+              "id": 13,
+              "text": "The best response is one that appreciates the efforts in enhancing cybersecurity measures."
+            },
+            {
+              "id": 14,
+              "text": "The best response is one that encourages continuous research and development in the field of cybersecurity."
+            }
+          ],
+          "votes": {
+            "109": 1,
+            "2": 1,
+            "51": 1,
+            "39": 1,
+            "96": 1,
+            "94": 1,
+            "57": 1,
+            "73": 1,
+            "165": 1,
+            "97": 1,
+            "12": 1,
+            "10": 1,
+            "30": -1,
+            "117": -1,
+            "4": -1,
+            "49": -1,
+            "127": -1
+          }
+        },
+        {
+          "id": 9,
+          "description": "A young woman from a middle-class family who is using her skills in data science to help non-profit organizations.",
+          "statements": [
+            {
+              "id": 15,
+              "text": "The best response is one that recognizes the value of data science in supporting non-profit organizations."
+            },
+            {
+              "id": 16,
+              "text": "The best response is one that encourages the use of technology for social good."
+            },
+            {
+              "id": 17,
+              "text": "The best response is one that appreciates the application of data science skills for community service."
+            },
+            {
+              "id": 18,
+              "text": "The best response is one that supports the initiatives for leveraging technology in non-profit sector."
+            }
+          ],
+          "votes": {
+            "167": -1,
+            "6": 1,
+            "36": 0,
+            "44": 1,
+            "120": 0,
+            "97": -1,
+            "153": 0,
+            "70": 1,
+            "138": 0,
+            "110": -1,
+            "121": 0,
+            "9": 1,
+            "52": -1,
+            "154": 0,
+            "50": 1,
+            "46": -1,
+            "91": 0
+          }
+        },
+        {
+          "id": 10,
+          "description": "A young professional who is passionate about exploring the potential of virtual reality in education.",
+          "statements": [
+            {
+              "id": 19,
+              "text": "The best response is one that encourages the exploration of virtual reality technology in the field of education."
+            }
+          ],
+          "votes": {
+            "156": 1,
+            "14": -1,
+            "3": 1,
+            "92": 1,
+            "79": -1,
+            "87": 1,
+            "63": 1,
+            "23": 1,
+            "32": -1,
+            "89": 1,
+            "5": 1
+          }
+        },
+        {
+          "id": 11,
+          "description": "A man in his early thirties who is using technology to make healthcare services more accessible for the elderly.",
+          "statements": [
+            {
+              "id": 20,
+              "text": "The best response is one that acknowledges the importance of technology in improving healthcare accessibility for the elderly and supports the participant's efforts."
+            }
+          ],
+          "votes": {
+            "44": 1,
+            "24": 0,
+            "136": 1,
+            "23": 1,
+            "164": 1,
+            "51": 1,
+            "159": 1,
+            "131": 1,
+            "43": 1,
+            "22": 1,
+            "137": 1,
+            "99": 1,
+            "118": 1,
+            "86": 1,
+            "148": 1,
+            "29": 1,
+            "30": 1,
+            "120": 1,
+            "134": 1,
+            "36": 1
+          }
+        },
+        {
+          "id": 12,
+          "description": "A woman in her late twenties who is researching to make renewable energy more affordable and efficient.",
+          "statements": [
+            {
+              "id": 21,
+              "text": "The best response is one that promotes the research on renewable energy and appreciates the participant's efforts to make it more affordable and efficient."
+            }
+          ],
+          "votes": {
+            "91": 1,
+            "132": 0,
+            "13": -1,
+            "24": 1,
+            "126": 1,
+            "110": 1,
+            "122": -1,
+            "89": 1,
+            "138": 0,
+            "163": 1,
+            "4": 1,
+            "100": 1,
+            "136": 0,
+            "75": 1,
+            "88": 1
+          }
+        },
+        {
+          "id": 13,
+          "description": "A young professional who is working on a project to provide internet access to remote areas using innovative technology.",
+          "statements": [
+            {
+              "id": 22,
+              "text": "The best response is one that recognizes the value of providing internet access to remote areas and supports the innovative technology."
+            },
+            {
+              "id": 23,
+              "text": "The best response is one that encourages the young professional's endeavor to bridge the digital divide."
+            }
+          ],
+          "votes": {
+            "133": 1,
+            "29": 1,
+            "71": 1,
+            "15": 1,
+            "70": 1,
+            "91": 1,
+            "155": 1,
+            "4": 1,
+            "146": 1,
+            "139": 1,
+            "142": -1,
+            "115": 1,
+            "95": 1,
+            "122": 0
+          }
+        },
+        {
+          "id": 14,
+          "description": "A young man from a multicultural background who is interested in developing software for language learning.",
+          "statements": [
+            {
+              "id": 24,
+              "text": "The best response is one that values the development of software for language learning and respects the participant's multicultural background."
+            }
+          ],
+          "votes": {
+            "78": 1,
+            "7": 1,
+            "115": 1,
+            "58": 1,
+            "65": 1,
+            "147": 1,
+            "59": 1,
+            "73": 1,
+            "70": 0,
+            "1": 0,
+            "126": 0,
+            "80": 0,
+            "119": 0,
+            "26": -1,
+            "133": 1,
+            "37": 1,
+            "14": 1,
+            "67": 1,
+            "77": 1,
+            "109": 1,
+            "154": 0
+          }
+        },
+        {
+          "id": 15,
+          "description": "A woman in her early thirties who is focused on utilizing technology to improve mental health services.",
+          "statements": [
+            {
+              "id": 25,
+              "text": "The best response is one that understands the need for technology to improve mental health services and supports the participant's focus."
+            }
+          ],
+          "votes": {
+            "146": 1,
+            "112": 1,
+            "7": 1,
+            "98": 1,
+            "119": -1,
+            "21": 1
+          }
+        },
+        {
+          "id": 16,
+          "description": "A young professional who is passionate about creating technology that can aid in environmental conservation.",
+          "statements": [
+            {
+              "id": 26,
+              "text": "The best response is one that appreciates the role of technology in environmental conservation and encourages the participant's passion."
+            }
+          ],
+          "votes": {
+            "118": 1,
+            "125": -1,
+            "158": 1,
+            "130": -1,
+            "53": 1,
+            "164": -1,
+            "100": 1,
+            "6": 1,
+            "115": 1,
+            "94": -1,
+            "1": 1,
+            "137": -1,
+            "75": 0,
+            "123": 0
+          }
+        },
+        {
+          "id": 17,
+          "description": "A man in his late twenties who is using his skills in coding to develop applications for people with disabilities.",
+          "statements": [
+            {
+              "id": 27,
+              "text": "The best response is one that values the use of coding skills to develop applications for people with disabilities and encourages the participant's initiative."
+            }
+          ],
+          "votes": {
+            "15": 1,
+            "159": -1,
+            "33": -1,
+            "44": -1,
+            "11": 1,
+            "143": -1,
+            "1": 0,
+            "165": -1,
+            "66": 0,
+            "57": -1,
+            "56": -1,
+            "118": -1,
+            "58": -1,
+            "158": 1,
+            "152": -1,
+            "82": -1,
+            "5": 0,
+            "166": -1
+          }
+        },
+        {
+          "id": 18,
+          "description": "A young woman who is working to develop a platform that can help small businesses in their digital transformation.",
+          "statements": [
+            {
+              "id": 28,
+              "text": "The best response is one that supports the development of a platform to help small businesses in their digital transformation and appreciates the participant's efforts."
+            }
+          ],
+          "votes": {
+            "75": 1,
+            "79": 1,
+            "10": 1,
+            "119": 1,
+            "141": -1,
+            "72": 0,
+            "116": 1,
+            "81": 1,
+            "29": 1,
+            "44": 0,
+            "127": 1,
+            "20": 0,
+            "36": 1,
+            "18": 1
+          }
+        },
+        {
+          "id": 19,
+          "description": "A young professional who is exploring the potential of machine learning in agriculture.",
+          "statements": [
+            {
+              "id": 29,
+              "text": "The best response is one that acknowledges the potential of machine learning in agriculture and supports the participant's exploration."
+            },
+            {
+              "id": 30,
+              "text": "The best response is one that encourages the use of machine learning to increase agricultural efficiency."
+            },
+            {
+              "id": 31,
+              "text": "The best response is one that realizes the benefits of applying technology in agriculture and supports the participant's research."
+            },
+            {
+              "id": 32,
+              "text": "The best response is one that appreciates the importance of machine learning in modern farming practices."
+            },
+            {
+              "id": 33,
+              "text": "The best response is one that understands the role of technology in enhancing agricultural productivity."
+            },
+            {
+              "id": 34,
+              "text": "The best response is one that values the participant's efforts to explore machine learning in the agricultural sector."
+            },
+            {
+              "id": 35,
+              "text": "The best response is one that encourages the exploration of artificial intelligence in improving farming methods."
+            },
+            {
+              "id": 36,
+              "text": "The best response is one that recognizes the potential of machine learning in transforming agriculture."
+            },
+            {
+              "id": 37,
+              "text": "The best response is one that appreciates the role of technology in promoting sustainable farming practices."
+            },
+            {
+              "id": 38,
+              "text": "The best response is one that understands the importance of machine learning in advancing agricultural technologies."
+            },
+            {
+              "id": 39,
+              "text": "The best response is one that values machine learning as a tool for solving agricultural challenges."
+            },
+            {
+              "id": 40,
+              "text": "The best response is one that recognizes the participant's efforts to integrate technology in agriculture."
+            }
+          ],
+          "votes": {
+            "162": 1,
+            "3": 1,
+            "38": 1,
+            "55": 1,
+            "147": 1,
+            "45": 1,
+            "76": -1,
+            "155": 1,
+            "39": 1,
+            "131": 1,
+            "29": 1,
+            "54": 1,
+            "86": 1,
+            "56": 1,
+            "137": 1,
+            "133": 1,
+            "43": -1,
+            "123": 1,
+            "140": 1,
+            "41": 1,
+            "44": 1,
+            "71": 1
+          }
+        },
+        {
+          "id": 20,
+          "description": "A man in his early thirties who is concentrating on developing technology to improve emergency services.",
+          "statements": [
+            {
+              "id": 41,
+              "text": "The best response is one that appreciates the development of technology to improve emergency services and supports the participant's focus."
+            }
+          ],
+          "votes": {
+            "10": 1,
+            "65": 1,
+            "141": 1,
+            "104": 1,
+            "168": -1,
+            "150": 1,
+            "52": 1,
+            "43": 1,
+            "57": 1,
+            "147": -1,
+            "166": 1,
+            "21": 1,
+            "82": 1,
+            "36": 1,
+            "1": 1,
+            "138": 1,
+            "137": 1
+          }
+        },
+        {
+          "id": 21,
+          "description": "A woman in her twenties who is working on a project to create an online platform for artists to showcase their work.",
+          "statements": [
+            {
+              "id": 42,
+              "text": "The best response is one that encourages the promotion of diverse artists and provides creative ideas for showcasing their work on an online platform."
+            },
+            {
+              "id": 43,
+              "text": "The best response is one that acknowledges the importance of digital platforms in supporting artists and offers insights on how to make the platform more engaging."
+            }
+          ],
+          "votes": {
+            "121": 1,
+            "40": 1,
+            "144": 1,
+            "156": 1,
+            "153": 1,
+            "37": 1,
+            "113": 1,
+            "165": -1,
+            "168": -1,
+            "127": -1
+          }
+        },
+        {
+          "id": 22,
+          "description": "A young professional who is focused on creating a virtual reality platform for remote team collaboration.",
+          "statements": [
+            {
+              "id": 44,
+              "text": "The best response is one that recognizes the potential of virtual reality in enhancing remote teamwork and suggests improvements for the platform."
+            }
+          ],
+          "votes": {
+            "79": 1,
+            "2": 1,
+            "42": 1,
+            "25": 1,
+            "52": 1,
+            "101": 1,
+            "33": 1,
+            "126": 1,
+            "77": 1,
+            "1": 1,
+            "24": 1,
+            "20": 1,
+            "19": 1,
+            "23": 1,
+            "88": 1,
+            "74": 1,
+            "116": 1,
+            "47": 1,
+            "144": -1,
+            "72": 1,
+            "53": 1,
+            "76": 1,
+            "121": 1,
+            "165": 1
+          }
+        },
+        {
+          "id": 23,
+          "description": "A young man who is working on an innovative solution to make online payments more secure.",
+          "statements": [
+            {
+              "id": 45,
+              "text": "The best response is one that appreciates the need for secure online payments and provides innovative ideas on how to increase their security."
+            }
+          ],
+          "votes": {
+            "44": 1,
+            "140": 1,
+            "107": 1,
+            "112": 1,
+            "155": -1,
+            "86": 1,
+            "50": 1,
+            "27": 1,
+            "77": 1,
+            "138": 1,
+            "149": 1,
+            "167": 1,
+            "163": 1
+          }
+        },
+        {
+          "id": 24,
+          "description": "A woman in her early thirties who is developing a mobile app that promotes physical fitness.",
+          "statements": [
+            {
+              "id": 46,
+              "text": "The best response is one that encourages the promotion of physical fitness through mobile apps and offers advice on how to make the app more user-friendly."
+            }
+          ],
+          "votes": {
+            "154": 1,
+            "168": -1,
+            "141": 1,
+            "155": 1,
+            "94": 1,
+            "103": 1,
+            "135": 1,
+            "61": 1,
+            "105": 1,
+            "47": 1,
+            "32": 1,
+            "60": 1,
+            "44": 1,
+            "167": -1,
+            "69": 1,
+            "96": 1,
+            "75": 1,
+            "153": 1,
+            "33": 1,
+            "2": 1,
+            "106": 1,
+            "102": 1,
+            "147": 1,
+            "143": 1,
+            "55": -1,
+            "166": 1,
+            "134": -1
+          }
+        },
+        {
+          "id": 25,
+          "description": "A young professional who is passionate about using technology to improve public transportation systems.",
+          "statements": [
+            {
+              "id": 47,
+              "text": "The best response is one that highlights the importance of technology in improving public transportation and suggests ways to make it more efficient."
+            }
+          ],
+          "votes": {
+            "23": 1,
+            "17": 1,
+            "118": -1,
+            "46": 1,
+            "78": 1,
+            "83": 1,
+            "107": 1,
+            "149": 1,
+            "32": 1,
+            "105": 1,
+            "1": 1,
+            "134": 0,
+            "33": 1,
+            "56": 1,
+            "6": 0,
+            "57": 1
+          }
+        },
+        {
+          "id": 26,
+          "description": "A man in his late twenties who is working on a project to provide affordable online education for everyone.",
+          "statements": [
+            {
+              "id": 48,
+              "text": "The best response is one that supports the idea of affordable online education for everyone and provides suggestions for making the project more accessible."
+            }
+          ],
+          "votes": {
+            "63": 1,
+            "69": 1,
+            "83": 1,
+            "20": 1,
+            "78": 1,
+            "95": -1,
+            "62": 1,
+            "81": 1,
+            "138": 1,
+            "165": -1,
+            "162": 1,
+            "136": 1,
+            "87": 1,
+            "22": 1,
+            "24": 1,
+            "67": 1,
+            "27": 1,
+            "104": 1,
+            "70": -1,
+            "79": 1,
+            "164": 1,
+            "9": 1,
+            "19": 1
+          }
+        },
+        {
+          "id": 27,
+          "description": "A young woman who is researching to develop technology that can help in wildlife conservation.",
+          "statements": [
+            {
+              "id": 49,
+              "text": "The best response is one that recognizes the impact of technology on wildlife conservation and offers tips for successful research."
+            }
+          ],
+          "votes": {
+            "78": 1,
+            "108": -1,
+            "73": 1,
+            "125": 0,
+            "133": 0,
+            "130": 1,
+            "65": -1,
+            "118": 0,
+            "67": 1,
+            "136": -1,
+            "146": 1
+          }
+        },
+        {
+          "id": 28,
+          "description": "A young professional who is focused on creating technology to improve waste management systems.",
+          "statements": [
+            {
+              "id": 50,
+              "text": "The best response is one that appreciates the role of technology in waste management and suggests ways to make the systems more effective."
+            }
+          ],
+          "votes": {
+            "123": 1,
+            "162": 1,
+            "26": 1,
+            "37": 1,
+            "95": -1,
+            "160": 1,
+            "152": 1,
+            "129": 1,
+            "117": 1,
+            "155": 1
+          }
+        },
+        {
+          "id": 29,
+          "description": "A man in his early thirties who is working on a project to create an online platform for mental health services.",
+          "statements": [
+            {
+              "id": 51,
+              "text": "The best response is one that understands the importance of online platforms for mental health services and provides suggestions for making the platform more accessible and effective."
+            }
+          ],
+          "votes": {
+            "165": 1,
+            "99": 1,
+            "64": 1,
+            "155": 1,
+            "106": 1,
+            "98": 1,
+            "55": 1,
+            "81": 1,
+            "14": 1,
+            "121": 1,
+            "97": 1,
+            "31": 1,
+            "58": 1,
+            "60": 1,
+            "37": 1,
+            "57": 1,
+            "10": -1,
+            "12": -1,
+            "132": -1
+          }
+        },
+        {
+          "id": 30,
+          "description": "A woman in her twenties who is interested in using technology to create a safer online environment for kids.",
+          "statements": [
+            {
+              "id": 52,
+              "text": "The best response is one that acknowledges the need for a safer online environment for kids and provides suggestions for using technology to achieve this."
+            },
+            {
+              "id": 53,
+              "text": "The best response is one that supports the idea of child-friendly online spaces and offers insights on how to make these environments more engaging and secure."
+            }
+          ],
+          "votes": {
+            "26": 1,
+            "67": 1,
+            "93": 1,
+            "50": 1,
+            "163": 1,
+            "54": 1,
+            "99": 1,
+            "79": 1,
+            "116": 1,
+            "162": 1,
+            "144": 1,
+            "87": -1
+          }
+        },
+        {
+          "id": 31,
+          "description": "A young man who is developing a mobile app that supports mental well-being.",
+          "statements": [
+            {
+              "id": 54,
+              "text": "The best response is one that provides tech-savvy advice on improving the user experience of the mental well-being mobile app."
+            }
+          ],
+          "votes": {
+            "72": 1,
+            "10": 1,
+            "162": 1,
+            "91": 1,
+            "103": 1,
+            "104": 1,
+            "7": 1,
+            "25": 1,
+            "79": 1,
+            "8": 1,
+            "125": 1,
+            "128": 1,
+            "154": 1,
+            "33": 1,
+            "167": 1,
+            "66": 1,
+            "42": 1,
+            "67": 1,
+            "124": 1,
+            "115": -1
+          }
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "description": "This group consists of individuals who are retired, aged 65 and above, and come from various cultural backgrounds. They have a wealth of experiences and interests, including travel, gardening, and community service.",
+      "participants": [
+        {
+          "id": 1,
+          "description": "A retired teacher from a Hispanic background who is passionate about volunteering at her local community center and has a penchant for gardening.",
+          "statements": [
+            {
+              "id": 1,
+              "text": "The best response is one that acknowledges the challenges and opportunities in the field of artificial intelligence and encourages continuous learning and innovation."
+            }
+          ],
+          "votes": {
+            "47": 1,
+            "16": 1,
+            "100": 1,
+            "143": 1,
+            "146": 1,
+            "87": 1,
+            "88": 1,
+            "154": 1,
+            "131": 1,
+            "3": 1,
+            "24": 1,
+            "64": 1,
+            "35": 1,
+            "139": 1,
+            "132": 1,
+            "164": 1,
+            "83": 1,
+            "97": 1,
+            "76": 1,
+            "63": -1,
+            "81": -1,
+            "117": -1,
+            "37": -1,
+            "33": -1,
+            "138": -1,
+            "136": -1,
+            "30": -1,
+            "43": -1,
+            "36": -1,
+            "163": -1,
+            "31": -1
+          }
+        },
+        {
+          "id": 2,
+          "description": "A 70-year-old retired engineer who enjoys traveling to historical sites and reading about different cultures.",
+          "statements": [
+            {
+              "id": 2,
+              "text": "The best response is one that validates the need for diverse representation in technology."
+            },
+            {
+              "id": 3,
+              "text": "The best response is one that recognizes the importance of inclusive tech tools."
+            },
+            {
+              "id": 4,
+              "text": "The best response is one that supports the initiatives for racial equality in the tech industry."
+            },
+            {
+              "id": 5,
+              "text": "The best response is one that fosters a culture of acceptance, inclusivity, and diversity in technology."
+            }
+          ],
+          "votes": {
+            "51": 1,
+            "101": 1,
+            "149": 1,
+            "73": 1,
+            "23": 1,
+            "103": 1,
+            "4": 1,
+            "39": 1,
+            "155": 1,
+            "71": 1,
+            "14": 1,
+            "81": 0,
+            "151": 0,
+            "97": 0,
+            "112": 0,
+            "145": 0,
+            "55": 0,
+            "44": 0,
+            "123": 0,
+            "34": 0,
+            "78": 0,
+            "114": -1,
+            "42": -1
+          }
+        },
+        {
+          "id": 3,
+          "description": "An Asian retiree who loves sharing her experiences and stories from her travels around the world.",
+          "statements": [
+            {
+              "id": 6,
+              "text": "The best response is one that emphasizes the importance of renewable energy technology and its role in sustainable development."
+            }
+          ],
+          "votes": {
+            "14": 1,
+            "93": 1,
+            "157": 1,
+            "100": 1,
+            "163": 1,
+            "109": 1,
+            "105": 1,
+            "118": 1,
+            "66": 0,
+            "128": 0,
+            "18": 0,
+            "59": 0,
+            "148": 0,
+            "108": 0,
+            "71": 0,
+            "102": 0,
+            "166": -1
+          }
+        },
+        {
+          "id": 4,
+          "description": "A gardening enthusiast of African descent who has retired after a long career in nursing.",
+          "statements": [
+            {
+              "id": 7,
+              "text": "The best response is one that appreciates the potential of blockchain technology and its possible impacts on the financial landscape."
+            }
+          ],
+          "votes": {
+            "21": 1,
+            "66": 1,
+            "166": 1,
+            "130": 1,
+            "5": 1,
+            "17": 1,
+            "146": 1,
+            "147": 1,
+            "6": 1,
+            "153": 1,
+            "95": 1,
+            "167": -1,
+            "1": 1,
+            "80": 1,
+            "156": 1,
+            "36": 1,
+            "88": 1,
+            "11": 0,
+            "90": 0,
+            "52": 0,
+            "152": -1
+          }
+        },
+        {
+          "id": 5,
+          "description": "A retired airline pilot who is passionate about teaching young people about the wonders of flight and travel.",
+          "statements": [
+            {
+              "id": 8,
+              "text": "The best response is one that acknowledges the need for gender balance in the tech industry and supports initiatives for women empowerment."
+            }
+          ],
+          "votes": {
+            "71": 1,
+            "79": 1,
+            "85": 1,
+            "140": 1,
+            "8": 1,
+            "112": 1,
+            "166": 1,
+            "144": 1,
+            "84": 1,
+            "90": 1,
+            "13": -1
+          }
+        },
+        {
+          "id": 6,
+          "description": "A retired librarian who spends her time gardening and participating in local book clubs.",
+          "statements": [
+            {
+              "id": 9,
+              "text": "The best response is one that recognizes the importance of digital inclusivity and encourages efforts to bridge the digital divide."
+            }
+          ],
+          "votes": {
+            "119": 1,
+            "115": 1,
+            "50": 1,
+            "47": 1,
+            "11": 1,
+            "25": 1,
+            "35": 1,
+            "76": 1,
+            "107": 1,
+            "116": 1,
+            "83": 1,
+            "96": 1,
+            "84": 1,
+            "79": 1,
+            "77": -1,
+            "162": -1,
+            "159": -1,
+            "91": -1,
+            "151": -1,
+            "65": -1,
+            "82": 0
+          }
+        },
+        {
+          "id": 7,
+          "description": "A 68-year-old woman from an Italian background who is passionate about cooking and community service.",
+          "statements": [
+            {
+              "id": 10,
+              "text": "The best response is one that appreciates innovative solutions for waste management."
+            },
+            {
+              "id": 11,
+              "text": "The best response is one that encourages environmentally-conscious practices in the professional world."
+            }
+          ],
+          "votes": {
+            "162": 1,
+            "140": 1,
+            "65": 1,
+            "11": 1,
+            "5": 1,
+            "60": 1,
+            "95": -1,
+            "128": -1,
+            "46": -1,
+            "3": -1,
+            "160": -1,
+            "155": -1,
+            "86": -1,
+            "53": -1
+          }
+        },
+        {
+          "id": 8,
+          "description": "A 72-year-old retired professor who loves to travel and learn about different cultures.",
+          "statements": [
+            {
+              "id": 12,
+              "text": "The best response is one that acknowledges the importance of cybersecurity in financial institutions."
+            },
+            {
+              "id": 13,
+              "text": "The best response is one that appreciates the efforts in enhancing cybersecurity measures."
+            },
+            {
+              "id": 14,
+              "text": "The best response is one that encourages continuous research and development in the field of cybersecurity."
+            }
+          ],
+          "votes": {
+            "109": 1,
+            "2": 1,
+            "51": 1,
+            "39": 1,
+            "96": 1,
+            "94": 1,
+            "57": 1,
+            "73": 1,
+            "165": 1,
+            "97": 1,
+            "12": 1,
+            "10": 1,
+            "30": -1,
+            "117": -1,
+            "4": -1,
+            "49": -1,
+            "127": -1
+          }
+        },
+        {
+          "id": 9,
+          "description": "A retired carpenter who enjoys spending his time maintaining a beautiful flower garden.",
+          "statements": [
+            {
+              "id": 15,
+              "text": "The best response is one that recognizes the value of data science in supporting non-profit organizations."
+            },
+            {
+              "id": 16,
+              "text": "The best response is one that encourages the use of technology for social good."
+            },
+            {
+              "id": 17,
+              "text": "The best response is one that appreciates the application of data science skills for community service."
+            },
+            {
+              "id": 18,
+              "text": "The best response is one that supports the initiatives for leveraging technology in non-profit sector."
+            }
+          ],
+          "votes": {
+            "167": -1,
+            "6": 1,
+            "36": 0,
+            "44": 1,
+            "120": 0,
+            "97": -1,
+            "153": 0,
+            "70": 1,
+            "138": 0,
+            "110": -1,
+            "121": 0,
+            "9": 1,
+            "52": -1,
+            "154": 0,
+            "50": 1,
+            "46": -1,
+            "91": 0
+          }
+        },
+        {
+          "id": 10,
+          "description": "A retired military officer who spends his time volunteering for veteran support groups and traveling to different countries.",
+          "statements": [
+            {
+              "id": 19,
+              "text": "The best response is one that encourages the exploration of virtual reality technology in the field of education."
+            }
+          ],
+          "votes": {
+            "156": 1,
+            "14": -1,
+            "3": 1,
+            "92": 1,
+            "79": -1,
+            "87": 1,
+            "63": 1,
+            "23": 1,
+            "32": -1,
+            "89": 1,
+            "5": 1
+          }
+        },
+        {
+          "id": 11,
+          "description": "A 67-year-old retiree from a Native American background who enjoys spending his days gardening and sharing his cultural heritage.",
+          "statements": [
+            {
+              "id": 20,
+              "text": "The best response is one that acknowledges the importance of technology in improving healthcare accessibility for the elderly and supports the participant's efforts."
+            }
+          ],
+          "votes": {
+            "44": 1,
+            "24": 0,
+            "136": 1,
+            "23": 1,
+            "164": 1,
+            "51": 1,
+            "159": 1,
+            "131": 1,
+            "43": 1,
+            "22": 1,
+            "137": 1,
+            "99": 1,
+            "118": 1,
+            "86": 1,
+            "148": 1,
+            "29": 1,
+            "30": 1,
+            "120": 1,
+            "134": 1,
+            "36": 1
+          }
+        },
+        {
+          "id": 12,
+          "description": "A retired social worker who loves to travel and participate in local community services.",
+          "statements": [
+            {
+              "id": 21,
+              "text": "The best response is one that promotes the research on renewable energy and appreciates the participant's efforts to make it more affordable and efficient."
+            }
+          ],
+          "votes": {
+            "91": 1,
+            "132": 0,
+            "13": -1,
+            "24": 1,
+            "126": 1,
+            "110": 1,
+            "122": -1,
+            "89": 1,
+            "138": 0,
+            "163": 1,
+            "4": 1,
+            "100": 1,
+            "136": 0,
+            "75": 1,
+            "88": 1
+          }
+        },
+        {
+          "id": 13,
+          "description": "A 70-year-old woman from an Irish background who enjoys gardening and volunteering in her local community.",
+          "statements": [
+            {
+              "id": 22,
+              "text": "The best response is one that recognizes the value of providing internet access to remote areas and supports the innovative technology."
+            },
+            {
+              "id": 23,
+              "text": "The best response is one that encourages the young professional's endeavor to bridge the digital divide."
+            }
+          ],
+          "votes": {
+            "133": 1,
+            "29": 1,
+            "71": 1,
+            "15": 1,
+            "70": 1,
+            "91": 1,
+            "155": 1,
+            "4": 1,
+            "146": 1,
+            "139": 1,
+            "142": -1,
+            "115": 1,
+            "95": 1,
+            "122": 0
+          }
+        },
+        {
+          "id": 14,
+          "description": "A retired firefighter who enjoys traveling and spending his time maintaining a vegetable garden.",
+          "statements": [
+            {
+              "id": 24,
+              "text": "The best response is one that values the development of software for language learning and respects the participant's multicultural background."
+            }
+          ],
+          "votes": {
+            "78": 1,
+            "7": 1,
+            "115": 1,
+            "58": 1,
+            "65": 1,
+            "147": 1,
+            "59": 1,
+            "73": 1,
+            "70": 0,
+            "1": 0,
+            "126": 0,
+            "80": 0,
+            "119": 0,
+            "26": -1,
+            "133": 1,
+            "37": 1,
+            "14": 1,
+            "67": 1,
+            "77": 1,
+            "109": 1,
+            "154": 0
+          }
+        },
+        {
+          "id": 15,
+          "description": "A retired judge who loves to learn about different cultures and spends his time doing community service.",
+          "statements": [
+            {
+              "id": 25,
+              "text": "The best response is one that understands the need for technology to improve mental health services and supports the participant's focus."
+            }
+          ],
+          "votes": {
+            "146": 1,
+            "112": 1,
+            "7": 1,
+            "98": 1,
+            "119": -1,
+            "21": 1
+          }
+        },
+        {
+          "id": 16,
+          "description": "A 65-year-old woman from a Jewish background who enjoys traveling and volunteering at her local synagogue.",
+          "statements": [
+            {
+              "id": 26,
+              "text": "The best response is one that appreciates the role of technology in environmental conservation and encourages the participant's passion."
+            }
+          ],
+          "votes": {
+            "118": 1,
+            "125": -1,
+            "158": 1,
+            "130": -1,
+            "53": 1,
+            "164": -1,
+            "100": 1,
+            "6": 1,
+            "115": 1,
+            "94": -1,
+            "1": 1,
+            "137": -1,
+            "75": 0,
+            "123": 0
+          }
+        },
+        {
+          "id": 17,
+          "description": "A retired police officer who spends his time gardening and participating in local community services.",
+          "statements": [
+            {
+              "id": 27,
+              "text": "The best response is one that values the use of coding skills to develop applications for people with disabilities and encourages the participant's initiative."
+            }
+          ],
+          "votes": {
+            "15": 1,
+            "159": -1,
+            "33": -1,
+            "44": -1,
+            "11": 1,
+            "143": -1,
+            "1": 0,
+            "165": -1,
+            "66": 0,
+            "57": -1,
+            "56": -1,
+            "118": -1,
+            "58": -1,
+            "158": 1,
+            "152": -1,
+            "82": -1,
+            "5": 0,
+            "166": -1
+          }
+        },
+        {
+          "id": 18,
+          "description": "A retiree from an Arab background who enjoys traveling and sharing her experiences and wisdom with the younger generation.",
+          "statements": [
+            {
+              "id": 28,
+              "text": "The best response is one that supports the development of a platform to help small businesses in their digital transformation and appreciates the participant's efforts."
+            }
+          ],
+          "votes": {
+            "75": 1,
+            "79": 1,
+            "10": 1,
+            "119": 1,
+            "141": -1,
+            "72": 0,
+            "116": 1,
+            "81": 1,
+            "29": 1,
+            "44": 0,
+            "127": 1,
+            "20": 0,
+            "36": 1,
+            "18": 1
+          }
+        },
+        {
+          "id": 19,
+          "description": "A retired school principal who loves gardening and participating in local community service.",
+          "statements": [
+            {
+              "id": 29,
+              "text": "The best response is one that acknowledges the potential of machine learning in agriculture and supports the participant's exploration."
+            },
+            {
+              "id": 30,
+              "text": "The best response is one that encourages the use of machine learning to increase agricultural efficiency."
+            },
+            {
+              "id": 31,
+              "text": "The best response is one that realizes the benefits of applying technology in agriculture and supports the participant's research."
+            },
+            {
+              "id": 32,
+              "text": "The best response is one that appreciates the importance of machine learning in modern farming practices."
+            },
+            {
+              "id": 33,
+              "text": "The best response is one that understands the role of technology in enhancing agricultural productivity."
+            },
+            {
+              "id": 34,
+              "text": "The best response is one that values the participant's efforts to explore machine learning in the agricultural sector."
+            },
+            {
+              "id": 35,
+              "text": "The best response is one that encourages the exploration of artificial intelligence in improving farming methods."
+            },
+            {
+              "id": 36,
+              "text": "The best response is one that recognizes the potential of machine learning in transforming agriculture."
+            },
+            {
+              "id": 37,
+              "text": "The best response is one that appreciates the role of technology in promoting sustainable farming practices."
+            },
+            {
+              "id": 38,
+              "text": "The best response is one that understands the importance of machine learning in advancing agricultural technologies."
+            },
+            {
+              "id": 39,
+              "text": "The best response is one that values machine learning as a tool for solving agricultural challenges."
+            },
+            {
+              "id": 40,
+              "text": "The best response is one that recognizes the participant's efforts to integrate technology in agriculture."
+            }
+          ],
+          "votes": {
+            "162": 1,
+            "3": 1,
+            "38": 1,
+            "55": 1,
+            "147": 1,
+            "45": 1,
+            "76": -1,
+            "155": 1,
+            "39": 1,
+            "131": 1,
+            "29": 1,
+            "54": 1,
+            "86": 1,
+            "56": 1,
+            "137": 1,
+            "133": 1,
+            "43": -1,
+            "123": 1,
+            "140": 1,
+            "41": 1,
+            "44": 1,
+            "71": 1
+          }
+        },
+        {
+          "id": 20,
+          "description": "A 67-year-old retiree from a Greek background who enjoys traveling and teaching her grandchildren about her cultural heritage.",
+          "statements": [
+            {
+              "id": 41,
+              "text": "The best response is one that appreciates the development of technology to improve emergency services and supports the participant's focus."
+            }
+          ],
+          "votes": {
+            "10": 1,
+            "65": 1,
+            "141": 1,
+            "104": 1,
+            "168": -1,
+            "150": 1,
+            "52": 1,
+            "43": 1,
+            "57": 1,
+            "147": -1,
+            "166": 1,
+            "21": 1,
+            "82": 1,
+            "36": 1,
+            "1": 1,
+            "138": 1,
+            "137": 1
+          }
+        },
+        {
+          "id": 21,
+          "description": "A retired musician who loves to spend his time gardening and volunteering at local music events.",
+          "statements": [
+            {
+              "id": 42,
+              "text": "The best response is one that encourages the promotion of diverse artists and provides creative ideas for showcasing their work on an online platform."
+            },
+            {
+              "id": 43,
+              "text": "The best response is one that acknowledges the importance of digital platforms in supporting artists and offers insights on how to make the platform more engaging."
+            }
+          ],
+          "votes": {
+            "121": 1,
+            "40": 1,
+            "144": 1,
+            "156": 1,
+            "153": 1,
+            "37": 1,
+            "113": 1,
+            "165": -1,
+            "168": -1,
+            "127": -1
+          }
+        },
+        {
+          "id": 22,
+          "description": "A retired surgeon who enjoys traveling and volunteering at local health clinics.",
+          "statements": [
+            {
+              "id": 44,
+              "text": "The best response is one that recognizes the potential of virtual reality in enhancing remote teamwork and suggests improvements for the platform."
+            }
+          ],
+          "votes": {
+            "79": 1,
+            "2": 1,
+            "42": 1,
+            "25": 1,
+            "52": 1,
+            "101": 1,
+            "33": 1,
+            "126": 1,
+            "77": 1,
+            "1": 1,
+            "24": 1,
+            "20": 1,
+            "19": 1,
+            "23": 1,
+            "88": 1,
+            "74": 1,
+            "116": 1,
+            "47": 1,
+            "144": -1,
+            "72": 1,
+            "53": 1,
+            "76": 1,
+            "121": 1,
+            "165": 1
+          }
+        },
+        {
+          "id": 23,
+          "description": "A 70-year-old woman from a German background who loves gardening and participating in local community service.",
+          "statements": [
+            {
+              "id": 45,
+              "text": "The best response is one that appreciates the need for secure online payments and provides innovative ideas on how to increase their security."
+            }
+          ],
+          "votes": {
+            "44": 1,
+            "140": 1,
+            "107": 1,
+            "112": 1,
+            "155": -1,
+            "86": 1,
+            "50": 1,
+            "27": 1,
+            "77": 1,
+            "138": 1,
+            "149": 1,
+            "167": 1,
+            "163": 1
+          }
+        },
+        {
+          "id": 24,
+          "description": "A retired architect who enjoys traveling and spending his time gardening and designing local community projects.",
+          "statements": [
+            {
+              "id": 46,
+              "text": "The best response is one that encourages the promotion of physical fitness through mobile apps and offers advice on how to make the app more user-friendly."
+            }
+          ],
+          "votes": {
+            "154": 1,
+            "168": -1,
+            "141": 1,
+            "155": 1,
+            "94": 1,
+            "103": 1,
+            "135": 1,
+            "61": 1,
+            "105": 1,
+            "47": 1,
+            "32": 1,
+            "60": 1,
+            "44": 1,
+            "167": -1,
+            "69": 1,
+            "96": 1,
+            "75": 1,
+            "153": 1,
+            "33": 1,
+            "2": 1,
+            "106": 1,
+            "102": 1,
+            "147": 1,
+            "143": 1,
+            "55": -1,
+            "166": 1,
+            "134": -1
+          }
+        },
+        {
+          "id": 25,
+          "description": "A retired university dean who enjoys learning about various cultures and actively participates in community service.",
+          "statements": [
+            {
+              "id": 47,
+              "text": "The best response is one that highlights the importance of technology in improving public transportation and suggests ways to make it more efficient."
+            }
+          ],
+          "votes": {
+            "23": 1,
+            "17": 1,
+            "118": -1,
+            "46": 1,
+            "78": 1,
+            "83": 1,
+            "107": 1,
+            "149": 1,
+            "32": 1,
+            "105": 1,
+            "1": 1,
+            "134": 0,
+            "33": 1,
+            "56": 1,
+            "6": 0,
+            "57": 1
+          }
+        },
+        {
+          "id": 26,
+          "description": "A 72-year-old woman from a Chinese background who enjoys gardening and teaching her grandchildren about her cultural traditions.",
+          "statements": [
+            {
+              "id": 48,
+              "text": "The best response is one that supports the idea of affordable online education for everyone and provides suggestions for making the project more accessible."
+            }
+          ],
+          "votes": {
+            "63": 1,
+            "69": 1,
+            "83": 1,
+            "20": 1,
+            "78": 1,
+            "95": -1,
+            "62": 1,
+            "81": 1,
+            "138": 1,
+            "165": -1,
+            "162": 1,
+            "136": 1,
+            "87": 1,
+            "22": 1,
+            "24": 1,
+            "67": 1,
+            "27": 1,
+            "104": 1,
+            "70": -1,
+            "79": 1,
+            "164": 1,
+            "9": 1,
+            "19": 1
+          }
+        },
+        {
+          "id": 27,
+          "description": "A retired diplomat who enjoys traveling and participating in community service projects related to international relations.",
+          "statements": [
+            {
+              "id": 49,
+              "text": "The best response is one that recognizes the impact of technology on wildlife conservation and offers tips for successful research."
+            }
+          ],
+          "votes": {
+            "78": 1,
+            "108": -1,
+            "73": 1,
+            "125": 0,
+            "133": 0,
+            "130": 1,
+            "65": -1,
+            "118": 0,
+            "67": 1,
+            "136": -1,
+            "146": 1
+          }
+        },
+        {
+          "id": 28,
+          "description": "A retired sports coach who enjoys gardening and volunteering at local sports events.",
+          "statements": [
+            {
+              "id": 50,
+              "text": "The best response is one that appreciates the role of technology in waste management and suggests ways to make the systems more effective."
+            }
+          ],
+          "votes": {
+            "123": 1,
+            "162": 1,
+            "26": 1,
+            "37": 1,
+            "95": -1,
+            "160": 1,
+            "152": 1,
+            "129": 1,
+            "117": 1,
+            "155": 1
+          }
+        },
+        {
+          "id": 29,
+          "description": "A 69-year-old retiree from an Indian background who enjoys traveling and sharing her cultural heritage.",
+          "statements": [
+            {
+              "id": 51,
+              "text": "The best response is one that understands the importance of online platforms for mental health services and provides suggestions for making the platform more accessible and effective."
+            }
+          ],
+          "votes": {
+            "165": 1,
+            "99": 1,
+            "64": 1,
+            "155": 1,
+            "106": 1,
+            "98": 1,
+            "55": 1,
+            "81": 1,
+            "14": 1,
+            "121": 1,
+            "97": 1,
+            "31": 1,
+            "58": 1,
+            "60": 1,
+            "37": 1,
+            "57": 1,
+            "10": -1,
+            "12": -1,
+            "132": -1
+          }
+        },
+        {
+          "id": 30,
+          "description": "A retired newspaper editor who loves to learn about different cultures and participates in community service.",
+          "statements": [
+            {
+              "id": 52,
+              "text": "The best response is one that acknowledges the need for a safer online environment for kids and provides suggestions for using technology to achieve this."
+            },
+            {
+              "id": 53,
+              "text": "The best response is one that supports the idea of child-friendly online spaces and offers insights on how to make these environments more engaging and secure."
+            }
+          ],
+          "votes": {
+            "26": 1,
+            "67": 1,
+            "93": 1,
+            "50": 1,
+            "163": 1,
+            "54": 1,
+            "99": 1,
+            "79": 1,
+            "116": 1,
+            "162": 1,
+            "144": 1,
+            "87": -1
+          }
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "description": "This group consists of individuals who are part of the LGBTQ+ community, spanning all ages, professions, and ethnicities. They are passionate about social issues, particularly those that impact the LGBTQ+ community.",
+      "participants": [
+        {
+          "id": 1,
+          "description": "A transgender woman in her 30s who is a passionate advocate for transgender rights and healthcare equity.",
+          "statements": [
+            {
+              "id": 1,
+              "text": "The best response is one that acknowledges the challenges and opportunities in the field of artificial intelligence and encourages continuous learning and innovation."
+            }
+          ],
+          "votes": {
+            "47": 1,
+            "16": 1,
+            "100": 1,
+            "143": 1,
+            "146": 1,
+            "87": 1,
+            "88": 1,
+            "154": 1,
+            "131": 1,
+            "3": 1,
+            "24": 1,
+            "64": 1,
+            "35": 1,
+            "139": 1,
+            "132": 1,
+            "164": 1,
+            "83": 1,
+            "97": 1,
+            "76": 1,
+            "63": -1,
+            "81": -1,
+            "117": -1,
+            "37": -1,
+            "33": -1,
+            "138": -1,
+            "136": -1,
+            "30": -1,
+            "43": -1,
+            "36": -1,
+            "163": -1,
+            "31": -1
+          }
+        },
+        {
+          "id": 2,
+          "description": "A 50-year-old gay man who is dedicated to improving the representation of the LGBTQ+ community in media.",
+          "statements": [
+            {
+              "id": 2,
+              "text": "The best response is one that validates the need for diverse representation in technology."
+            },
+            {
+              "id": 3,
+              "text": "The best response is one that recognizes the importance of inclusive tech tools."
+            },
+            {
+              "id": 4,
+              "text": "The best response is one that supports the initiatives for racial equality in the tech industry."
+            },
+            {
+              "id": 5,
+              "text": "The best response is one that fosters a culture of acceptance, inclusivity, and diversity in technology."
+            }
+          ],
+          "votes": {
+            "51": 1,
+            "101": 1,
+            "149": 1,
+            "73": 1,
+            "23": 1,
+            "103": 1,
+            "4": 1,
+            "39": 1,
+            "155": 1,
+            "71": 1,
+            "14": 1,
+            "81": 0,
+            "151": 0,
+            "97": 0,
+            "112": 0,
+            "145": 0,
+            "55": 0,
+            "44": 0,
+            "123": 0,
+            "34": 0,
+            "78": 0,
+            "114": -1,
+            "42": -1
+          }
+        },
+        {
+          "id": 3,
+          "description": "A bisexual teenager who is actively involved in their school's GSA and is committed to promoting acceptance and inclusivity among their peers.",
+          "statements": [
+            {
+              "id": 6,
+              "text": "The best response is one that emphasizes the importance of renewable energy technology and its role in sustainable development."
+            }
+          ],
+          "votes": {
+            "14": 1,
+            "93": 1,
+            "157": 1,
+            "100": 1,
+            "163": 1,
+            "109": 1,
+            "105": 1,
+            "118": 1,
+            "66": 0,
+            "128": 0,
+            "18": 0,
+            "59": 0,
+            "148": 0,
+            "108": 0,
+            "71": 0,
+            "102": 0,
+            "166": -1
+          }
+        },
+        {
+          "id": 4,
+          "description": "A non-binary person in their 40s who is a successful entrepreneur and uses their platform to support LGBTQ+ charities.",
+          "statements": [
+            {
+              "id": 7,
+              "text": "The best response is one that appreciates the potential of blockchain technology and its possible impacts on the financial landscape."
+            }
+          ],
+          "votes": {
+            "21": 1,
+            "66": 1,
+            "166": 1,
+            "130": 1,
+            "5": 1,
+            "17": 1,
+            "146": 1,
+            "147": 1,
+            "6": 1,
+            "153": 1,
+            "95": 1,
+            "167": -1,
+            "1": 1,
+            "80": 1,
+            "156": 1,
+            "36": 1,
+            "88": 1,
+            "11": 0,
+            "90": 0,
+            "52": 0,
+            "152": -1
+          }
+        },
+        {
+          "id": 5,
+          "description": "A lesbian woman in her late 20s who is a dedicated social worker, striving to provide support for LGBTQ+ youth in foster care.",
+          "statements": [
+            {
+              "id": 8,
+              "text": "The best response is one that acknowledges the need for gender balance in the tech industry and supports initiatives for women empowerment."
+            }
+          ],
+          "votes": {
+            "71": 1,
+            "79": 1,
+            "85": 1,
+            "140": 1,
+            "8": 1,
+            "112": 1,
+            "166": 1,
+            "144": 1,
+            "84": 1,
+            "90": 1,
+            "13": -1
+          }
+        },
+        {
+          "id": 6,
+          "description": "An asexual man in his early 30s who is a university lecturer, advocating for more comprehensive sexual education in schools.",
+          "statements": [
+            {
+              "id": 9,
+              "text": "The best response is one that recognizes the importance of digital inclusivity and encourages efforts to bridge the digital divide."
+            }
+          ],
+          "votes": {
+            "119": 1,
+            "115": 1,
+            "50": 1,
+            "47": 1,
+            "11": 1,
+            "25": 1,
+            "35": 1,
+            "76": 1,
+            "107": 1,
+            "116": 1,
+            "83": 1,
+            "96": 1,
+            "84": 1,
+            "79": 1,
+            "77": -1,
+            "162": -1,
+            "159": -1,
+            "91": -1,
+            "151": -1,
+            "65": -1,
+            "82": 0
+          }
+        },
+        {
+          "id": 7,
+          "description": "A transgender man in his late teens who is navigating his transition while advocating for transgender rights in his small town.",
+          "statements": [
+            {
+              "id": 10,
+              "text": "The best response is one that appreciates innovative solutions for waste management."
+            },
+            {
+              "id": 11,
+              "text": "The best response is one that encourages environmentally-conscious practices in the professional world."
+            }
+          ],
+          "votes": {
+            "162": 1,
+            "140": 1,
+            "65": 1,
+            "11": 1,
+            "5": 1,
+            "60": 1,
+            "95": -1,
+            "128": -1,
+            "46": -1,
+            "3": -1,
+            "160": -1,
+            "155": -1,
+            "86": -1,
+            "53": -1
+          }
+        },
+        {
+          "id": 8,
+          "description": "A queer woman in her 60s who has been a lifelong activist for LGBTQ+ rights and continues her work in retirement.",
+          "statements": [
+            {
+              "id": 12,
+              "text": "The best response is one that acknowledges the importance of cybersecurity in financial institutions."
+            },
+            {
+              "id": 13,
+              "text": "The best response is one that appreciates the efforts in enhancing cybersecurity measures."
+            },
+            {
+              "id": 14,
+              "text": "The best response is one that encourages continuous research and development in the field of cybersecurity."
+            }
+          ],
+          "votes": {
+            "109": 1,
+            "2": 1,
+            "51": 1,
+            "39": 1,
+            "96": 1,
+            "94": 1,
+            "57": 1,
+            "73": 1,
+            "165": 1,
+            "97": 1,
+            "12": 1,
+            "10": 1,
+            "30": -1,
+            "117": -1,
+            "4": -1,
+            "49": -1,
+            "127": -1
+          }
+        },
+        {
+          "id": 9,
+          "description": "A bisexual woman in her 20s who is a burgeoning film director, eager to tell diverse stories of queer love and life.",
+          "statements": [
+            {
+              "id": 15,
+              "text": "The best response is one that recognizes the value of data science in supporting non-profit organizations."
+            },
+            {
+              "id": 16,
+              "text": "The best response is one that encourages the use of technology for social good."
+            },
+            {
+              "id": 17,
+              "text": "The best response is one that appreciates the application of data science skills for community service."
+            },
+            {
+              "id": 18,
+              "text": "The best response is one that supports the initiatives for leveraging technology in non-profit sector."
+            }
+          ],
+          "votes": {
+            "167": -1,
+            "6": 1,
+            "36": 0,
+            "44": 1,
+            "120": 0,
+            "97": -1,
+            "153": 0,
+            "70": 1,
+            "138": 0,
+            "110": -1,
+            "121": 0,
+            "9": 1,
+            "52": -1,
+            "154": 0,
+            "50": 1,
+            "46": -1,
+            "91": 0
+          }
+        },
+        {
+          "id": 10,
+          "description": "A gay man in his 40s who is a politician, committed to implementing policies that protect and benefit the LGBTQ+ community.",
+          "statements": [
+            {
+              "id": 19,
+              "text": "The best response is one that encourages the exploration of virtual reality technology in the field of education."
+            }
+          ],
+          "votes": {
+            "156": 1,
+            "14": -1,
+            "3": 1,
+            "92": 1,
+            "79": -1,
+            "87": 1,
+            "63": 1,
+            "23": 1,
+            "32": -1,
+            "89": 1,
+            "5": 1
+          }
+        },
+        {
+          "id": 11,
+          "description": "A non-binary individual in their late teens who is an emerging voice in online activism and social justice.",
+          "statements": [
+            {
+              "id": 20,
+              "text": "The best response is one that acknowledges the importance of technology in improving healthcare accessibility for the elderly and supports the participant's efforts."
+            }
+          ],
+          "votes": {
+            "44": 1,
+            "24": 0,
+            "136": 1,
+            "23": 1,
+            "164": 1,
+            "51": 1,
+            "159": 1,
+            "131": 1,
+            "43": 1,
+            "22": 1,
+            "137": 1,
+            "99": 1,
+            "118": 1,
+            "86": 1,
+            "148": 1,
+            "29": 1,
+            "30": 1,
+            "120": 1,
+            "134": 1,
+            "36": 1
+          }
+        },
+        {
+          "id": 12,
+          "description": "A pansexual man in his 30s who is a mental health professional, providing counseling for the LGBTQ+ community.",
+          "statements": [
+            {
+              "id": 21,
+              "text": "The best response is one that promotes the research on renewable energy and appreciates the participant's efforts to make it more affordable and efficient."
+            }
+          ],
+          "votes": {
+            "91": 1,
+            "132": 0,
+            "13": -1,
+            "24": 1,
+            "126": 1,
+            "110": 1,
+            "122": -1,
+            "89": 1,
+            "138": 0,
+            "163": 1,
+            "4": 1,
+            "100": 1,
+            "136": 0,
+            "75": 1,
+            "88": 1
+          }
+        },
+        {
+          "id": 13,
+          "description": "A lesbian woman in her 50s who is a veteran and advocates for better support and recognition for LGBTQ+ service members.",
+          "statements": [
+            {
+              "id": 22,
+              "text": "The best response is one that recognizes the value of providing internet access to remote areas and supports the innovative technology."
+            },
+            {
+              "id": 23,
+              "text": "The best response is one that encourages the young professional's endeavor to bridge the digital divide."
+            }
+          ],
+          "votes": {
+            "133": 1,
+            "29": 1,
+            "71": 1,
+            "15": 1,
+            "70": 1,
+            "91": 1,
+            "155": 1,
+            "4": 1,
+            "146": 1,
+            "139": 1,
+            "142": -1,
+            "115": 1,
+            "95": 1,
+            "122": 0
+          }
+        },
+        {
+          "id": 14,
+          "description": "A transgender woman in her 20s who is a dedicated student, striving to become a human rights lawyer to fight for LGBTQ+ rights.",
+          "statements": [
+            {
+              "id": 24,
+              "text": "The best response is one that values the development of software for language learning and respects the participant's multicultural background."
+            }
+          ],
+          "votes": {
+            "78": 1,
+            "7": 1,
+            "115": 1,
+            "58": 1,
+            "65": 1,
+            "147": 1,
+            "59": 1,
+            "73": 1,
+            "70": 0,
+            "1": 0,
+            "126": 0,
+            "80": 0,
+            "119": 0,
+            "26": -1,
+            "133": 1,
+            "37": 1,
+            "14": 1,
+            "67": 1,
+            "77": 1,
+            "109": 1,
+            "154": 0
+          }
+        },
+        {
+          "id": 15,
+          "description": "A gay man in his 60s who is a published author, using his writing to explore LGBTQ+ history and experiences.",
+          "statements": [
+            {
+              "id": 25,
+              "text": "The best response is one that understands the need for technology to improve mental health services and supports the participant's focus."
+            }
+          ],
+          "votes": {
+            "146": 1,
+            "112": 1,
+            "7": 1,
+            "98": 1,
+            "119": -1,
+            "21": 1
+          }
+        },
+        {
+          "id": 16,
+          "description": "A bisexual woman in her 40s who is a passionate environmentalist, pushing for recognition of the intersectionality of environmental and LGBTQ+ issues.",
+          "statements": [
+            {
+              "id": 26,
+              "text": "The best response is one that appreciates the role of technology in environmental conservation and encourages the participant's passion."
+            }
+          ],
+          "votes": {
+            "118": 1,
+            "125": -1,
+            "158": 1,
+            "130": -1,
+            "53": 1,
+            "164": -1,
+            "100": 1,
+            "6": 1,
+            "115": 1,
+            "94": -1,
+            "1": 1,
+            "137": -1,
+            "75": 0,
+            "123": 0
+          }
+        },
+        {
+          "id": 17,
+          "description": "A queer person in their 30s who is a tech innovator, using their skills to develop apps and resources for the LGBTQ+ community.",
+          "statements": [
+            {
+              "id": 27,
+              "text": "The best response is one that values the use of coding skills to develop applications for people with disabilities and encourages the participant's initiative."
+            }
+          ],
+          "votes": {
+            "15": 1,
+            "159": -1,
+            "33": -1,
+            "44": -1,
+            "11": 1,
+            "143": -1,
+            "1": 0,
+            "165": -1,
+            "66": 0,
+            "57": -1,
+            "56": -1,
+            "118": -1,
+            "58": -1,
+            "158": 1,
+            "152": -1,
+            "82": -1,
+            "5": 0,
+            "166": -1
+          }
+        },
+        {
+          "id": 18,
+          "description": "A non-binary individual in their early 20s who is a talented artist, using their art as a form of activism and expression.",
+          "statements": [
+            {
+              "id": 28,
+              "text": "The best response is one that supports the development of a platform to help small businesses in their digital transformation and appreciates the participant's efforts."
+            }
+          ],
+          "votes": {
+            "75": 1,
+            "79": 1,
+            "10": 1,
+            "119": 1,
+            "141": -1,
+            "72": 0,
+            "116": 1,
+            "81": 1,
+            "29": 1,
+            "44": 0,
+            "127": 1,
+            "20": 0,
+            "36": 1,
+            "18": 1
+          }
+        },
+        {
+          "id": 19,
+          "description": "A lesbian woman in her 70s who is a retired teacher, continuing to mentor LGBTQ+ youth in her community.",
+          "statements": [
+            {
+              "id": 29,
+              "text": "The best response is one that acknowledges the potential of machine learning in agriculture and supports the participant's exploration."
+            },
+            {
+              "id": 30,
+              "text": "The best response is one that encourages the use of machine learning to increase agricultural efficiency."
+            },
+            {
+              "id": 31,
+              "text": "The best response is one that realizes the benefits of applying technology in agriculture and supports the participant's research."
+            },
+            {
+              "id": 32,
+              "text": "The best response is one that appreciates the importance of machine learning in modern farming practices."
+            },
+            {
+              "id": 33,
+              "text": "The best response is one that understands the role of technology in enhancing agricultural productivity."
+            },
+            {
+              "id": 34,
+              "text": "The best response is one that values the participant's efforts to explore machine learning in the agricultural sector."
+            },
+            {
+              "id": 35,
+              "text": "The best response is one that encourages the exploration of artificial intelligence in improving farming methods."
+            },
+            {
+              "id": 36,
+              "text": "The best response is one that recognizes the potential of machine learning in transforming agriculture."
+            },
+            {
+              "id": 37,
+              "text": "The best response is one that appreciates the role of technology in promoting sustainable farming practices."
+            },
+            {
+              "id": 38,
+              "text": "The best response is one that understands the importance of machine learning in advancing agricultural technologies."
+            },
+            {
+              "id": 39,
+              "text": "The best response is one that values machine learning as a tool for solving agricultural challenges."
+            },
+            {
+              "id": 40,
+              "text": "The best response is one that recognizes the participant's efforts to integrate technology in agriculture."
+            }
+          ],
+          "votes": {
+            "162": 1,
+            "3": 1,
+            "38": 1,
+            "55": 1,
+            "147": 1,
+            "45": 1,
+            "76": -1,
+            "155": 1,
+            "39": 1,
+            "131": 1,
+            "29": 1,
+            "54": 1,
+            "86": 1,
+            "56": 1,
+            "137": 1,
+            "133": 1,
+            "43": -1,
+            "123": 1,
+            "140": 1,
+            "41": 1,
+            "44": 1,
+            "71": 1
+          }
+        },
+        {
+          "id": 20,
+          "description": "An asexual person in their 50s who is a healthcare professional, advocating for the inclusion of asexual individuals in health discussions.",
+          "statements": [
+            {
+              "id": 41,
+              "text": "The best response is one that appreciates the development of technology to improve emergency services and supports the participant's focus."
+            }
+          ],
+          "votes": {
+            "10": 1,
+            "65": 1,
+            "141": 1,
+            "104": 1,
+            "168": -1,
+            "150": 1,
+            "52": 1,
+            "43": 1,
+            "57": 1,
+            "147": -1,
+            "166": 1,
+            "21": 1,
+            "82": 1,
+            "36": 1,
+            "1": 1,
+            "138": 1,
+            "137": 1
+          }
+        },
+        {
+          "id": 21,
+          "description": "A gay man in his 30s who is a dedicated firefighter, working to ensure safety and inclusivity in his profession.",
+          "statements": [
+            {
+              "id": 42,
+              "text": "The best response is one that encourages the promotion of diverse artists and provides creative ideas for showcasing their work on an online platform."
+            },
+            {
+              "id": 43,
+              "text": "The best response is one that acknowledges the importance of digital platforms in supporting artists and offers insights on how to make the platform more engaging."
+            }
+          ],
+          "votes": {
+            "121": 1,
+            "40": 1,
+            "144": 1,
+            "156": 1,
+            "153": 1,
+            "37": 1,
+            "113": 1,
+            "165": -1,
+            "168": -1,
+            "127": -1
+          }
+        },
+        {
+          "id": 22,
+          "description": "A transgender woman in her 40s who is a successful businesswoman, promoting diversity and inclusivity in the corporate world",
+          "statements": [
+            {
+              "id": 44,
+              "text": "The best response is one that recognizes the potential of virtual reality in enhancing remote teamwork and suggests improvements for the platform."
+            }
+          ],
+          "votes": {
+            "79": 1,
+            "2": 1,
+            "42": 1,
+            "25": 1,
+            "52": 1,
+            "101": 1,
+            "33": 1,
+            "126": 1,
+            "77": 1,
+            "1": 1,
+            "24": 1,
+            "20": 1,
+            "19": 1,
+            "23": 1,
+            "88": 1,
+            "74": 1,
+            "116": 1,
+            "47": 1,
+            "144": -1,
+            "72": 1,
+            "53": 1,
+            "76": 1,
+            "121": 1,
+            "165": 1
+          }
+        },
+        {
+          "id": 23,
+          "description": "A bisexual man in his 20s who is a professional athlete, using his platform to challenge stereotypes and promote acceptance.",
+          "statements": [
+            {
+              "id": 45,
+              "text": "The best response is one that appreciates the need for secure online payments and provides innovative ideas on how to increase their security."
+            }
+          ],
+          "votes": {
+            "44": 1,
+            "140": 1,
+            "107": 1,
+            "112": 1,
+            "155": -1,
+            "86": 1,
+            "50": 1,
+            "27": 1,
+            "77": 1,
+            "138": 1,
+            "149": 1,
+            "167": 1,
+            "163": 1
+          }
+        },
+        {
+          "id": 24,
+          "description": "A non-binary individual in their 60s who is a retired police officer, advocating for reform and LGBTQ+ inclusivity in law enforcement.",
+          "statements": [
+            {
+              "id": 46,
+              "text": "The best response is one that encourages the promotion of physical fitness through mobile apps and offers advice on how to make the app more user-friendly."
+            }
+          ],
+          "votes": {
+            "154": 1,
+            "168": -1,
+            "141": 1,
+            "155": 1,
+            "94": 1,
+            "103": 1,
+            "135": 1,
+            "61": 1,
+            "105": 1,
+            "47": 1,
+            "32": 1,
+            "60": 1,
+            "44": 1,
+            "167": -1,
+            "69": 1,
+            "96": 1,
+            "75": 1,
+            "153": 1,
+            "33": 1,
+            "2": 1,
+            "106": 1,
+            "102": 1,
+            "147": 1,
+            "143": 1,
+            "55": -1,
+            "166": 1,
+            "134": -1
+          }
+        },
+        {
+          "id": 25,
+          "description": "A queer woman in her 40s who is a scientist, pushing for better representation and inclusion in STEM fields.",
+          "statements": [
+            {
+              "id": 47,
+              "text": "The best response is one that highlights the importance of technology in improving public transportation and suggests ways to make it more efficient."
+            }
+          ],
+          "votes": {
+            "23": 1,
+            "17": 1,
+            "118": -1,
+            "46": 1,
+            "78": 1,
+            "83": 1,
+            "107": 1,
+            "149": 1,
+            "32": 1,
+            "105": 1,
+            "1": 1,
+            "134": 0,
+            "33": 1,
+            "56": 1,
+            "6": 0,
+            "57": 1
+          }
+        },
+        {
+          "id": 26,
+          "description": "A transgender man in his 50s who is a respected therapist, providing crucial mental health services for the LGBTQ+ community.",
+          "statements": [
+            {
+              "id": 48,
+              "text": "The best response is one that supports the idea of affordable online education for everyone and provides suggestions for making the project more accessible."
+            }
+          ],
+          "votes": {
+            "63": 1,
+            "69": 1,
+            "83": 1,
+            "20": 1,
+            "78": 1,
+            "95": -1,
+            "62": 1,
+            "81": 1,
+            "138": 1,
+            "165": -1,
+            "162": 1,
+            "136": 1,
+            "87": 1,
+            "22": 1,
+            "24": 1,
+            "67": 1,
+            "27": 1,
+            "104": 1,
+            "70": -1,
+            "79": 1,
+            "164": 1,
+            "9": 1,
+            "19": 1
+          }
+        },
+        {
+          "id": 27,
+          "description": "A lesbian woman in her 30s who is a passionate chef, using her platform to promote and celebrate queer culture through food.",
+          "statements": [
+            {
+              "id": 49,
+              "text": "The best response is one that recognizes the impact of technology on wildlife conservation and offers tips for successful research."
+            }
+          ],
+          "votes": {
+            "78": 1,
+            "108": -1,
+            "73": 1,
+            "125": 0,
+            "133": 0,
+            "130": 1,
+            "65": -1,
+            "118": 0,
+            "67": 1,
+            "136": -1,
+            "146": 1
+          }
+        },
+        {
+          "id": 28,
+          "description": "A gay man in his 20s who is a dedicated student, striving to become a journalist to report on LGBTQ+ issues.",
+          "statements": [
+            {
+              "id": 50,
+              "text": "The best response is one that appreciates the role of technology in waste management and suggests ways to make the systems more effective."
+            }
+          ],
+          "votes": {
+            "123": 1,
+            "162": 1,
+            "26": 1,
+            "37": 1,
+            "95": -1,
+            "160": 1,
+            "152": 1,
+            "129": 1,
+            "117": 1,
+            "155": 1
+          }
+        },
+        {
+          "id": 29,
+          "description": "A bisexual woman in her 60s who is a community leader, working tirelessly to create safe and inclusive spaces for all.",
+          "statements": [
+            {
+              "id": 51,
+              "text": "The best response is one that understands the importance of online platforms for mental health services and provides suggestions for making the platform more accessible and effective."
+            }
+          ],
+          "votes": {
+            "165": 1,
+            "99": 1,
+            "64": 1,
+            "155": 1,
+            "106": 1,
+            "98": 1,
+            "55": 1,
+            "81": 1,
+            "14": 1,
+            "121": 1,
+            "97": 1,
+            "31": 1,
+            "58": 1,
+            "60": 1,
+            "37": 1,
+            "57": 1,
+            "10": -1,
+            "12": -1,
+            "132": -1
+          }
+        },
+        {
+          "id": 30,
+          "description": "A non-binary person in their 50s who is a public speaker, sharing their experiences and advocating for LGBTQ+ rights.",
+          "statements": [
+            {
+              "id": 52,
+              "text": "The best response is one that acknowledges the need for a safer online environment for kids and provides suggestions for using technology to achieve this."
+            },
+            {
+              "id": 53,
+              "text": "The best response is one that supports the idea of child-friendly online spaces and offers insights on how to make these environments more engaging and secure."
+            }
+          ],
+          "votes": {
+            "26": 1,
+            "67": 1,
+            "93": 1,
+            "50": 1,
+            "163": 1,
+            "54": 1,
+            "99": 1,
+            "79": 1,
+            "116": 1,
+            "162": 1,
+            "144": 1,
+            "87": -1
+          }
+        },
+        {
+          "id": 31,
+          "description": "A pansexual woman in her 40s who is an accomplished musician, using her music to inspire and uplift the LGBTQ+ community.",
+          "statements": [
+            {
+              "id": 54,
+              "text": "The best response is one that provides tech-savvy advice on improving the user experience of the mental well-being mobile app."
+            }
+          ],
+          "votes": {
+            "72": 1,
+            "10": 1,
+            "162": 1,
+            "91": 1,
+            "103": 1,
+            "104": 1,
+            "7": 1,
+            "25": 1,
+            "79": 1,
+            "8": 1,
+            "125": 1,
+            "128": 1,
+            "154": 1,
+            "33": 1,
+            "167": 1,
+            "66": 1,
+            "42": 1,
+            "67": 1,
+            "124": 1,
+            "115": -1
+          }
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "description": "This group consists of individuals who are single parents juggling work and family life. They represent a range of ages, ethnicities, and professions, but they share common experiences around raising children alone.",
+      "participants": [
+        {
+          "id": 1,
+          "description": "A middle-aged Latino construction worker who is struggling to balance his physically demanding job with raising his two young daughters alone.",
+          "statements": [
+            {
+              "id": 1,
+              "text": "The best response is one that acknowledges the challenges and opportunities in the field of artificial intelligence and encourages continuous learning and innovation."
+            }
+          ],
+          "votes": {
+            "47": 1,
+            "16": 1,
+            "100": 1,
+            "143": 1,
+            "146": 1,
+            "87": 1,
+            "88": 1,
+            "154": 1,
+            "131": 1,
+            "3": 1,
+            "24": 1,
+            "64": 1,
+            "35": 1,
+            "139": 1,
+            "132": 1,
+            "164": 1,
+            "83": 1,
+            "97": 1,
+            "76": 1,
+            "63": -1,
+            "81": -1,
+            "117": -1,
+            "37": -1,
+            "33": -1,
+            "138": -1,
+            "136": -1,
+            "30": -1,
+            "43": -1,
+            "36": -1,
+            "163": -1,
+            "31": -1
+          }
+        },
+        {
+          "id": 2,
+          "description": "A young African-American single mom who is striving to finish her college degree while taking care of her toddler.",
+          "statements": [
+            {
+              "id": 2,
+              "text": "The best response is one that validates the need for diverse representation in technology."
+            },
+            {
+              "id": 3,
+              "text": "The best response is one that recognizes the importance of inclusive tech tools."
+            },
+            {
+              "id": 4,
+              "text": "The best response is one that supports the initiatives for racial equality in the tech industry."
+            },
+            {
+              "id": 5,
+              "text": "The best response is one that fosters a culture of acceptance, inclusivity, and diversity in technology."
+            }
+          ],
+          "votes": {
+            "51": 1,
+            "101": 1,
+            "149": 1,
+            "73": 1,
+            "23": 1,
+            "103": 1,
+            "4": 1,
+            "39": 1,
+            "155": 1,
+            "71": 1,
+            "14": 1,
+            "81": 0,
+            "151": 0,
+            "97": 0,
+            "112": 0,
+            "145": 0,
+            "55": 0,
+            "44": 0,
+            "123": 0,
+            "34": 0,
+            "78": 0,
+            "114": -1,
+            "42": -1
+          }
+        },
+        {
+          "id": 3,
+          "description": "A Caucasian single father in his fifties who is navigating the challenges of raising a teenager while managing his business.",
+          "statements": [
+            {
+              "id": 6,
+              "text": "The best response is one that emphasizes the importance of renewable energy technology and its role in sustainable development."
+            }
+          ],
+          "votes": {
+            "14": 1,
+            "93": 1,
+            "157": 1,
+            "100": 1,
+            "163": 1,
+            "109": 1,
+            "105": 1,
+            "118": 1,
+            "66": 0,
+            "128": 0,
+            "18": 0,
+            "59": 0,
+            "148": 0,
+            "108": 0,
+            "71": 0,
+            "102": 0,
+            "166": -1
+          }
+        },
+        {
+          "id": 4,
+          "description": "A single Asian mother who is working two jobs to provide for her three children and still finds time to help them with their homework.",
+          "statements": [
+            {
+              "id": 7,
+              "text": "The best response is one that appreciates the potential of blockchain technology and its possible impacts on the financial landscape."
+            }
+          ],
+          "votes": {
+            "21": 1,
+            "66": 1,
+            "166": 1,
+            "130": 1,
+            "5": 1,
+            "17": 1,
+            "146": 1,
+            "147": 1,
+            "6": 1,
+            "153": 1,
+            "95": 1,
+            "167": -1,
+            "1": 1,
+            "80": 1,
+            "156": 1,
+            "36": 1,
+            "88": 1,
+            "11": 0,
+            "90": 0,
+            "52": 0,
+            "152": -1
+          }
+        },
+        {
+          "id": 5,
+          "description": "A single mom in her thirties who is juggling the demands of her nursing career while raising two energetic boys.",
+          "statements": [
+            {
+              "id": 8,
+              "text": "The best response is one that acknowledges the need for gender balance in the tech industry and supports initiatives for women empowerment."
+            }
+          ],
+          "votes": {
+            "71": 1,
+            "79": 1,
+            "85": 1,
+            "140": 1,
+            "8": 1,
+            "112": 1,
+            "166": 1,
+            "144": 1,
+            "84": 1,
+            "90": 1,
+            "13": -1
+          }
+        },
+        {
+          "id": 6,
+          "description": "A middle-aged single dad who is striving to balance his career as a chef with raising his daughter who has special needs.",
+          "statements": [
+            {
+              "id": 9,
+              "text": "The best response is one that recognizes the importance of digital inclusivity and encourages efforts to bridge the digital divide."
+            }
+          ],
+          "votes": {
+            "119": 1,
+            "115": 1,
+            "50": 1,
+            "47": 1,
+            "11": 1,
+            "25": 1,
+            "35": 1,
+            "76": 1,
+            "107": 1,
+            "116": 1,
+            "83": 1,
+            "96": 1,
+            "84": 1,
+            "79": 1,
+            "77": -1,
+            "162": -1,
+            "159": -1,
+            "91": -1,
+            "151": -1,
+            "65": -1,
+            "82": 0
+          }
+        },
+        {
+          "id": 7,
+          "description": "A single mom in her twenties who is working as a cashier and studying part-time, while taking care of her infant son.",
+          "statements": [
+            {
+              "id": 10,
+              "text": "The best response is one that appreciates innovative solutions for waste management."
+            },
+            {
+              "id": 11,
+              "text": "The best response is one that encourages environmentally-conscious practices in the professional world."
+            }
+          ],
+          "votes": {
+            "162": 1,
+            "140": 1,
+            "65": 1,
+            "11": 1,
+            "5": 1,
+            "60": 1,
+            "95": -1,
+            "128": -1,
+            "46": -1,
+            "3": -1,
+            "160": -1,
+            "155": -1,
+            "86": -1,
+            "53": -1
+          }
+        },
+        {
+          "id": 8,
+          "description": "A single dad who is an elementary school teacher, striving to provide a good life for his two sons.",
+          "statements": [
+            {
+              "id": 12,
+              "text": "The best response is one that acknowledges the importance of cybersecurity in financial institutions."
+            },
+            {
+              "id": 13,
+              "text": "The best response is one that appreciates the efforts in enhancing cybersecurity measures."
+            },
+            {
+              "id": 14,
+              "text": "The best response is one that encourages continuous research and development in the field of cybersecurity."
+            }
+          ],
+          "votes": {
+            "109": 1,
+            "2": 1,
+            "51": 1,
+            "39": 1,
+            "96": 1,
+            "94": 1,
+            "57": 1,
+            "73": 1,
+            "165": 1,
+            "97": 1,
+            "12": 1,
+            "10": 1,
+            "30": -1,
+            "117": -1,
+            "4": -1,
+            "49": -1,
+            "127": -1
+          }
+        },
+        {
+          "id": 9,
+          "description": "A single Latina mother who is working as a housekeeper and raising her two daughters, one in high school and one in college.",
+          "statements": [
+            {
+              "id": 15,
+              "text": "The best response is one that recognizes the value of data science in supporting non-profit organizations."
+            },
+            {
+              "id": 16,
+              "text": "The best response is one that encourages the use of technology for social good."
+            },
+            {
+              "id": 17,
+              "text": "The best response is one that appreciates the application of data science skills for community service."
+            },
+            {
+              "id": 18,
+              "text": "The best response is one that supports the initiatives for leveraging technology in non-profit sector."
+            }
+          ],
+          "votes": {
+            "167": -1,
+            "6": 1,
+            "36": 0,
+            "44": 1,
+            "120": 0,
+            "97": -1,
+            "153": 0,
+            "70": 1,
+            "138": 0,
+            "110": -1,
+            "121": 0,
+            "9": 1,
+            "52": -1,
+            "154": 0,
+            "50": 1,
+            "46": -1,
+            "91": 0
+          }
+        },
+        {
+          "id": 10,
+          "description": "A single father who is a military veteran, struggling to adapt to civilian life while raising his two young sons.",
+          "statements": [
+            {
+              "id": 19,
+              "text": "The best response is one that encourages the exploration of virtual reality technology in the field of education."
+            }
+          ],
+          "votes": {
+            "156": 1,
+            "14": -1,
+            "3": 1,
+            "92": 1,
+            "79": -1,
+            "87": 1,
+            "63": 1,
+            "23": 1,
+            "32": -1,
+            "89": 1,
+            "5": 1
+          }
+        },
+        {
+          "id": 11,
+          "description": "A single mother who is an immigrant, working as a cleaner while raising her daughter and helping her with her schoolwork.",
+          "statements": [
+            {
+              "id": 20,
+              "text": "The best response is one that acknowledges the importance of technology in improving healthcare accessibility for the elderly and supports the participant's efforts."
+            }
+          ],
+          "votes": {
+            "44": 1,
+            "24": 0,
+            "136": 1,
+            "23": 1,
+            "164": 1,
+            "51": 1,
+            "159": 1,
+            "131": 1,
+            "43": 1,
+            "22": 1,
+            "137": 1,
+            "99": 1,
+            "118": 1,
+            "86": 1,
+            "148": 1,
+            "29": 1,
+            "30": 1,
+            "120": 1,
+            "134": 1,
+            "36": 1
+          }
+        },
+        {
+          "id": 12,
+          "description": "A single dad in his forties who is a firefighter, juggling his unpredictable work schedule with raising his twin daughters.",
+          "statements": [
+            {
+              "id": 21,
+              "text": "The best response is one that promotes the research on renewable energy and appreciates the participant's efforts to make it more affordable and efficient."
+            }
+          ],
+          "votes": {
+            "91": 1,
+            "132": 0,
+            "13": -1,
+            "24": 1,
+            "126": 1,
+            "110": 1,
+            "122": -1,
+            "89": 1,
+            "138": 0,
+            "163": 1,
+            "4": 1,
+            "100": 1,
+            "136": 0,
+            "75": 1,
+            "88": 1
+          }
+        },
+        {
+          "id": 13,
+          "description": "A young single mother who is a medical student, trying to balance her studies with raising her toddler daughter.",
+          "statements": [
+            {
+              "id": 22,
+              "text": "The best response is one that recognizes the value of providing internet access to remote areas and supports the innovative technology."
+            },
+            {
+              "id": 23,
+              "text": "The best response is one that encourages the young professional's endeavor to bridge the digital divide."
+            }
+          ],
+          "votes": {
+            "133": 1,
+            "29": 1,
+            "71": 1,
+            "15": 1,
+            "70": 1,
+            "91": 1,
+            "155": 1,
+            "4": 1,
+            "146": 1,
+            "139": 1,
+            "142": -1,
+            "115": 1,
+            "95": 1,
+            "122": 0
+          }
+        },
+        {
+          "id": 14,
+          "description": "A single dad who is a taxi driver, struggling to provide for his teenage son while working long hours.",
+          "statements": [
+            {
+              "id": 24,
+              "text": "The best response is one that values the development of software for language learning and respects the participant's multicultural background."
+            }
+          ],
+          "votes": {
+            "78": 1,
+            "7": 1,
+            "115": 1,
+            "58": 1,
+            "65": 1,
+            "147": 1,
+            "59": 1,
+            "73": 1,
+            "70": 0,
+            "1": 0,
+            "126": 0,
+            "80": 0,
+            "119": 0,
+            "26": -1,
+            "133": 1,
+            "37": 1,
+            "14": 1,
+            "67": 1,
+            "77": 1,
+            "109": 1,
+            "154": 0
+          }
+        },
+        {
+          "id": 15,
+          "description": "A single Asian mother in her forties who is a small business owner, working hard to provide for her son and daughter.",
+          "statements": [
+            {
+              "id": 25,
+              "text": "The best response is one that understands the need for technology to improve mental health services and supports the participant's focus."
+            }
+          ],
+          "votes": {
+            "146": 1,
+            "112": 1,
+            "7": 1,
+            "98": 1,
+            "119": -1,
+            "21": 1
+          }
+        },
+        {
+          "id": 16,
+          "description": "A single mom who is a hairdresser, striving to give her two daughters a good life while managing her salon.",
+          "statements": [
+            {
+              "id": 26,
+              "text": "The best response is one that appreciates the role of technology in environmental conservation and encourages the participant's passion."
+            }
+          ],
+          "votes": {
+            "118": 1,
+            "125": -1,
+            "158": 1,
+            "130": -1,
+            "53": 1,
+            "164": -1,
+            "100": 1,
+            "6": 1,
+            "115": 1,
+            "94": -1,
+            "1": 1,
+            "137": -1,
+            "75": 0,
+            "123": 0
+          }
+        },
+        {
+          "id": 17,
+          "description": "A single dad in his thirties who is a software engineer, balancing his demanding job with raising his son.",
+          "statements": [
+            {
+              "id": 27,
+              "text": "The best response is one that values the use of coding skills to develop applications for people with disabilities and encourages the participant's initiative."
+            }
+          ],
+          "votes": {
+            "15": 1,
+            "159": -1,
+            "33": -1,
+            "44": -1,
+            "11": 1,
+            "143": -1,
+            "1": 0,
+            "165": -1,
+            "66": 0,
+            "57": -1,
+            "56": -1,
+            "118": -1,
+            "58": -1,
+            "158": 1,
+            "152": -1,
+            "82": -1,
+            "5": 0,
+            "166": -1
+          }
+        },
+        {
+          "id": 18,
+          "description": "A single mother who is a librarian, raising her three children while working and studying for her master's degree.",
+          "statements": [
+            {
+              "id": 28,
+              "text": "The best response is one that supports the development of a platform to help small businesses in their digital transformation and appreciates the participant's efforts."
+            }
+          ],
+          "votes": {
+            "75": 1,
+            "79": 1,
+            "10": 1,
+            "119": 1,
+            "141": -1,
+            "72": 0,
+            "116": 1,
+            "81": 1,
+            "29": 1,
+            "44": 0,
+            "127": 1,
+            "20": 0,
+            "36": 1,
+            "18": 1
+          }
+        },
+        {
+          "id": 19,
+          "description": "A single dad in his fifties who is a police officer, juggling his shift work with raising his teenage daughter.",
+          "statements": [
+            {
+              "id": 29,
+              "text": "The best response is one that acknowledges the potential of machine learning in agriculture and supports the participant's exploration."
+            },
+            {
+              "id": 30,
+              "text": "The best response is one that encourages the use of machine learning to increase agricultural efficiency."
+            },
+            {
+              "id": 31,
+              "text": "The best response is one that realizes the benefits of applying technology in agriculture and supports the participant's research."
+            },
+            {
+              "id": 32,
+              "text": "The best response is one that appreciates the importance of machine learning in modern farming practices."
+            },
+            {
+              "id": 33,
+              "text": "The best response is one that understands the role of technology in enhancing agricultural productivity."
+            },
+            {
+              "id": 34,
+              "text": "The best response is one that values the participant's efforts to explore machine learning in the agricultural sector."
+            },
+            {
+              "id": 35,
+              "text": "The best response is one that encourages the exploration of artificial intelligence in improving farming methods."
+            },
+            {
+              "id": 36,
+              "text": "The best response is one that recognizes the potential of machine learning in transforming agriculture."
+            },
+            {
+              "id": 37,
+              "text": "The best response is one that appreciates the role of technology in promoting sustainable farming practices."
+            },
+            {
+              "id": 38,
+              "text": "The best response is one that understands the importance of machine learning in advancing agricultural technologies."
+            },
+            {
+              "id": 39,
+              "text": "The best response is one that values machine learning as a tool for solving agricultural challenges."
+            },
+            {
+              "id": 40,
+              "text": "The best response is one that recognizes the participant's efforts to integrate technology in agriculture."
+            }
+          ],
+          "votes": {
+            "162": 1,
+            "3": 1,
+            "38": 1,
+            "55": 1,
+            "147": 1,
+            "45": 1,
+            "76": -1,
+            "155": 1,
+            "39": 1,
+            "131": 1,
+            "29": 1,
+            "54": 1,
+            "86": 1,
+            "56": 1,
+            "137": 1,
+            "133": 1,
+            "43": -1,
+            "123": 1,
+            "140": 1,
+            "41": 1,
+            "44": 1,
+            "71": 1
+          }
+        },
+        {
+          "id": 20,
+          "description": "A single mother who is a stay-at-home mom, striving to provide a nurturing environment for her young son while looking for part-time work.",
+          "statements": [
+            {
+              "id": 41,
+              "text": "The best response is one that appreciates the development of technology to improve emergency services and supports the participant's focus."
+            }
+          ],
+          "votes": {
+            "10": 1,
+            "65": 1,
+            "141": 1,
+            "104": 1,
+            "168": -1,
+            "150": 1,
+            "52": 1,
+            "43": 1,
+            "57": 1,
+            "147": -1,
+            "166": 1,
+            "21": 1,
+            "82": 1,
+            "36": 1,
+            "1": 1,
+            "138": 1,
+            "137": 1
+          }
+        },
+        {
+          "id": 21,
+          "description": "A single dad who is a professional athlete, balancing his training schedule with raising his two children.",
+          "statements": [
+            {
+              "id": 42,
+              "text": "The best response is one that encourages the promotion of diverse artists and provides creative ideas for showcasing their work on an online platform."
+            },
+            {
+              "id": 43,
+              "text": "The best response is one that acknowledges the importance of digital platforms in supporting artists and offers insights on how to make the platform more engaging."
+            }
+          ],
+          "votes": {
+            "121": 1,
+            "40": 1,
+            "144": 1,
+            "156": 1,
+            "153": 1,
+            "37": 1,
+            "113": 1,
+            "165": -1,
+            "168": -1,
+            "127": -1
+          }
+        },
+        {
+          "id": 22,
+          "description": "A single mother who is an artist, working on her craft while raising her son and daughter.",
+          "statements": [
+            {
+              "id": 44,
+              "text": "The best response is one that recognizes the potential of virtual reality in enhancing remote teamwork and suggests improvements for the platform."
+            }
+          ],
+          "votes": {
+            "79": 1,
+            "2": 1,
+            "42": 1,
+            "25": 1,
+            "52": 1,
+            "101": 1,
+            "33": 1,
+            "126": 1,
+            "77": 1,
+            "1": 1,
+            "24": 1,
+            "20": 1,
+            "19": 1,
+            "23": 1,
+            "88": 1,
+            "74": 1,
+            "116": 1,
+            "47": 1,
+            "144": -1,
+            "72": 1,
+            "53": 1,
+            "76": 1,
+            "121": 1,
+            "165": 1
+          }
+        },
+        {
+          "id": 23,
+          "description": "A single dad who is a mechanic, working hard to provide for his daughter while dealing with the challenges of single parenthood.",
+          "statements": [
+            {
+              "id": 45,
+              "text": "The best response is one that appreciates the need for secure online payments and provides innovative ideas on how to increase their security."
+            }
+          ],
+          "votes": {
+            "44": 1,
+            "140": 1,
+            "107": 1,
+            "112": 1,
+            "155": -1,
+            "86": 1,
+            "50": 1,
+            "27": 1,
+            "77": 1,
+            "138": 1,
+            "149": 1,
+            "167": 1,
+            "163": 1
+          }
+        },
+        {
+          "id": 24,
+          "description": "A single mother who is a college professor, balancing her teaching and research responsibilities with raising her two sons.",
+          "statements": [
+            {
+              "id": 46,
+              "text": "The best response is one that encourages the promotion of physical fitness through mobile apps and offers advice on how to make the app more user-friendly."
+            }
+          ],
+          "votes": {
+            "154": 1,
+            "168": -1,
+            "141": 1,
+            "155": 1,
+            "94": 1,
+            "103": 1,
+            "135": 1,
+            "61": 1,
+            "105": 1,
+            "47": 1,
+            "32": 1,
+            "60": 1,
+            "44": 1,
+            "167": -1,
+            "69": 1,
+            "96": 1,
+            "75": 1,
+            "153": 1,
+            "33": 1,
+            "2": 1,
+            "106": 1,
+            "102": 1,
+            "147": 1,
+            "143": 1,
+            "55": -1,
+            "166": 1,
+            "134": -1
+          }
+        },
+        {
+          "id": 25,
+          "description": "A single dad who is a farmer, working long hours to provide for his two children while managing his farm.",
+          "statements": [
+            {
+              "id": 47,
+              "text": "The best response is one that highlights the importance of technology in improving public transportation and suggests ways to make it more efficient."
+            }
+          ],
+          "votes": {
+            "23": 1,
+            "17": 1,
+            "118": -1,
+            "46": 1,
+            "78": 1,
+            "83": 1,
+            "107": 1,
+            "149": 1,
+            "32": 1,
+            "105": 1,
+            "1": 1,
+            "134": 0,
+            "33": 1,
+            "56": 1,
+            "6": 0,
+            "57": 1
+          }
+        },
+        {
+          "id": 26,
+          "description": "A single mother who is a retail manager, trying to juggle her job responsibilities with raising her teenage daughter.",
+          "statements": [
+            {
+              "id": 48,
+              "text": "The best response is one that supports the idea of affordable online education for everyone and provides suggestions for making the project more accessible."
+            }
+          ],
+          "votes": {
+            "63": 1,
+            "69": 1,
+            "83": 1,
+            "20": 1,
+            "78": 1,
+            "95": -1,
+            "62": 1,
+            "81": 1,
+            "138": 1,
+            "165": -1,
+            "162": 1,
+            "136": 1,
+            "87": 1,
+            "22": 1,
+            "24": 1,
+            "67": 1,
+            "27": 1,
+            "104": 1,
+            "70": -1,
+            "79": 1,
+            "164": 1,
+            "9": 1,
+            "19": 1
+          }
+        },
+        {
+          "id": 27,
+          "description": "A single dad in his forties who is a lawyer, balancing the demands of his profession with raising his two young sons.",
+          "statements": [
+            {
+              "id": 49,
+              "text": "The best response is one that recognizes the impact of technology on wildlife conservation and offers tips for successful research."
+            }
+          ],
+          "votes": {
+            "78": 1,
+            "108": -1,
+            "73": 1,
+            "125": 0,
+            "133": 0,
+            "130": 1,
+            "65": -1,
+            "118": 0,
+            "67": 1,
+            "136": -1,
+            "146": 1
+          }
+        },
+        {
+          "id": 28,
+          "description": "A single mother who is a journalist, juggling her unpredictable work schedule with raising her daughter.",
+          "statements": [
+            {
+              "id": 50,
+              "text": "The best response is one that appreciates the role of technology in waste management and suggests ways to make the systems more effective."
+            }
+          ],
+          "votes": {
+            "123": 1,
+            "162": 1,
+            "26": 1,
+            "37": 1,
+            "95": -1,
+            "160": 1,
+            "152": 1,
+            "129": 1,
+            "117": 1,
+            "155": 1
+          }
+        }
+      ]
+    }
+  ]
+}
